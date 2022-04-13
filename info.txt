@@ -1,0 +1,3 @@
+arr ptr funcs - https://stackoverflow.com/questions/252748/how-can-i-use-an-array-of-function-pointers
+
+status exit code https://www.cyberciti.biz/faq/linux-bash-exit-status-set-exit-statusin-bash/+
