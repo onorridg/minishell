@@ -6,6 +6,7 @@ MAKEFILE=Makefile
 SRCS=minishell.c\
 	builtins.c\
 	command_utils.c\
+	heredoc.c\
 	ft_split.c\
 	ft_strjoin.c\
 	ft_strcmp.c
