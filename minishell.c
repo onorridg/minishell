@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 16:33:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/13 19:37:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/14 19:05:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int bash(void)
 	return 0;
 }
 
-static int minishell(int com_num, char **words)
+static int minishell(int com_num, char **words, char **envp)
 {	
 	t_command *com;
 	BUILTIN **builtins_arr;
@@ -30,35 +30,60 @@ static int minishell(int com_num, char **words)
 		if (words[1] && ft_strcmp(words[1], "-n"))
 			com->option = 0;
 	}
+	com->env = envp;
 	com->data = words;
 	builtins_arr[com_num](com);
 	free(com);
 	return 0;
 }
 
-int main(int ac, char **av)
+void hdl(int sig)
+{
+	//printf("Sig: %i\n", sig);
+}
+
+int main(int ac, char **av, char **envp)
 {	
 	char 		**words;
 	char 		*str;
 	int 		command_number;
-	int 		exit;
+	int 		exit_status;
 	t_heredoc 	*heredoc_data;
 
-	exit = 1;
+	/* 	"ctrl + C" - SIGINT
+		"ctrl + \" - SIGQUIT
+	??	"ctrl + D" - SIGHUP  */
+	//signal(SIGQUIT, sig_exit);
+	
+	struct sigaction act;
+	sigset_t   set;
+	memset(&act, 0, sizeof(act));
+	act.sa_handler = hdl;
+	sigemptyset(&set);                                                             
+	//sigaddset(&set, SIGINT); 
+	//sigaddset(&set, SIGQUIT);
+	//act.sa_mask = set;
+	act.sa_mask = 0;
+	sigaction(SIGINT, &act, 0);
+	sigaction(SIGQUIT, &act, 0);
+	
+	exit_status = 1;
+	str = NULL;
 	heredoc_data = NULL;
-	while (exit)
-    {
+	while (TRUE)
+    {	
         str = readline("minishell$ ");
 		if (str)
-		{
+		{	
 			words = ft_split(str, ' ');
 			command_number = builtin_chek(words[0]);
 			if (ft_strcmp(words[0], "<<"))
 				heredoc_data = heredoc(words[1]);
-			if (command_number == EXIT)
-				exit = 0;
+			if (command_number == D_EXIT)
+				exit(0);
+				//exit_status = 0;
 			else if (command_number != BASH)
-				minishell(command_number, words);
+				minishell(command_number, words, envp);
 			else
 				bash();
 			free(str);
@@ -66,5 +91,12 @@ int main(int ac, char **av)
 				heredoc_data = free_heredoc(heredoc_data);
 			split_free(words, -1);
 		}
+		else
+		{	
+			//write(1, "\033[H\033[J", 4);
+			write(1, "exit\n", 5); // control + D
+			exit(0);
+		}
     }
+	return 0;
 }

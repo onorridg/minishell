@@ -6,11 +6,28 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/12 18:44:39 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/14 18:20:09 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int ft_env(t_command *com)
+{
+	int i;
+	int j;
+	
+
+	i = 0;
+	while (com->env[i])
+	{	
+		write(1, com->env[i], ft_strlen(com->env[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+	printf("%i\n", i);
+	return (0);
+}
 
 int ft_pwd(t_command *com)
 {	

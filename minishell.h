@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/13 19:24:24 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/14 18:40:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define EXPORT 3
 # define UNSET 	4
 # define ENV	5
-# define EXIT	6
+# define D_EXIT	6
 
 
 
@@ -44,12 +44,17 @@
 #include <stdlib.h>             /* malloc, free */
 #include <readline/readline.h>  /* readline */
 #include <sys/wait.h>           /*  */
+#include <signal.h>
+
+///////
+#include <string.h>
 
 typedef struct s_command
 {
 	int		option;
 	int		command_name; 				/* echo - 0 , cd - 1, pwd - 2, export - 3, unset - 4, env - 5, exit - 6 */
-	char	**data; 
+	char	**data;
+	char	**env;
 }	t_command;
 
 typedef struct s_data
@@ -77,6 +82,7 @@ typedef int BUILTIN(t_command *data);
 int			ft_echo(t_command *com);
 int			ft_cd(t_command *com);
 int			ft_pwd(t_command *com);
+int 		ft_env(t_command *com);
 
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
