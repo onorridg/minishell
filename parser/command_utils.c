@@ -6,11 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/14 17:29:06 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/16 15:16:01 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int builtin_chek(char *builtin)
 {

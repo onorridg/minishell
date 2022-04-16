@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 16:33:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/15 18:30:41 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/16 18:59:06 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void hdl(int sig)
 	{
 		//printf("kek\n");
 		//printf("\n"); 			// Move to a new line
-    	//rl_on_new_line(); 		// Regenerate the prompt on a newline
-    	//rl_replace_line("", 0); // Clear the previous text
-    	//rl_redisplay();
+    	rl_on_new_line(); 		// Regenerate the prompt on a newline
+    	rl_replace_line("", 0); // Clear the previous text
+    	rl_redisplay();
 	}
 	return;
 }
@@ -71,7 +71,7 @@ int main(int ac, char **av, char **envp)
 	act.sa_mask = set;
 	sigaction(SIGINT, &act, 0);
 	signal(SIGQUIT, SIG_IGN);
-
+	rl_outstream = stderr;
 	struct termios tp;
 	if (tcgetattr(STDOUT_FILENO, &tp) == -1)
     	printf("1 - tcgetattr\n");

@@ -5,13 +5,12 @@ CFLAGS= #-Wall -Wextra -Werror
 MAKEFILE=Makefile
 SRCS=minishell.c\
 	builtins.c\
-	command_utils.c\
+	parser/command_utils.c\
 	heredoc.c\
-	minilib/ft_split.c\
-	minilib/ft_strjoin.c\
-	minilib/ft_strcmp.c
-READLINE_FLAGS=-lreadline -L/Users/onorridg/.brew/Cellar/readline/8.1.2/lib #-I/Users/onorridg/.brew/Cellar/readline/8.1.2/include
-
+	mini_lib/ft_split.c\
+	mini_lib/ft_strjoin.c\
+	mini_lib/ft_strcmp.c
+READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/Cellar/readline/8.1.2/lib
 OBJS=$(SRCS:.c=.o)
 
 all:$(NAME)
@@ -20,10 +19,10 @@ $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(READLINE_FLAGS)
 
 %.o: %.c $(MAKEFILE) $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/15 18:26:27 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/16 20:11:57 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define D_EXIT	6
 
 
+# define BLOD  "\033[1m"                 // Подчеркнуть, жирным шрифтом, выделить
+# define BEGIN(x,y) "\033["#x";"#y"m"    // x: background, y: foreground
+# define CLOSE "\033[0m"                 // Закрыть все свойства
+
 
 #include <unistd.h>             /* pipe, getcwd, chdir */
 #include <stdlib.h>             /* malloc, free */
@@ -49,14 +53,21 @@
 ///////
 #include <string.h>
 
-typedef struct s_command
-{
-	int		option;
-	int		command_name; 				/* echo - 0 , cd - 1, pwd - 2, export - 3, unset - 4, env - 5, exit - 6 */
-	char	**data;
-	char	**env;
+
+typedef	struct s_command
+{	
+	char				*command;
+	char				**envp;
+	struct s_command 	*next;
 }	t_command;
 
+//typedef struct s_command
+//{
+//	int		option;
+//	int		command_name; 				/* echo - 0 , cd - 1, pwd - 2, export - 3, unset - 4, env - 5, exit - 6 */
+//	char	**data;
+//	char	**env;
+//}	t_command;
 typedef struct s_data
 {
 	int			builtins; 				/*builtins(own implementation of commands like echo and etc.) - 0, from bash - 1 */
@@ -96,7 +107,6 @@ char		*ft_strjoin(char *str1, char *str2);
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 
-//char *readline();
 void rl_replace_line();
 void rl_clear_history();
 
