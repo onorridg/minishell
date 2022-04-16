@@ -6,11 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:29:30 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/12 15:43:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/16 14:21:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int ft_strcmp(char *str1, char *str2)
 {

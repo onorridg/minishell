@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 16:33:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/14 19:47:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:30:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,15 @@ static int minishell(int com_num, char **words, char **envp)
 
 void hdl(int sig)
 {
-	//printf("Sig: %i\n", sig);
+	if (sig == SIGINT)
+	{
+		//printf("kek\n");
+		//printf("\n"); 			// Move to a new line
+    	//rl_on_new_line(); 		// Regenerate the prompt on a newline
+    	//rl_replace_line("", 0); // Clear the previous text
+    	//rl_redisplay();
+	}
+	return;
 }
 
 int main(int ac, char **av, char **envp)
@@ -53,19 +61,26 @@ int main(int ac, char **av, char **envp)
 	/* 	"ctrl + C" - SIGINT
 		"ctrl + \" - SIGQUIT
 	??	"ctrl + D" - SIGHUP  */
-	//signal(SIGQUIT, sig_exit);
 	
 	struct sigaction act;
 	sigset_t   set;
 	memset(&act, 0, sizeof(act));
 	act.sa_handler = hdl;
 	sigemptyset(&set);                                                             
-	//sigaddset(&set, SIGINT); 
-	//sigaddset(&set, SIGQUIT);
-	//act.sa_mask = set;
-	act.sa_mask = 0;
+	sigaddset(&set, SIGINT); 
+	act.sa_mask = set;
 	sigaction(SIGINT, &act, 0);
-	sigaction(SIGQUIT, &act, 0);
+	signal(SIGQUIT, SIG_IGN);
+
+	struct termios tp;
+	if (tcgetattr(STDOUT_FILENO, &tp) == -1)
+    	printf("1 - tcgetattr\n");
+	//tp.c_iflag &= ~BRKINT;
+	tp.c_lflag &= ~ECHOCTL;
+	if (tcsetattr(STDOUT_FILENO, TCSADRAIN, &tp) == -1)
+    	printf("2 - tcsetattr\n");
+
+	
 	
 	exit_status = 1;
 	str = NULL;
@@ -73,6 +88,7 @@ int main(int ac, char **av, char **envp)
 	while (TRUE)
     {	
         str = readline("minishell$ ");
+		//printf()
 		if (str)
 		{	
 			words = ft_split(str, ' ');
@@ -87,14 +103,13 @@ int main(int ac, char **av, char **envp)
 			else
 				bash();
 			free(str);
-			if (heredoc_data)
-				heredoc_data = free_heredoc(heredoc_data);
+			//if (heredoc_data)
+			//	heredoc_data = free_heredoc(heredoc_data);
 			split_free(words, -1);
 		}
 		else
-		{	
-			//write(1, "\033[H\033[J", 4);
-			write(1, "exit\n", 5); // control + D
+		{
+			write(0, "exit\n", 6); // control + D
 			exit(0);
 		}
     }

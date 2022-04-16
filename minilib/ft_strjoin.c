@@ -6,11 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:59:24 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/12 15:42:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/16 14:21:09 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 int ft_strlen(char *str)
 {
     int i;

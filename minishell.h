@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/14 18:40:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:26:27 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 #include <readline/readline.h>  /* readline */
 #include <sys/wait.h>           /*  */
 #include <signal.h>
-
+#include <termios.h>			/* tcgetattr, tcsetattr */
 ///////
 #include <string.h>
 
@@ -96,6 +96,8 @@ char		*ft_strjoin(char *str1, char *str2);
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 
-
+//char *readline();
+void rl_replace_line();
+void rl_clear_history();
 
 #endif

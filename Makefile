@@ -7,10 +7,10 @@ SRCS=minishell.c\
 	builtins.c\
 	command_utils.c\
 	heredoc.c\
-	ft_split.c\
-	ft_strjoin.c\
-	ft_strcmp.c
-READLINE_FLAGS=-lreadline
+	minilib/ft_split.c\
+	minilib/ft_strjoin.c\
+	minilib/ft_strcmp.c
+READLINE_FLAGS=-lreadline -L/Users/onorridg/.brew/Cellar/readline/8.1.2/lib #-I/Users/onorridg/.brew/Cellar/readline/8.1.2/include
 
 OBJS=$(SRCS:.c=.o)
 

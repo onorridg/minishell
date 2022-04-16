@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:13:18 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/13 19:14:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:13:16 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_heredoc	*free_heredoc(t_heredoc *node)
 
 	while (node)
 	{	
-		printf("%s\n", node->string);
+		if (node->string[0])
+			printf("%s\n", node->string);
 		if (node->next)
 			save = node->next;
 		else
@@ -46,7 +47,7 @@ t_heredoc	*heredoc(char *stop)
 	while (TRUE)
 	{
 		str = readline("heredoc> ");
-		if (ft_strcmp(str, stop))
+		if (ft_strcmp(str, stop) || str[0] == 0)
 			break;
 		save = node;
 		node = (t_heredoc *)malloc(sizeof(t_heredoc));
