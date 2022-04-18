@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 15:16:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:03:54 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ BUILTIN	**set_ptr_func_to_arr(void)
 		printf("FCK malloc !\n");
 		return 0;
 	}
-	builtins_arr[0] = ft_echo;
+	builtins_arr[0] = 0; ///ft_echo
 	builtins_arr[1] = ft_cd;
 	builtins_arr[2] = ft_pwd;
 	builtins_arr[3] = 0;

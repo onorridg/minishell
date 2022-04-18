@@ -6,22 +6,22 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 16:58:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:14:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_env(t_command *com)
+int ft_env(t_data *data)
 {
 	int i;
 	int j;
 	
 
 	i = 0;
-	while (com->envp[i])
+	while (data->envp[i])
 	{	
-		write(1, com->envp[i], ft_strlen(com->envp[i]));
+		write(1, data->envp[i], ft_strlen(data->envp[i]));
 		write(1, "\n", 1);
 		i++;
 	}
@@ -29,7 +29,7 @@ int ft_env(t_command *com)
 	return (0);
 }
 
-int ft_pwd(t_command *com)
+int ft_pwd(t_data *data)
 {	
 	int		i;
 	char	dir[DIR_MAX];
@@ -44,17 +44,17 @@ int ft_pwd(t_command *com)
 	return 0;
 }
 
-int ft_cd(t_command *com)
+int ft_cd(t_data *data)
 {	
 	/* "cd " cd с пробелом не работает */
-	/*if (com->data[1])
-		chdir(com->data[1]);
+	if (data->command)
+		chdir(data->command);
 	else
-		chdir(getenv("HOME"));*/
+		chdir(getenv("HOME"));
 	return (0);
 }
 
-int	ft_echo(t_command *com)
+int	ft_echo(t_data *data)
 {
 	/*int	i;
 	int j;

@@ -6,11 +6,48 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 17:15:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:16:07 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	value_to_variable(char *string)
+{
+	return;
+}
+
+char	**command_parts_parser(t_command *command)
+{
+	BUILTIN	**builtin_functions;
+	int		builtin_number;
+	char	**command_parts;
+	t_data	*data;
+	
+	data = (t_data *)malloc(sizeof(t_data));
+	builtin_functions = set_ptr_func_to_arr();
+	command_parts = ft_split(command->command, ' ');
+	if(!command_parts)
+		exit(1);
+	builtin_number = builtin_chek(command_parts[0]);
+	if (builtin_number == ECHO)
+	{	
+		printf("%s\n", command->command);
+	}
+	else if (builtin_number != BASH)
+	{
+		if (!command_parts[1]) 								// check options
+			builtin_functions[builtin_number](command->envp);
+		else
+			printf("[!] Error options\n");   				// print error message
+	}
+	else
+	{
+		printf("BASH: %s\n", command->command);
+	}
+	free(data);
+	return 0;
+}
 
 static t_command	*insert_command_into_node(char *command, char **envp, t_command *previous_node_ptr)
 {	

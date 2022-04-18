@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 17:13:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:13:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
 # define PATH_MAX   1024
 
 # define BASH	-1
-# define D_ECHO	0
-# define D_CD 	1
-# define D_PWD 	2
-# define D_EXPORT 3
-# define D_UNSET 	4
-# define D_ENV	5
-# define D_EXIT	6
+# define ECHO	0
+# define CD 	1
+# define PWD 	2
+# define EXPORT 3
+# define UNSET 	4
+# define ENV	5
+# define EXIT	6
 
 
 # define BLOD  "\033[1m"                 /* Подчеркнуть, жирным шрифтом, выделить */
@@ -55,25 +55,19 @@
 #include <string.h> // 					DELETE !!!
 //////////////////////
 
+typedef struct s_data
+{
+	char	*command;
+	char	**envp;
+}	t_data;
+
+
 typedef	struct s_command
 {	
 	char				*command;
 	char				**envp;
 	struct s_command 	*next;
 }	t_command;
-
-//typedef struct s_command
-//{
-//	int		option;
-//	int		command_name; 				/* echo - 0 , cd - 1, pwd - 2, export - 3, unset - 4, env - 5, exit - 6 */
-//	char	**data;
-//	char	**env;
-//}	t_command;
-typedef struct s_data
-{
-	int			builtins; 				/*builtins(own implementation of commands like echo and etc.) - 0, from bash - 1 */
-	t_command	*commands;
-}   t_data;
 
 typedef struct s_heredoc
 {
@@ -88,13 +82,13 @@ typedef struct s_split
 }	t_split;
 
 
-typedef int BUILTIN(t_command *data);
+typedef int BUILTIN(t_data *data);
 
 
-int			ft_echo(t_command *com);
-int			ft_cd(t_command *com);
-int			ft_pwd(t_command *com);
-int 		ft_env(t_command *com);
+int			ft_echo(t_data *data);
+int			ft_cd(t_data *data);
+int			ft_pwd(t_data *data);
+int 		ft_env(t_data *data);
 
 void 		set_terminal_configuration(void);
 
