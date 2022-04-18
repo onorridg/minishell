@@ -6,13 +6,13 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 20:26:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:15:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command	*insert_command_into_node(char *command, char **envp, t_command *previous_node_ptr)
+static t_command	*insert_command_into_node(char *command, char **envp, t_command *previous_node_ptr)
 {	
 	t_command	*node;
 	
@@ -46,17 +46,17 @@ t_command	*string_parser(char *string, char **envp)
 			first_command = node;
 		i++;
 	}
-	while(first_command)
+	/*while(first_command)
 	{
 		printf("%s\n", first_command->command);
 		first_command = first_command->next;
-	}
-	return (0);
+	}*/
+	return (first_command);
 }
 
-int main(void)
+/*int main(void)
 {
 	char *string = readline("$> ");
 	string_parser(string, NULL);
 	return 0;
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 16:45:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:13:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,30 @@
 # define PATH_MAX   1024
 
 # define BASH	-1
-# define ECHO	0
-# define CD 	1
-# define PWD 	2
-# define EXPORT 3
-# define UNSET 	4
-# define ENV	5
+# define D_ECHO	0
+# define D_CD 	1
+# define D_PWD 	2
+# define D_EXPORT 3
+# define D_UNSET 	4
+# define D_ENV	5
 # define D_EXIT	6
 
 
-# define BLOD  "\033[1m"                 // Подчеркнуть, жирным шрифтом, выделить
-# define BEGIN(x,y) "\033["#x";"#y"m"    // x: background, y: foreground
-# define CLOSE "\033[0m"                 // Закрыть все свойства
+# define BLOD  "\033[1m"                 /* Подчеркнуть, жирным шрифтом, выделить */
+# define BEGIN(x,y) "\033["#x";"#y"m"    /* x: background, y: foreground */
+# define CLOSE "\033[0m"                 /* Закрыть все свойства */
 
-
-#include <unistd.h>             /* pipe, getcwd, chdir */
-#include <stdlib.h>             /* malloc, free */
-#include <readline/readline.h>  /* readline */
+#include <unistd.h>             		/* pipe, getcwd, chdir */
+#include <stdlib.h>             		/* malloc, free */
+#include <readline/readline.h>  		/* readline */
 #include <readline/history.h>
-#include <sys/wait.h>           /*  */
-#include <signal.h>
-#include <termios.h>			/* tcgetattr, tcsetattr */
-///////
-#include <string.h>
+#include <sys/wait.h>           		/*  */
+#include <signal.h>						/*  sigemptyset, sigaddset, sigaction, signal*/
+#include <termios.h>					/* tcgetattr, tcsetattr */
 
+//////////////////////
+#include <string.h> // 					DELETE !!!
+//////////////////////
 
 typedef	struct s_command
 {	
@@ -99,6 +99,8 @@ int 		ft_env(t_command *com);
 void 		set_terminal_configuration(void);
 
 void 		ctrl_d_exit(void);
+
+t_command	*string_parser(char *string, char **envp);
 
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);

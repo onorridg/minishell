@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 16:56:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:16:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 static int minishell(char *string, char **envp)
 {	
 	//BUILTIN **builtins_arr;
-	return 1;
+	t_command	*command;
+
+	command = string_parser(string, envp);
+	while(command)
+	{
+		printf("%s\n", command->command);
+		command = command->next;
+	}
+	return (0);
 }
 
 int main(int ac, char **av, char **envp)
 {
-	char *str;
+	char	*str;
 	
 	str = NULL;
 	set_terminal_configuration();
@@ -39,4 +47,5 @@ int main(int ac, char **av, char **envp)
 			break;
 		}
 	}
+	return (0);
 }
