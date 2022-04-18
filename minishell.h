@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 20:11:57 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:06:38 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 #include <unistd.h>             /* pipe, getcwd, chdir */
 #include <stdlib.h>             /* malloc, free */
 #include <readline/readline.h>  /* readline */
+#include <readline/history.h>
 #include <sys/wait.h>           /*  */
 #include <signal.h>
 #include <termios.h>			/* tcgetattr, tcsetattr */

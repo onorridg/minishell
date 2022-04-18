@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 16:33:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 18:59:06 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:09:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void hdl(int sig)
 	{
 		//printf("kek\n");
 		//printf("\n"); 			// Move to a new line
-    	rl_on_new_line(); 		// Regenerate the prompt on a newline
+    	/*rl_on_new_line(); 		// Regenerate the prompt on a newline
     	rl_replace_line("", 0); // Clear the previous text
+    	rl_redisplay();*/
+
+		rl_on_new_line();
     	rl_redisplay();
 	}
 	return;
