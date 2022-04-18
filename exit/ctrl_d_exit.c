@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ctrl_d_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 20:18:21 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/13 20:18:32 by onorridg         ###   ########.fr       */
+/*   Created: 2022/04/18 16:44:19 by onorridg          #+#    #+#             */
+/*   Updated: 2022/04/18 16:45:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
+void ctrl_d_exit(void)
+{
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	write(1, "exit\n", 5);
+}

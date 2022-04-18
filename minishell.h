@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 16:06:38 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:45:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ int			ft_cd(t_command *com);
 int			ft_pwd(t_command *com);
 int 		ft_env(t_command *com);
 
+void 		set_terminal_configuration(void);
+
+void 		ctrl_d_exit(void);
+
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
@@ -107,6 +111,7 @@ int			split_free(char **words, int count);
 char		*ft_strjoin(char *str1, char *str2);
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
+void		*ft_memset(void *b, int c, size_t len);
 
 void rl_replace_line();
 void rl_clear_history();

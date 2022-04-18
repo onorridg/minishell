@@ -6,11 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/14 18:20:09 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:58:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int ft_env(t_command *com)
 {
@@ -19,9 +19,9 @@ int ft_env(t_command *com)
 	
 
 	i = 0;
-	while (com->env[i])
+	while (com->envp[i])
 	{	
-		write(1, com->env[i], ft_strlen(com->env[i]));
+		write(1, com->envp[i], ft_strlen(com->envp[i]));
 		write(1, "\n", 1);
 		i++;
 	}
@@ -47,16 +47,16 @@ int ft_pwd(t_command *com)
 int ft_cd(t_command *com)
 {	
 	/* "cd " cd с пробелом не работает */
-	if (com->data[1])
+	/*if (com->data[1])
 		chdir(com->data[1]);
 	else
-		chdir(getenv("HOME"));
+		chdir(getenv("HOME"));*/
 	return (0);
 }
 
 int	ft_echo(t_command *com)
 {
-	int	i;
+	/*int	i;
 	int j;
 
 	j = 1;
@@ -72,6 +72,6 @@ int	ft_echo(t_command *com)
 			write(1, " ", 1);	
 	}
 	if (com->option)
-			write(1, "\n", 1);
+			write(1, "\n", 1);*/
 	return (0);
 }

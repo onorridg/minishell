@@ -6,11 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:13:18 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/15 17:13:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:58:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_heredoc	*free_heredoc(t_heredoc *node)
 {	t_heredoc *save;

@@ -3,14 +3,17 @@ CC=cc
 HEADER=minishell.h
 CFLAGS= #-Wall -Wextra -Werror
 MAKEFILE=Makefile
-SRCS=minishell.c\
-	builtins.c\
+SRCS=main.c\
+	terminal_config/set_terminal_config.c\
+	builtins/builtins.c\
+	builtins/heredoc.c\
 	parser/command_utils.c\
-	heredoc.c\
+	exit/ctrl_d_exit.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin.c\
-	mini_lib/ft_strcmp.c
-READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/Cellar/readline/8.1.2/lib
+	mini_lib/ft_strcmp.c\
+	mini_lib/ft_memset.c
+READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 OBJS=$(SRCS:.c=.o)
 
 all:$(NAME)
