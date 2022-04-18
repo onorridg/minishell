@@ -6,22 +6,22 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 18:14:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 19:46:38 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_env(t_data *data)
+int ft_env(t_command *command)
 {
 	int i;
 	int j;
 	
 
 	i = 0;
-	while (data->envp[i])
+	while (command->envp[i])
 	{	
-		write(1, data->envp[i], ft_strlen(data->envp[i]));
+		write(1, command->envp[i], ft_strlen(command->envp[i]));
 		write(1, "\n", 1);
 		i++;
 	}
@@ -29,7 +29,7 @@ int ft_env(t_data *data)
 	return (0);
 }
 
-int ft_pwd(t_data *data)
+int ft_pwd(t_command *command)
 {	
 	int		i;
 	char	dir[DIR_MAX];
@@ -44,34 +44,40 @@ int ft_pwd(t_data *data)
 	return 0;
 }
 
-int ft_cd(t_data *data)
+int ft_cd(t_command *command)
 {	
 	/* "cd " cd с пробелом не работает */
-	if (data->command)
-		chdir(data->command);
+	if (command->command_parts[1])
+		chdir(command->command_parts[1]);
 	else
 		chdir(getenv("HOME"));
 	return (0);
 }
 
-int	ft_echo(t_data *data)
+int	ft_echo(t_command *command)
 {
-	/*int	i;
+	int	i;
 	int j;
-
+	int newline;
+	
 	j = 1;
-	if (com->option == 0)
+	newline = TRUE;
+	if (ft_strcmp(command->command_parts[1], "-n"))
+	{
 		j = 2;
-	while (com->data[j])
+		newline = FALSE;
+	}
+	//printf("j = %i\n", j);
+	while (command->command_parts[j])
 	{
 		i = 0;
-		while (com->data[j][i])
-			write(1, &com->data[j][i++], 1);
+		while (command->command_parts[j][i])
+			write(1, &command->command_parts[j][i++], 1);
 		j++;
-		if (com->data[j])
+		if (command->command_parts[j])
 			write(1, " ", 1);	
 	}
-	if (com->option)
-			write(1, "\n", 1);*/
+	if (newline)
+		write(1, "\n", 1);
 	return (0);
 }

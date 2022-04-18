@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 18:13:22 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 19:33:47 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 # define DIR_MAX    255
 # define PATH_MAX   1024
 
-# define BASH	-1
-# define ECHO	0
-# define CD 	1
-# define PWD 	2
-# define EXPORT 3
-# define UNSET 	4
-# define ENV	5
-# define EXIT	6
+# define D_BASH	-1
+# define D_ECHO	0
+# define D_CD 	1
+# define D_PWD 	2
+# define D_EXPORT 3
+# define D_UNSET 	4
+# define D_ENV	5
+# define D_EXIT	6
 
 
 # define BLOD  "\033[1m"                 /* Подчеркнуть, жирным шрифтом, выделить */
@@ -65,6 +65,7 @@ typedef struct s_data
 typedef	struct s_command
 {	
 	char				*command;
+	char				**command_parts;
 	char				**envp;
 	struct s_command 	*next;
 }	t_command;
@@ -81,20 +82,28 @@ typedef struct s_split
 	char	**words;
 }	t_split;
 
-
-typedef int BUILTIN(t_data *data);
-
-
-int			ft_echo(t_data *data);
-int			ft_cd(t_data *data);
-int			ft_pwd(t_data *data);
-int 		ft_env(t_data *data);
-
+// start configuration
 void 		set_terminal_configuration(void);
 
+// builtins
+typedef int BUILTIN(t_command *command);
+
+int			ft_echo(t_command *command);
+int			ft_cd(t_command *command);
+int			ft_pwd(t_command *command);
+int 		ft_env(t_command *command);
+
+
+
+// exit
 void 		ctrl_d_exit(void);
 
+// parser
 t_command	*string_parser(char *string, char **envp);
+char		**command_parts_parser(t_command *command);
+
+// executor
+int			command_distribution(t_command *command);
 
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
@@ -102,6 +111,7 @@ int			builtin_chek(char *builtin);
 char    	*get_command_path(char *command);
 BUILTIN		**set_ptr_func_to_arr(void);
 
+// minilib
 char		**ft_split(char *string, char ch);
 int			split_free(char **words, int count);
 char		*ft_strjoin(char *str1, char *str2);
@@ -109,6 +119,7 @@ int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 void		*ft_memset(void *b, int c, size_t len);
 
+// libreadline
 void rl_replace_line();
 void rl_clear_history();
 

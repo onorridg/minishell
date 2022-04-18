@@ -9,6 +9,7 @@ SRCS=main.c\
 	builtins/heredoc.c\
 	parser/command_utils.c\
 	parser/string_parser.c\
+	executor/command_distribution.c\
 	exit/ctrl_d_exit.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin.c\

@@ -6,47 +6,62 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 18:16:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/18 19:39:14 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+/*	
+	
+*/
 
-void	value_to_variable(char *string)
+
+char	*value_to_variable(char *string)
 {
-	return;
+	char 	*value;
+	char	*env_variable;
+	int		i;
+
+	env_variable = getenv(&string[1]);
+	if (env_variable)
+	{
+		value = (char *)malloc(sizeof(char) * ft_strlen(env_variable + 1));
+		i = 0;
+		while (env_variable[i])
+		{
+			value[i] = env_variable[i];
+			i++;
+		}
+		value[i] = '\0';
+	}
+	else
+	{
+		value = (char *)malloc(sizeof(char) * 2);
+		value[0] = ' ';
+		value[1] = '\0';
+	}
+	//printf("%s=%s\n", string, value);
+	//free(string);
+	return (value);
 }
 
 char	**command_parts_parser(t_command *command)
 {
-	BUILTIN	**builtin_functions;
-	int		builtin_number;
-	char	**command_parts;
-	t_data	*data;
 	
-	data = (t_data *)malloc(sizeof(t_data));
-	builtin_functions = set_ptr_func_to_arr();
+	char	**command_parts;
+	int		i;
+	
 	command_parts = ft_split(command->command, ' ');
 	if(!command_parts)
 		exit(1);
-	builtin_number = builtin_chek(command_parts[0]);
-	if (builtin_number == ECHO)
-	{	
-		printf("%s\n", command->command);
-	}
-	else if (builtin_number != BASH)
+	i = 0;
+	while(command_parts[i])
 	{
-		if (!command_parts[1]) 								// check options
-			builtin_functions[builtin_number](command->envp);
-		else
-			printf("[!] Error options\n");   				// print error message
+		if(command_parts[i][0] == '$' && ft_strlen(command_parts[i]) > 1)
+			command_parts[i] = value_to_variable(command_parts[i]);
+		i++;
 	}
-	else
-	{
-		printf("BASH: %s\n", command->command);
-	}
-	free(data);
-	return 0;
+	return command_parts;
 }
 
 static t_command	*insert_command_into_node(char *command, char **envp, t_command *previous_node_ptr)
@@ -57,6 +72,7 @@ static t_command	*insert_command_into_node(char *command, char **envp, t_command
 	if (!node)
 		exit(1);
 	node->command = command;
+	node->command_parts = NULL;
 	node->envp = envp;
 	node->next = NULL;
 	if (previous_node_ptr)
