@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 19:46:38 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:07:38 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int ft_env(t_command *command)
 		write(1, "\n", 1);
 		i++;
 	}
-	printf("%i\n", i);
+	//printf("%i\n", i);
 	return (0);
 }
 
@@ -40,7 +40,6 @@ int ft_pwd(t_command *command)
 	while (dir[i])
 		write(1, &dir[i++], 1);
 	write(1, "\n", 1);
-	
 	return 0;
 }
 

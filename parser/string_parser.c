@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 19:39:14 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:10:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,24 @@ char	*value_to_variable(char *string)
 	return (value);
 }
 
+char	*spaces_deleter(char *string)
+{
+	int 	i;
+	char	*new_string;
+	
+	i = 0;
+	while (string[i] == '\n' || string[i] == '\t' || string[i] == '\v'
+		|| string[i] == '\r' || string[i] == '\f' || string[i] == ' ')
+		i++;
+	if (i != 0)
+	{
+		new_string = ft_set_mem_aloc(&string[i]);
+		free(string);
+		return (new_string);
+	}
+	return (string);
+}
+
 char	**command_parts_parser(t_command *command)
 {
 	
@@ -57,6 +75,8 @@ char	**command_parts_parser(t_command *command)
 	i = 0;
 	while(command_parts[i])
 	{
+		command_parts[i] = spaces_deleter(command_parts[i]);
+		//printf("%s\n", command_parts[i]);
 		if(command_parts[i][0] == '$' && ft_strlen(command_parts[i]) > 1)
 			command_parts[i] = value_to_variable(command_parts[i]);
 		i++;
@@ -93,7 +113,7 @@ t_command	*string_parser(char *string, char **envp)
 	i = 0;
 	node = NULL;
 	while (commands_array[i])
-	{	
+	{
 		node = insert_command_into_node(commands_array[i], envp, node);
 		if (i == 0)
 			first_command = node;

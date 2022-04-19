@@ -14,7 +14,8 @@ SRCS=main.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin.c\
 	mini_lib/ft_strcmp.c\
-	mini_lib/ft_memset.c
+	mini_lib/ft_memset.c\
+	mini_lib/ft_set_mem_aloc.c
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 OBJS=$(SRCS:.c=.o)
 

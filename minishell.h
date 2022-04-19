@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 19:33:47 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:52:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void 		ctrl_d_exit(void);
 // parser
 t_command	*string_parser(char *string, char **envp);
 char		**command_parts_parser(t_command *command);
+char		*spaces_deleter(char *string);
 
 // executor
 int			command_distribution(t_command *command);
@@ -118,6 +119,7 @@ char		*ft_strjoin(char *str1, char *str2);
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 void		*ft_memset(void *b, int c, size_t len);
+char		*ft_set_mem_aloc(char *string);
 
 // libreadline
 void rl_replace_line();
