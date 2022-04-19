@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_teminal_config.c                               :+:      :+:    :+:   */
+/*   set_terminal_config.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 16:54:47 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:55:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,21 @@ static void set_signal_configuration(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void set_terminal_configuration(void)
+void	set_terminal_configuration(char **envp)
 {
 	struct termios tp;
-
 	if (tcgetattr(STDIN_FILENO, &tp) == -1)
     	exit(1);
 	tp.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(STDIN_FILENO, 0, &tp) == -1)
     	exit(1);
 	set_signal_configuration();
-}
+	g_data = NULL;
+	g_data = (t_data *)malloc(sizeof(t_data));
+	if (!g_data)
+		exit(1);
+	g_data->exit_code = 0;
+	g_data->envp = envp;
+	g_data->first_var = NULL;
+	g_data->last_var = NULL;
+}	

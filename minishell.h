@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 17:57:05 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:44:37 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,18 @@ typedef struct s_shell_var
 	struct 	s_shell_var	*next;
 }	t_shell_var;
 
+typedef struct s_data
+{	
+	int			exit_code;
+	char		**envp;
+	t_shell_var *first_var;
+	t_shell_var *last_var;
+}	t_data;
+
+
 // start configuration
-void 		set_terminal_configuration(void);
+t_data		*g_data;
+void	set_terminal_configuration(char **envp);
 
 // builtins
 typedef int BUILTIN(t_command *command);
@@ -102,7 +112,7 @@ char		*spaces_deleter(char *string);
 
 // executor
 int			command_distribution(t_command *command);
-t_shell_var	*set_variable(char *string, t_shell_var *last_var);
+int			set_variable(char *string, t_shell_var *last_var);
 
 // utils
 t_heredoc	*heredoc(char *stop);

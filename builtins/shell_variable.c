@@ -6,17 +6,17 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 18:17:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:12:44 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // allowed alphabet, numbers but not like as first character in name
-t_shell_var	*set_variable(char *string, t_shell_var *last_var)	
+int	set_variable(char *string, t_shell_var *last_var)	
 {
 	char		**data;
-	t_shell_var *new_var;
+	t_shell_var *swap;
 	int			i;
 	
 	data = ft_split(string, '=');
@@ -33,11 +33,26 @@ t_shell_var	*set_variable(char *string, t_shell_var *last_var)
 				i++;
 			if (!data[0][i])
 			{	
-				printf("OK\n");
-				//new_var->variable = data[0];
-				//new_var->value = data[1];
-				//if (last_var)
-				//	last_var->next = new_var;
+				swap = g_data->last_var;
+				g_data->last_var = (t_shell_var *)malloc(sizeof(t_shell_var));
+				if (!g_data->last_var)
+					exit(1);
+				g_data->last_var->variable = data[0];
+				g_data->last_var->value = data[1];
+				g_data->last_var->next = NULL;
+				if (!g_data->first_var)
+				{	
+					g_data->first_var = g_data->last_var;
+				}
+				else 
+					swap->next = g_data->last_var;
+				
+				swap = g_data->first_var;
+				while (swap)
+				{
+					printf("%s=%s\n", swap->variable, swap->value);
+					swap = swap->next;
+				}
 			}
 			else
 				printf("[!] Incorrect name variable\n");		//change this error to error like in bash
@@ -45,5 +60,5 @@ t_shell_var	*set_variable(char *string, t_shell_var *last_var)
 		else
 			printf("[!] Incorrect name variable\n"); 		//change this error to error like in bash
 	}	
-	return (new_var);
+	return (0);
 }

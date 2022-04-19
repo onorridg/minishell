@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 18:03:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:13:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(int ac, char **av, char **envp)
 	char	*str;
 	
 	str = NULL;
-	set_terminal_configuration();
+	set_terminal_configuration(envp);
 	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
@@ -49,7 +49,8 @@ int main(int ac, char **av, char **envp)
 		else
 		{
 			ctrl_d_exit();
-			break;
+			exit(0);
+			//break;
 		}
 	}
 	return (0);
