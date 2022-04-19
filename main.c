@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 14:29:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:48:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av, char **envp)
 	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
-		str = readline(BEGIN(49, 32)"root@mac:# "CLOSE);
+		str = readline(BEGIN(49, 35) BLOD "➜ " BEGIN(49, 33)"root@mac:# "CLOSE);
 		add_history(str);
 		if (str)
 		{

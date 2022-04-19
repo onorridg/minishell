@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 14:01:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 15:43:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static int get_words(char **words, int count, char *string, char ch)
             return(split_free(words, i - 1));
         while(*&string[k] && *&string[k] != ch)
             words[i][j++] = *&string[k++];
-        //if (*string)
-        //    string++;
         words[i][j] = '\0';
-		//printf()
         i++;
     }
     words[i] = 0;
@@ -81,11 +78,11 @@ static int get_count(char *string, char ch)
     
     while (string[i])
     {	
-		while (string[i++] == ch)
-		{
-        	if (string[i + 1] && string[i + 1] != ch)
-            	count += 1;
-		}
+		while (string[i] && string[i] == ch)
+			i++;
+		count += 1;
+		while(string[i] && string[i] != ch)
+			i++;
     }
     return (count);
 }
@@ -97,9 +94,10 @@ char **ft_split(char *s, char ch)
     char    *string;
 
     string = s;
-    count = get_count(string, ch) + 1;
-    //if (ch == ':')
-    //    count += 1;
+	count = 0;
+    count = get_count(string, ch);
+	if (count == 0)
+		count = 1;  	// when press enter, mb need fix
     words = malloc(sizeof(char *) * (count + 1));
     if (!words)
         return (0);
