@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 19:12:44 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:18:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,6 @@ int	set_variable(char *string, t_shell_var *last_var)
 				}
 				else 
 					swap->next = g_data->last_var;
-				
-				swap = g_data->first_var;
-				while (swap)
-				{
-					printf("%s=%s\n", swap->variable, swap->value);
-					swap = swap->next;
-				}
 			}
 			else
 				printf("[!] Incorrect name variable\n");		//change this error to error like in bash
