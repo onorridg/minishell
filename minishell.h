@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 11:52:08 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:40:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ BUILTIN		**set_ptr_func_to_arr(void);
 
 // minilib
 char		**ft_split(char *string, char ch);
-int			split_free(char **words, int count);
-char		*ft_strjoin(char *str1, char *str2);
+int			split_free(char **words, int count); //need revrite to normal ft_strjoin
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 void		*ft_memset(void *b, int c, size_t len);
 char		*ft_set_mem_aloc(char *string);
+char		*ft_strjoin_path(char *str1, char *str2);
 
 // libreadline
 void rl_replace_line();

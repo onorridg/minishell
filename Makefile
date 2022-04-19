@@ -12,7 +12,7 @@ SRCS=main.c\
 	executor/command_distribution.c\
 	exit/ctrl_d_exit.c\
 	mini_lib/ft_split.c\
-	mini_lib/ft_strjoin.c\
+	mini_lib/ft_strjoin_path.c\
 	mini_lib/ft_strcmp.c\
 	mini_lib/ft_memset.c\
 	mini_lib/ft_set_mem_aloc.c

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:59:24 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 14:21:09 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:40:31 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_strlen(char *str)
     return i;
 }
 
-char *ft_strjoin(char *str1, char *str2)
+char *ft_strjoin_path(char *str1, char *str2)
 {   
     char *str_new;
     int len;

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 19:31:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:41:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,14 @@ char    *get_command_path(char *command)
 	i = 0;
 	while(arr_paths[i])
 	{	
-		path = ft_strjoin(arr_paths[i], command);
+		//printf("%s\n", arr_paths[i]);
+		path = ft_strjoin_path(arr_paths[i], command);
 		if (!access(path, 1))
+		{
+			split_free(arr_paths, -1);
 			return (path);
+		}
+		free(path);
 		i++;
 	}
 	return (0);
