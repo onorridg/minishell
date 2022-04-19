@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 14:04:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:30:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ char	*value_to_variable(char *string)
 	char	*env_variable;
 	int		i;
 
-
 	env_variable = getenv(&string[1]);
 	if (env_variable)
 		value = ft_set_mem_aloc(env_variable);
 	else
 		value = ft_set_mem_aloc(" ");
 	free(string);
-	//printf(value);
 	return (value);
 }
 
@@ -65,10 +63,8 @@ char	**command_parts_parser(t_command *command)
 	while(command_parts[i])
 	{
 		command_parts[i] = spaces_deleter(command_parts[i]);
-		//printf("%s\n", command_parts[i]);
 		if(command_parts[i][0] && command_parts[i][0] == '$' && ft_strlen(command_parts[i]) > 1)
 			command_parts[i] = value_to_variable(command_parts[i]);
-		//printf("%s\n\n", command_parts[i]);
 		i++;
 	}
 	return command_parts;
