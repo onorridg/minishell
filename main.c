@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/18 19:28:43 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:13:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,20 @@ static int minishell(char *string, char **envp)
 {	
 	t_command	*first_command;
 	t_command	*command;
-	
+	int i = 0;
 	first_command = string_parser(string, envp);
 	command = first_command;
 	while (command)
 	{
 		command->command_parts = command_parts_parser(command);
+		i = 0;
+		while (command->command_parts[i])
+		{
+			printf("%i - |%s|\n", i, command->command_parts[i]);
+			i++;
+			printf("---------\n");
+		}
+		printf("#####\n");
 		command_distribution(command);
 		command = command->next;
 	}
@@ -35,6 +43,7 @@ int main(int ac, char **av, char **envp)
 	
 	str = NULL;
 	set_terminal_configuration();
+	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
 		str = readline(BEGIN(49, 32)"root@mac:# "CLOSE);

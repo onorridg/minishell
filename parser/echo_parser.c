@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 20:25:49 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 12:43:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:52:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	echo_parser(t_command *command)
 {
-		
+	return;	
 }

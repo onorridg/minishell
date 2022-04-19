@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 12:40:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:27:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			ft_echo(t_command *command);
 int			ft_cd(t_command *command);
 int			ft_pwd(t_command *command);
 int 		ft_env(t_command *command);
+int 		plug(t_command *command);
 
 
 

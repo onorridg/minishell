@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 12:19:03 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 12:20:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 13:38:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static int get_words(char **words, int count, char *string, char ch)
     while (i < count)
     {   
         j = 0;
-        word_len = get_word_len(string, ch);
+		while (*string == ch)
+			j++;
+        word_len = get_word_len(&string[j], ch);
         words[i] = (char *)malloc(sizeof(char) * (word_len + 1));
         if (!words[i])
             return(split_free(words, i - 1));
         while(*string && *string != ch)
             words[i][j++] = *string++;
-        if (*string)
-            string++;
         words[i][j] = '\0';
         i++;
     }

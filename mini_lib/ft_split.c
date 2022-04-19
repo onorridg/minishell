@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/16 14:20:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 14:01:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,25 @@ static int get_words(char **words, int count, char *string, char ch)
     int     word_len;
     int     i;
     int     j;
+	int		k;
 
     i = 0;
+	k = 0;
     while (i < count)
     {   
         j = 0;
-        word_len = get_word_len(string, ch);
+		while (*&string[k] == ch)
+			k++;
+        word_len = get_word_len(&string[k], ch);
         words[i] = (char *)malloc(sizeof(char) * (word_len + 1));
         if (!words[i])
             return(split_free(words, i - 1));
-        while(*string && *string != ch)
-            words[i][j++] = *string++;
-        if (*string)
-            string++;
+        while(*&string[k] && *&string[k] != ch)
+            words[i][j++] = *&string[k++];
+        //if (*string)
+        //    string++;
         words[i][j] = '\0';
+		//printf()
         i++;
     }
     words[i] = 0;
@@ -75,9 +80,12 @@ static int get_count(char *string, char ch)
     count = 0;
     
     while (string[i])
-    {
-        if (string[i++] == ch)
-            count += 1;
+    {	
+		while (string[i++] == ch)
+		{
+        	if (string[i + 1] && string[i + 1] != ch)
+            	count += 1;
+		}
     }
     return (count);
 }
