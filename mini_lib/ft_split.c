@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 15:43:46 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:26:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ static int get_count(char *string, char ch)
     {	
 		while (string[i] && string[i] == ch)
 			i++;
-		count += 1;
+		if (string[i])
+			count += 1;
 		while(string[i] && string[i] != ch)
 			i++;
     }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 15:48:48 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:37:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 static int minishell(char *string, char **envp)
 {	
-	t_command	*first_command;
-	t_command	*command;
+	t_command			*first_command;
+	t_command			*command;
+	t_shell_variable	*var;
 
 	first_command = string_parser(string, envp);
 	command = first_command;

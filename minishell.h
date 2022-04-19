@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 14:27:26 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 17:46:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,11 @@
 #include <sys/wait.h>           		/*  */
 #include <signal.h>						/*  sigemptyset, sigaddset, sigaction, signal*/
 #include <termios.h>					/* tcgetattr, tcsetattr */
+#include <limits.h>
 
 //////////////////////
 #include <string.h> // 					DELETE !!!
 //////////////////////
-
-typedef struct s_data
-{
-	char	*command;
-	char	**envp;
-}	t_data;
-
 
 typedef	struct s_command
 {	
@@ -76,11 +70,12 @@ typedef struct s_heredoc
 	struct s_heredoc	*next;	
 }	t_heredoc;
 
-typedef struct s_split
+typedef struct s_shell_var
 {
-	int		count;
-	char	**words;
-}	t_split;
+	char				*variable;
+	char				*value;
+	struct 	s_shell_var	*next;
+}	t_shell_var;
 
 // start configuration
 void 		set_terminal_configuration(void);
@@ -92,6 +87,7 @@ int			ft_echo(t_command *command);
 int			ft_cd(t_command *command);
 int			ft_pwd(t_command *command);
 int 		ft_env(t_command *command);
+int 		ft_exit(t_command *command);
 int 		plug(t_command *command);
 
 
@@ -106,7 +102,9 @@ char		*spaces_deleter(char *string);
 
 // executor
 int			command_distribution(t_command *command);
+t_shell_var	*set_variable(char *string, t_shell_var *last_var);
 
+// utils
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);

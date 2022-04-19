@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 15:12:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:23:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int plug(t_command *command)
 {
 	printf("[!] PLUG FUNCTION\n");
 	return 0;
+}
+
+int ft_exit(t_command *command)
+{
+	write(1, "exit\n", 5);
+	exit(0);
 }
 
 int ft_env(t_command *command)
@@ -31,7 +37,6 @@ int ft_env(t_command *command)
 		write(1, "\n", 1);
 		i++;
 	}
-	//printf("%i\n", i);
 	return (0);
 }
 
