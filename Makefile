@@ -6,6 +6,7 @@ MAKEFILE=Makefile
 SRCS=main.c\
 	terminal_config/set_terminal_config.c\
 	builtins/builtins.c\
+	builtins/shell_variable.c\
 	builtins/heredoc.c\
 	parser/command_utils.c\
 	parser/string_parser.c\
@@ -15,7 +16,8 @@ SRCS=main.c\
 	mini_lib/ft_strjoin_path.c\
 	mini_lib/ft_strcmp.c\
 	mini_lib/ft_memset.c\
-	mini_lib/ft_set_mem_aloc.c
+	mini_lib/ft_set_mem_aloc.c\
+	mini_lib/ft_find_chr_in_string.c
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 OBJS=$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 17:48:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:17:16 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_shell_var	*set_variable(char *string, t_shell_var *last_var)
 	t_shell_var *new_var;
 	int			i;
 	
-	data = split(string, '=');
-	if (data && !data[2] && ft_strlen(data[i]) <= LINE_MAX - 1)
+	data = ft_split(string, '=');
+	if (data && data[1] && !data[2] && ft_strlen(data[i]) <= LINE_MAX - 1)
 	{
-		if ((data[0][0] >= 65 && data[0][0] <= 90) ||
-			(data[0][0] >= 97 && data[0][0] <= 122) || data[0][0] == '_')
+		if ((data[0][0] >= 'A' && data[0][0] <= 'Z') ||
+			(data[0][0] >= 'a' && data[0][0] <= 'z') || data[0][0] == '_')
 		{	
 			i = 0;
 			while ((data[0][i] >= 'A' && data[0][i] <= 'Z')
@@ -32,17 +32,18 @@ t_shell_var	*set_variable(char *string, t_shell_var *last_var)
 				|| (data[0][i] >= '0' && data[0][i] <= '9'))
 				i++;
 			if (!data[0][i])
-			{
-				new_var->variable = data[0];
-				new_var->value = data[1];
-				if (last_var)
-					last_var->next = new_var;
+			{	
+				printf("OK\n");
+				//new_var->variable = data[0];
+				//new_var->value = data[1];
+				//if (last_var)
+				//	last_var->next = new_var;
 			}
 			else
-				print("[!] Incorrect name variable\n");		//change this error to error like in bash
+				printf("[!] Incorrect name variable\n");		//change this error to error like in bash
 		}
 		else
-			print("[!] Incorrect name variable\n"); 		//change this error to error like in bash
+			printf("[!] Incorrect name variable\n"); 		//change this error to error like in bash
 	}	
 	return (new_var);
 }
