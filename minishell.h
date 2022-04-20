@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 14:06:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:17:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ typedef struct s_heredoc
 	struct s_heredoc	*next;	
 }	t_heredoc;
 
-typedef struct s_shell_var
+typedef struct s_own_var
 {
 	char				*variable;
 	char				*value;
-	struct 	s_shell_var	*next;
-}	t_shell_var;
+	struct 	s_own_var	*next;
+}	t_own_var;
 
 typedef struct s_envp
 {
@@ -90,8 +90,8 @@ typedef struct s_data
 	char		**envp;
 	t_envp		*first_envp;
 	t_envp		*last_envp;
-	t_shell_var *first_var;
-	t_shell_var *last_var;
+	t_own_var *first_var;
+	t_own_var *last_var;
 }	t_data;
 
 
@@ -123,7 +123,7 @@ char		*value_to_variable(char *string);
 
 // executor
 int			command_distribution(t_command *command);
-int			set_variable(char *string, t_shell_var *last_var);
+int			set_variable(char *string, t_own_var *last_var);
 
 // utils
 t_heredoc	*heredoc(char *stop);

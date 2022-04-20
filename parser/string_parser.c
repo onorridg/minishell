@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 14:02:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:15:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*value_to_variable(char *string)
 {
 	char 		*value;
 	char		*env_variable;
-	t_shell_var *variable;
+	t_own_var	*variable;
 
 	value = NULL;
 	env_variable = getenv(&string[1]);

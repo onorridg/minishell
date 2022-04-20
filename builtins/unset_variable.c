@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:52:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:17:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int uset_own_variable(char *string)
 {	
-	t_shell_var	*node;
-	t_shell_var	*privius_node;
+	t_own_var	*node;
+	t_own_var	*privius_node;
 
 	node = g_data->first_var;
 	privius_node = NULL;

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:38:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:16:25 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int ft_env(t_command *command)
 }
 
 // allowed alphabet, numbers but not like as first character in name
-int	set_variable(char *string, t_shell_var *last_var)	
+int	set_variable(char *string, t_own_var *last_var)	
 {
 	char		**data;
-	t_shell_var *swap;
+	t_own_var *swap;
 	int			i;
 	
 	data = ft_split(string, '=');
@@ -50,7 +50,7 @@ int	set_variable(char *string, t_shell_var *last_var)
 			if (!data[0][i])
 			{	
 				swap = g_data->last_var;
-				g_data->last_var = (t_shell_var *)malloc(sizeof(t_shell_var));
+				g_data->last_var = (t_own_var *)malloc(sizeof(t_own_var));
 				if (!g_data->last_var)
 					exit(1);
 				g_data->last_var->variable = data[0];
