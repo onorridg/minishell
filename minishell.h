@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 16:17:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:16:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,6 @@ int 		ft_env(t_command *command);
 int 		ft_exit(t_command *command);
 int 		plug(t_command *command);
 
-
-
 // exit
 void 		ctrl_d_exit(void);
 
@@ -140,7 +138,10 @@ int			ft_strlen(char *str);
 void		*ft_memset(void *b, int c, size_t len);
 char		*ft_set_mem_aloc(char *string);
 char		*ft_strjoin_path(char *str1, char *str2);
-int			find_char_in_string(char *string, char ch);
+int			ft_find_char_in_string(char *string, char ch);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char		*ft_strjoin(char const *s1, char const *s2);
+
 
 
 // libreadline

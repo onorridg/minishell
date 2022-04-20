@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:49:32 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:27:44 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int command_distribution(t_command *command)
 	
 	builtin_functions = set_ptr_func_to_arr();
 	builtin_number = builtin_chek(command->command_parts[0]);
-	if (!command->command_parts[1] && find_char_in_string(command->command_parts[0], '=') != -1)
+	if (!command->command_parts[1] && ft_find_char_in_string(command->command_parts[0], '=') != -1)
 		set_variable(command->command, 0);
 		//printf("[!] set variable\n");
 		

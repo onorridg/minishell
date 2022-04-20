@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_chr_in_string.c                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 17:54:14 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 19:16:47 by onorridg         ###   ########.fr       */
+/*   Created: 2022/04/20 19:10:10 by onorridg          #+#    #+#             */
+/*   Updated: 2022/04/20 19:10:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_find_char_in_string(char *string, char ch)
-{
-	int i;
+#include "../minishell.h"
 
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen((char *) src);
 	i = 0;
-	while (string[i])
+	if (dstsize)
 	{
-		if (string[i] == ch)
-			return (i);
-		i++;
+		dstsize--;
+		while (src[i] && dstsize--)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	return (-1);
+	return (len);
 }

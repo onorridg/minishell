@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 14:23:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:05:52 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,38 +45,5 @@ int ft_cd(t_command *command)
 		chdir(command->command_parts[1]);
 	else
 		chdir(getenv("HOME"));
-	return (0);
-}
-
-int	ft_echo(t_command *command)
-{
-	int	i;
-	int j;
-	int newline;
-	
-	j = 1;
-	newline = TRUE;
-	if (command->command_parts[1])
-	{
-		if (ft_strcmp(command->command_parts[1], "-n"))
-		{
-			j = 2;
-			newline = FALSE;
-			while(ft_strcmp(command->command_parts[j], "-n"))
-				j++;
-		}
-		while (command->command_parts[j])
-		{
-			i = 0;
-			if(command->command_parts[j][0] == '$' && ft_strlen(command->command_parts[j]) > 1)
-				command->command_parts[j] = value_to_variable(command->command_parts[j]);
-			write(1, command->command_parts[j], ft_strlen(command->command_parts[j]));
-			j++;
-			if (command->command_parts[j])
-				write(1, " ", 1);	
-		}
-	}
-	if (newline)
-		write(1, "\n", 1);
 	return (0);
 }
