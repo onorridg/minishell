@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:36:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:18:54 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int create_envp_list(char **envp)
 	int 	i;
 	t_envp	*swap;
 	char	**data;
+	t_envp	*first;
 	
-	i = 0;
+	i = 0; 
 	while (envp[i])
 	{
 		swap = g_data->last_envp;
@@ -37,6 +38,7 @@ static int create_envp_list(char **envp)
 			swap->next = g_data->last_envp;
 		i++;
 	}
+	
 	return (0);
 }
 
