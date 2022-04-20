@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 18:12:11 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:49:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int command_distribution(t_command *command)
 		set_variable(command->command, 0);
 		//printf("[!] set variable\n");
 		
-	else if (builtin_number == D_ECHO || builtin_number == D_CD)
+	else if (builtin_number == D_ECHO || builtin_number == D_CD || builtin_number == D_UNSET)
 	{	
 		builtin_functions[builtin_number](command);
 	}

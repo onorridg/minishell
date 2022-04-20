@@ -7,6 +7,7 @@ SRCS=main.c\
 	terminal_config/set_terminal_config.c\
 	builtins/builtins.c\
 	builtins/shell_variable.c\
+	builtins/unset_variable.c\
 	builtins/heredoc.c\
 	parser/command_utils.c\
 	parser/string_parser.c\

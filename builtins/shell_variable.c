@@ -6,13 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:31:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:38:25 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-
 
 int ft_env(t_command *command)
 {

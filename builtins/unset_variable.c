@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:32:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:52:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,15 @@ static int unset_envp(char *string)
 	return (0);
 }
 
-int	unset_variable(char *string)
-{
-	if (!unset_envp(string))
-		uset_own_variable(string);
+int	ft_unset(t_command *command)
+{	
+	if (command->command_parts[1])
+	{	
+		printf("%s %s\n", command->command_parts[0], command->command_parts[1]);
+		if (!unset_envp(&command->command_parts[1][1]))
+			uset_own_variable(&command->command_parts[1][1]);
+	}
+	else
+		printf("WTF!\n");
 	return (0);
 }
