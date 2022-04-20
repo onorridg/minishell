@@ -6,11 +6,29 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 19:18:26 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:31:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+
+
+int ft_env(t_command *command)
+{
+	t_envp 	*variable_node;
+
+	variable_node = g_data->first_envp;
+	while (variable_node)
+	{
+		write(1, variable_node->variable, ft_strlen(variable_node->variable));
+		write(1, "=", 1);
+		write(1, variable_node->value, ft_strlen(variable_node->value));
+		write(1, "\n", 1);
+		variable_node = variable_node->next;	
+	}
+	return (0);
+}
 
 // allowed alphabet, numbers but not like as first character in name
 int	set_variable(char *string, t_shell_var *last_var)	
@@ -41,9 +59,7 @@ int	set_variable(char *string, t_shell_var *last_var)
 				g_data->last_var->value = data[1];
 				g_data->last_var->next = NULL;
 				if (!g_data->first_var)
-				{	
 					g_data->first_var = g_data->last_var;
-				}
 				else 
 					swap->next = g_data->last_var;
 			}

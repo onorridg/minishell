@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 16:23:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:56:14 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,6 @@ int ft_exit(t_command *command)
 {
 	write(1, "exit\n", 5);
 	exit(0);
-}
-
-int ft_env(t_command *command)
-{
-	int i;
-	int j;
-	
-
-	i = 0;
-	while (command->envp[i])
-	{	
-		write(1, command->envp[i], ft_strlen(command->envp[i]));
-		write(1, "\n", 1);
-		i++;
-	}
-	return (0);
 }
 
 int ft_pwd(t_command *command)

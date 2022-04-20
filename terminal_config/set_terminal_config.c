@@ -6,11 +6,39 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 18:55:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:36:30 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static int create_envp_list(char **envp)
+{
+	int 	i;
+	t_envp	*swap;
+	char	**data;
+	
+	i = 0;
+	while (envp[i])
+	{
+		swap = g_data->last_envp;
+		g_data->last_envp = (t_envp *)malloc(sizeof(t_envp));
+		if (!g_data->last_envp)
+			exit(1);
+		data = ft_split(envp[i], '=');
+		if (!data)
+			exit(1);
+		g_data->last_envp->variable = data[0];
+		g_data->last_envp->value = data[1];
+		g_data->last_envp->next = NULL;
+		if (i == 0)
+			g_data->first_envp = g_data->last_envp;
+		else
+			swap->next = g_data->last_envp;
+		i++;
+	}
+	return (0);
+}
 
 static void	hdl(int sig)
 {
@@ -55,4 +83,5 @@ void	set_terminal_configuration(char **envp)
 	g_data->envp = envp;
 	g_data->first_var = NULL;
 	g_data->last_var = NULL;
+	create_envp_list(envp);
 }	
