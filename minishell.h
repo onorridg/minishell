@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 19:16:41 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:03:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,12 @@ void		*ft_memset(void *b, int c, size_t len);
 char		*ft_set_mem_aloc(char *string);
 char		*ft_strjoin_path(char *str1, char *str2);
 int			ft_find_char_in_string(char *string, char ch);
+char		*ft_copy_str_len(char *string, int len);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strjoin(char const *s1, char const *s2);
+int			ft_whitespaces_len(char *string, int flag);
+int			ft_char_len(char *string, int flag);
+
 
 
 

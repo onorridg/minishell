@@ -1,2 +1,15 @@
-1) "echo kek   \  42"    менять количество пробелов перед \
-2) "cd " cd с пробелом не работает 
+bash-3.2$ kek
+bash: kek: command not found
+bash-3.2$ $kek
+bash-3.2$ $USER
+bash: onorridg: command not found
+bash-3.2$ echo "[$USER]"
+[onorridg]
+bash-3.2$ kek42=21
+bash-3.2$ echo "[$kek42]"
+[21]
+bash-3.2$ echo "[$2ek42]"
+[ek42]
+bash-3.2$ echo "[$23ek42]"
+[3ek42]
+bash-3.2$ echo "[$23ek42]"

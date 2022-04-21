@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 17:03:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:14:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*value_to_variable(char *string)
 	var = g_data->first_envp;
 	while (var)
 	{
-		if (ft_strcmp(&string[1], var->variable))
+		if (ft_strcmp(string, var->variable))
 		{
 			value = ft_set_mem_aloc(var->value);
 			break;
@@ -40,7 +40,7 @@ char	*value_to_variable(char *string)
 		variable = g_data->first_var;
 		while (variable)
 		{
-			if (ft_strcmp(&string[1], variable->variable))
+			if (ft_strcmp(string, variable->variable))
 			{
 				value = ft_set_mem_aloc(variable->value);
 				break;
@@ -49,7 +49,7 @@ char	*value_to_variable(char *string)
 		}
 	}
 	if (!value)
-		value = ft_set_mem_aloc(" ");
+		value = ft_set_mem_aloc("");
 	free(string);
 	return (value);
 }

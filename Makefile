@@ -1,8 +1,13 @@
 NAME=minishell
+
 CC=cc
+
 HEADER=minishell.h
+
 CFLAGS= #-Wall -Wextra -Werror
+
 MAKEFILE=Makefile
+
 SRCS=main.c\
 	terminal_config/set_terminal_config.c\
 	builtins/builtins.c\
@@ -20,9 +25,13 @@ SRCS=main.c\
 	mini_lib/ft_memset.c\
 	mini_lib/ft_set_mem_aloc.c\
 	mini_lib/ft_find_chr_in_string.c\
+	mini_lib/ft_copy_str_len.c\
 	mini_lib/ft_strlcpy.c\
-	mini_lib/ft_strjoin.c
+	mini_lib/ft_whitespaces_len.c\
+	mini_lib/ft_char_len.c
+
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
+
 OBJS=$(SRCS:.c=.o)
 
 all:$(NAME)
