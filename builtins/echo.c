@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 15:30:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:35:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ int	ft_echo(t_command *command)
 			while(ft_strcmp(command->command_parts[j], "-n"))
 				j++;
 		}
-		/*while (command->command_parts[j])
-		{
-			i = 0;
-			if(command->command_parts[j][0] == '$' && ft_strlen(command->command_parts[j]) > 1)
-				command->command_parts[j] = value_to_variable(command->command_parts[j]);
-			write(1, command->command_parts[j], ft_strlen(command->command_parts[j]));
-			j++;
-			if (command->command_parts[j])
-				write(1, " ", 1);	
-		}*/
 		while(command->command_parts[j])
 		{	
 			flag = 0;

@@ -1,22 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctrl_d_exit.c                                      :+:      :+:    :+:   */
+/*   path_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/18 16:44:19 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 17:04:28 by onorridg         ###   ########.fr       */
+/*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
+/*   Updated: 2022/04/21 16:43:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-void ctrl_d_exit(void)
-{
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	write(1, "exit\n", 5);
-	exit(0);
-}
+int		path_command()
