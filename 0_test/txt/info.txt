@@ -1,20 +1,8 @@
 arr ptr funcs:	 	https://stackoverflow.com/questions/252748/how-can-i-use-an-array-of-function-pointers
-status exit code: 	https://www.cyberciti.biz/faq/linux-bash-exit-status-set-exit-statusin-bash/+
+status exit code: 	https://www.cyberciti.biz/faq/linux-bash-exit-status-set-exit-statusin-bash/
 ctrl + d: 			https://unix.stackexchange.com/questions/110240/why-does-ctrl-d-eof-exit-the-shell	
-
 off echo simbols: https://stackoverflow.com/questions/59922972/how-to-stop-echo-in-terminal-using-c
 
+----------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-\ 033 [5m - управляющий код ANSI, что означает, что выходной атрибут отключен
-
-
-
-brew link --force readline
-
-Then, after building, reverse the above with
-
-brew unlink readline
+SHLVL: https://solutics.ru/linux/kak-i-pochemu-vy-dolzhny-ispolzovat-peremennuyu-shlvl/
