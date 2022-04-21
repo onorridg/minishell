@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 13:46:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:10:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ int builtin_chek(char *builtin)
 		return (5);
 	else if (ft_strcmp(builtin, "exit"))
 		return (6);
-	return (-1);
+	else 
+		return (7);
 }
 
 BUILTIN	**set_ptr_func_to_arr(void)
 {
 	BUILTIN **builtins_arr;
 	
-	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN*) * 8);
+	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN*) * 9);
 	if (!builtins_arr)
 	{
 		printf("FCK malloc !\n");
@@ -48,7 +49,8 @@ BUILTIN	**set_ptr_func_to_arr(void)
 	builtins_arr[4] = ft_unset;
 	builtins_arr[5] = ft_env;
 	builtins_arr[6] = ft_exit;
-	builtins_arr[7] = 0;
+	builtins_arr[7] = path_command;
+	builtins_arr[8] = 0;
 	return builtins_arr;
 }
 

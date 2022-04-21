@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 16:44:12 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:10:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ int command_distribution(t_command *command)
 	builtin_number = builtin_chek(command->command_parts[0]);
 	if (!command->command_parts[1] && ft_find_char_in_string(command->command_parts[0], '=') != -1)
 		set_variable(command->command, 0);
-	else if (builtin_number != -1)
-		builtin_functions[builtin_number](command);
 	else
-	{
-		printf(RED BLOD"BASH:"CLOSE" %s\n", command->command);
-	}
+		builtin_functions[builtin_number](command);
+		//printf(RED BLOD"BASH:"CLOSE" %s\n", command->command);
 	return (0);
 }

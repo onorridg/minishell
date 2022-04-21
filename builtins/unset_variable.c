@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 17:25:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:24:42 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ int	ft_unset(t_command *command)
 {	
 	if (command->command_parts[1])
 	{
-		printf("%s %s\n", command->command_parts[0], command->command_parts[1]);
-		if (!unset_envp(&command->command_parts[1][1],
-			g_data->first_envp, NULL))
-			uset_own_variable(&command->command_parts[1][1],
+		if (!unset_envp(command->command_parts[1],
+				g_data->first_envp, NULL))
+			uset_own_variable(command->command_parts[1],
 				g_data->first_var, NULL);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 16:27:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:25:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int ft_env(t_command *command)
 	return (0);
 }
 
-// allowed alphabet, numbers but not like as first character in name
+/* allowed alphabet, numbers (but not like as first character in name) */
 int	set_variable(char *string, t_own_var *last_var)	
 {
 	char		**data;

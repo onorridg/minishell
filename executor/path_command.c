@@ -6,8 +6,14 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 16:43:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:08:31 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		path_command()
+#include "../minishell.h"
+
+int		path_command(t_command *command)
+{
+	printf("TEST bash\n");
+	return 0;
+}

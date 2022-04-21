@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 14:03:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:07:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef	struct s_command
 {	
 	char				*command;
 	char				**command_parts;
-	char				**envp;
+	//char				**envp;
 	struct s_command 	*next;
 }	t_command;
 
@@ -108,6 +108,7 @@ int			ft_pwd(t_command *command);
 int			ft_unset(t_command *command);
 int 		ft_env(t_command *command);
 int 		ft_exit(t_command *command);
+int			path_command(t_command *command);
 int 		plug(t_command *command);
 
 // exit
