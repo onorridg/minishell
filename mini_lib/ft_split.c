@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 18:49:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:08:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@ static int get_word_len(char *string, char ch)
     i = 0;
 	flag = 0;
     while (string[i] && (string[i] != ch || flag != 0))
-	{	
-		if (string[i] == flag)
-			flag = 0;
-		else if (string[i] == '"' || string[i] == '\'')
-			flag = string[i];
+	{
+		if (string[i] == '"' || string[i] == '\'')
+		{
+			if (flag == 0)
+				flag = string[i];
+			else if (string[i] == flag)
+				flag = 0;
+		}
         i++;
 	}
     return (i);
@@ -70,11 +73,14 @@ static int get_words(char **words, int count, char *string, char ch)
         if (!words[i])
             return(split_free(words, i - 1));
         while(*&string[k] && (*&string[k] != ch || flag != 0))
-		{	
-			if (*&string[k] == flag)
-				flag = 0;
-			else if (*&string[k] == '"' || *&string[k] == '\'')
-				flag = *&string[k];
+		{
+			if (*&string[k] == '"' || *&string[k] == '\'')
+			{
+				if (flag == 0)
+					flag = *&string[k];
+				else if (*&string[k] == flag)
+					flag = 0;
+			}
             words[i][j++] = *&string[k++];
 		}
         words[i][j] = '\0';
@@ -101,10 +107,13 @@ static int get_count(char *string, char ch)
 			count += 1;
 		while(string[i] && (string[i] != ch || flag != 0))
 		{	
-			if (string[i] == flag)
-				flag = 0;
-			else if (string[i] == '"' || string[i] == '\'')
-				flag = string[i];
+			if (string[i] == '"' || string[i] == '\'')
+			{
+				if (flag == 0)
+					flag = string[i];
+				else if (string[i] == flag)
+					flag = 0;
+			}
 			i++;
 		}
     }
@@ -122,7 +131,6 @@ char **ft_split(char *s, char ch)
     count = get_count(string, ch);
 	if (count == 0)
 		count = 1;  	// when press enter, mb need fix
-	//printf("count: %i\n", count);
     words = malloc(sizeof(char *) * (count + 1));
     if (!words)
         return (0);
@@ -133,7 +141,8 @@ char **ft_split(char *s, char ch)
 
 /*int main(void)
 {	
-	char **result = ft_split("\" kek lol | 24 | aaaa              \" lol jekek |\"", ' ');
+	char **result = ft_split("\"'\"|'\"\"\"|'|\"|kek lol\"", '|');
+	//char **result = ft_split("\" kek lol | 24 | aaaa              \" lol jekek |\"", ' ');
 	int i = 0;
 	while(result[i])
 		printf("%s\n", result[i++]);

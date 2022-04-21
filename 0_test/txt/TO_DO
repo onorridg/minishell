@@ -1,5 +1,5 @@
 echo '"'"''$PATH''"'"': https://stackoverflow.com/c/42network/questions/1983
-rcho echo '""''$PATH''"'"''"
+echo echo '""''$PATH''"'"''"
 ----------------------------------------------------------------------------------
 $SHLVL 
 exit status: https://stackoverflow.com/c/42network/questions/1545
