@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 17:59:24 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/19 12:40:31 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:47:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char *ft_strjoin_path(char *str1, char *str2)
     if (str2)
         len += ft_strlen(str2);
     str_new = (char *)malloc(sizeof(char) * len + 2);
+	if (!str_new)
+		exit(1);
     i = 0;
     j = 0;
     while (str1[j])

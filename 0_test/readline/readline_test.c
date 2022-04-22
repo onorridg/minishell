@@ -3,27 +3,21 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>	/* errno */
+#include <stdio.h>
+#include <string.h> /* strerror */
+#include <fcntl.h>
 
-#include <readline/readline.h>
-#include <readline/history.h>               
-# define BEGIN(x,y) "\001\033["#x";"#y"m\002"
-# define CLOSE "\001\033[0m\002"        
-extern void rl_clear_history(void);
-
-
-int main(void)
-{
-	char *str;
-	rl_outstream = stderr;
-	while (1)
-	{
-		str = readline(BEGIN(49, 31)"root@mac:# "CLOSE);
-		if (!str)
-		{	
-			write(1, "exit\n", 5);
-			break;
-		}
-		add_history(str);
-		free(str);
-	}
+int main(int ac, char **av)
+{	
+	//if (command->command_parts[1])
+	chdir(av[1]);
+	//printf("%s\n", strerror(errno));
+	int i;
+	i = 0;
+	char ch[1];
+	errno = 255;
+	write(1, strerror(errno), strlen(strerror(errno)));
+	write(1, "\n", 1);
+	//execve("../../minishell", NULL, NULL);
 }

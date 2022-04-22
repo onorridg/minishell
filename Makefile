@@ -20,6 +20,7 @@ SRCS=main.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	exit/ctrl_d_exit.c\
+	error/error_handler.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin_path.c\
 	mini_lib/ft_strcmp.c\

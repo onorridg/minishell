@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:11:53 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 19:12:05 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:47:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	l_s1 = ft_strlen(s1);
 	l_s2 = ft_strlen(s2);
 	new = (char *)malloc(sizeof(char) * (l_s1 + l_s2) + 1);
+	if (!new)
+		exit(1);
 	if (l_s1 == 0 && l_s2 == 0)
 		*new = '\0';
 	else if (new)

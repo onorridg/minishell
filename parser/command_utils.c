@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 19:10:13 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:45:06 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ BUILTIN	**set_ptr_func_to_arr(void)
 	
 	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN*) * 9);
 	if (!builtins_arr)
-	{
-		printf("FCK malloc !\n");
-		return 0;
-	}
+		exit(1);
 	builtins_arr[0] = ft_echo;
 	builtins_arr[1] = ft_cd;
 	builtins_arr[2] = ft_pwd;
@@ -52,29 +49,4 @@ BUILTIN	**set_ptr_func_to_arr(void)
 	builtins_arr[7] = path_command;
 	builtins_arr[8] = 0;
 	return builtins_arr;
-}
-
-char    *get_command_path(char *command)
-{
-	char	**arr_paths;
-	int 	i;
-	char	*path;
-	
-	arr_paths = ft_split(getenv("PATH"), ':');
-	if (!arr_paths)
-		return (0);
-	i = 0;
-	while(arr_paths[i])
-	{	
-		//printf("%s\n", arr_paths[i]);
-		path = ft_strjoin_path(arr_paths[i], command);
-		if (!access(path, 1))
-		{
-			split_free(arr_paths, -1);
-			return (path);
-		}
-		free(path);
-		i++;
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 19:07:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:35:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 #include <signal.h>						/*  sigemptyset, sigaddset, sigaction, signal*/
 #include <termios.h>					/* tcgetattr, tcsetattr */
 #include <limits.h>
+#include <errno.h>						/* errno */
+#include <string.h> 					/* strerror */
 
 //////////////////////
 #include <string.h> // 					DELETE !!!
@@ -128,8 +130,10 @@ int			set_variable(char *string, t_own_var *last_var);
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
-char    	*get_command_path(char *command);
+//char    	*get_command_path(char *command);
 BUILTIN		**set_ptr_func_to_arr(void);
+void 		error_handler(t_command *command);
+
 
 // minilib
 char		**ft_split(char *string, char ch);
