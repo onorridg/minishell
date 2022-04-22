@@ -1,6 +1,7 @@
 echo '"'"''$PATH''"'"': 			https://stackoverflow.com/c/42network/questions/1983
 echo echo '""''$PATH''"'"''"
 echo echo "$USER|'"'$USER'|echo "|" 
+echo "$USER|'"'$USER'|echo "|test" | 
 ----------------------------------------------------------------------------------
 $SHLVL 
 exit status: https://stackoverflow.com/c/42network/questions/1545

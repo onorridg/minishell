@@ -6,14 +6,16 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 13:45:06 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:23:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int builtin_chek(char *builtin)
-{
+{	
+	if (!builtin)
+		return -1;
 	if (ft_strcmp(builtin, "echo"))
 		return (0);
 	else if (ft_strcmp(builtin, "cd"))

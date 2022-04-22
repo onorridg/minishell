@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 17:03:19 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:10:07 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	quotes(char ch, char *flag, int *replace_variable)
 		*replace_variable = FALSE;
 }
 
-void	print_one_word(char *word, int flag, int i)
+void	print_one_word(char *word, char flag, int i)
 {
 	int	replace_variable;
 

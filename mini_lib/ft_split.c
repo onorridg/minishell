@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 16:08:13 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:04:39 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ char **ft_split(char *s, char ch)
     count = get_count(string, ch);
 	if (count == 0)
 		count = 1;  	// when press enter, mb need fix
+	//if (ch == '|')
+	//	printf("parts: %i\n", count);
     words = malloc(sizeof(char *) * (count + 1));
     if (!words)
         return (0);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 16:12:26 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:04:31 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ char	**command_parts_parser(t_command *command)
 		exit(1);
 	i = 0;
 	while(command_parts[i])
-	{
+	{	
 		command_parts[i] = spaces_deleter(command_parts[i]);
+		//printf("command: |%s|\n", command_parts[i]);
 		i++;
 	}
 	return command_parts;
@@ -97,8 +98,9 @@ t_command	*string_parser(char *string, char **envp)
 		exit(1);
 	i = 0;
 	node = NULL;
+	//printf("\n");
 	while (commands_array[i])
-	{
+	{	
 		node = insert_command_into_node(commands_array[i], envp, node);
 		if (i == 0)
 			first_command = node;

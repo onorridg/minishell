@@ -19,6 +19,7 @@ SRCS=main.c\
 	parser/string_parser.c\
 	parser/my_getenv.c\
 	parser/get_own_env.c\
+	parser/get_command_path.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	exit/ctrl_d_exit.c\

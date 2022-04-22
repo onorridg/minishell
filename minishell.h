@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 14:39:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:11:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int			set_variable(char *string);
 t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
-//char    	*get_command_path(char *command);
+char    	*get_command_path(t_command *command);
 BUILTIN		**set_ptr_func_to_arr(void);
 void 		error_handler(t_command *command);
 
