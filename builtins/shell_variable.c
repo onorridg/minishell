@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 16:18:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:55:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,11 @@ int	set_variable(char *string)
 	if (set_env_variable(data))
 		return (0);
 	else if (data && data[1] && !data[2] && ft_strlen(data[1]) <= LINE_MAX - 1)
-	{	
-		
-		if ((data[0][0] >= 'A' && data[0][0] <= 'Z') ||
+	{
+		if (((data[0][0] >= 'A' && data[0][0] <= 'Z') ||
 			(data[0][0] >= 'a' && data[0][0] <= 'z') || data[0][0] == '_')
-		{	
-			if (!data[0][ft_char_len(data[0], TRUE)])
-				set_data_to_variable(data);
-			else
-				errno = 255;
-		}
+			&& !data[0][ft_char_len(data[0], TRUE)])
+			set_data_to_variable(data);
 		else
 			errno = 255;
 	}
