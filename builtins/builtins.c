@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 13:53:02 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:51:06 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,22 @@ int ft_pwd(t_command *command)
 
 int ft_cd(t_command *command)
 {	
-	int result;
+	int		result;
+	char	*home_path;
+	
 	if (command->command_parts[1])
 		result = chdir(command->command_parts[1]);
 	else
-		result = chdir(getenv("HOME"));
+	{
+		home_path = my_getenv("HOME");
+		if (!home_path)
+			result = -1;
+		else
+		{
+			result = chdir((const char*)home_path);
+			free(home_path);
+		}
+	}
 	if (result == -1)
 		error_handler(command);
 	return (0);

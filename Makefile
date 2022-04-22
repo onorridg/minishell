@@ -17,6 +17,8 @@ SRCS=main.c\
 	builtins/heredoc.c\
 	parser/command_utils.c\
 	parser/string_parser.c\
+	parser/my_getenv.c\
+	parser/get_own_env.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	exit/ctrl_d_exit.c\

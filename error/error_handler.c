@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:57:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 13:49:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:40:19 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static void display_error(int error_number, t_command *command)
 	errno = error_number;
 	write(1, "minishell: ", 12);
 	write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));
-	write(1, ": ", 2);
-	write(1, command->command_parts[1], ft_strlen(command->command_parts[1]));
+	if (command->command_parts[1])
+	{
+		write(1, ": ", 2);
+		write(1, command->command_parts[1], ft_strlen(command->command_parts[1]));
+	}
 	write(1, ": ", 2);
 	if (errno != 255)
 		write(1, strerror(errno), strlen(strerror(errno)));
