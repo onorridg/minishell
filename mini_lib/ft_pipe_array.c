@@ -6,23 +6,23 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:30:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 12:54:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:06:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_pipe_array(int count)
+void ft_pipe_array(void)
 {
 	int	**pipe_array;
 	int i;
 	int *pipe_fd;
 	
-	pipe_array = (int **)malloc(sizeof(int *) * (count + 1));
+	pipe_array = (int **)malloc(sizeof(int *) * (g_data->command_counter + 1));
 	if (!pipe_array)
 		exit(1);
 	i = 0;
-	while (i < count)
+	while (i < g_data->command_counter)
 	{	
 		pipe_fd = (int *)malloc(sizeof(int) * (2));
 		if (!pipe_fd)
@@ -32,26 +32,24 @@ void ft_pipe_array(int count)
 		pipe_array[i++] = pipe_fd;
 	}
 	pipe_array[i] = 0;
-	//g_data->pipes_array = pipe_array;
-	//printf("ENVP[0]: %s\n", g_data->envp[0]);
-	i =0;
-	while(i < count)
+	g_data->pipe_array = pipe_array;
+	/*i = 0;
+	while(i < g_data->command_counter)
 	{
-		printf("%i: [%i]|[%i]\n", i, pipe_array[i][0], pipe_array[i][1]);
+		printf("%i: [%i]|[%i]\n", i, g_data->pipe_array[i][0], g_data->pipe_array[i][1]);
 		i++;
-	}
-	printf("ENVP[0]: %s\n", g_data->envp[0]);
+	}*/
 }
 
-int main(void)
+/*int main(void)
 {	
 	int count = 10;
 	ft_pipe_array(count);
-	/*int i = 0;
+	int i = 0;
 	while(i < count)
 	{
 		printf("%i: [%i]|[%i]\n", i, g_data->pipe_array[i][0], g_data->pipe_array[i][1]);
 		i++;
 	}
-	return (0);*/
-}
+	return (0);
+}*/

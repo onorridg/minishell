@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 12:50:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:10:38 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 
 typedef	struct s_command
 {	
+	int					command_number;
 	char				*command;
 	char				**command_parts;
 	int					last_command;
@@ -89,7 +90,7 @@ typedef struct s_envp
 typedef struct s_data
 {	
 	int			command_counter;
-	int			**pipes_array;
+	int			**pipe_array;
 	int			exit_code;
 	char		**envp;
 	t_envp		*first_envp;
@@ -141,6 +142,7 @@ BUILTIN		**set_ptr_func_to_arr(void);
 void 		error_handler(t_command *command);
 
 
+
 // minilib
 char		**ft_split(char *string, char ch);
 int			split_free(char **words, int count); 
@@ -155,6 +157,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_whitespaces_len(char *string, int flag);
 int			ft_char_len(char *string, int flag);
+void 		ft_pipe_array(void);
 
 
 

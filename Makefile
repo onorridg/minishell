@@ -33,7 +33,8 @@ SRCS=main.c\
 	mini_lib/ft_copy_str_len.c\
 	mini_lib/ft_strlcpy.c\
 	mini_lib/ft_whitespaces_len.c\
-	mini_lib/ft_char_len.c
+	mini_lib/ft_char_len.c\
+	mini_lib/ft_pipe_array.c
 
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 
