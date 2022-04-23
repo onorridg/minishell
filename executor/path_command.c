@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 14:43:11 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 16:44:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 	return (0);
 }*/
 
+
 static int execut_comand(t_command *command, char *path)
 {	
 	int		*pipe_fds;
@@ -63,9 +64,18 @@ static int execut_comand(t_command *command, char *path)
 		else
 		{	
 			//close(pipe_fds[1]);
-			pipe_fds[1] = g_data->pipe_array[command->command_number - 1][0];
-			if (dup2(pipe_fds[1], STDIN_FILENO) == -1)
+			close(pipe_fds[0]);
+			pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
+			//if (dup2(pipe_fds[1], STDIN_FILENO) == -1)
+			//	exit(1);
+			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
 				exit(1);
+			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+				exit(1);
+			//if (dup2(pipe_fds[0], STDOUT_FILENO) == -1)
+			//	exit(1);
+			//if (dup2(pipe_fds[0], STDOUT_FILENO) == -1)
+			//	exit(1);
 			//while (read(pipe_fds[1], output, 1))
 			//	write(1, output, 1);
 			
