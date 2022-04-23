@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 13:10:38 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:21:11 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 #include <limits.h>
 #include <errno.h>						/* errno */
 #include <string.h> 					/* strerror */
+#include <fcntl.h>						/* open */
 
 //////////////////////
 #include <string.h> // 					DELETE !!!

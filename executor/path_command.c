@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 13:49:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:43:11 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,28 @@ static int execut_comand(t_command *command, char *path)
 	char	output[1];
 
 	pipe_fds = g_data->pipe_array[command->command_number];
-	printf("pipe fds: [%i]-[%i]\n", pipe_fds[0], pipe_fds[1]);
+	//printf("pipe fds: [%i]-[%i]\n", pipe_fds[0], pipe_fds[1]);
 	pid = fork();
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
 	{	
-		printf("command number: %i\n", command->command_number);						
-		if (command->command_number == 0) 					//close(pipefds[0]); rewrite, dose not close if << or <
+		//printf("command number: %i\n", command->command_number);						
+		if (command->command_number == 0) 	
 		{	
-			close(pipe_fds[0]);
+			close(pipe_fds[0]);								//close(pipefds[0]); rewrite, dose not close if << or <
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 				exit(1);
 		}
 		else
 		{	
-			//printf("IN else\n");
+			//close(pipe_fds[1]);
 			pipe_fds[1] = g_data->pipe_array[command->command_number - 1][0];
-			while (read(pipe_fds[1], output, 1))
-				write(1, output, 1);
+			if (dup2(pipe_fds[1], STDIN_FILENO) == -1)
+				exit(1);
+			//while (read(pipe_fds[1], output, 1))
+			//	write(1, output, 1);
+			
 				
 		}
 		execve(path, command->command_parts, NULL);
@@ -77,10 +80,14 @@ static int execut_comand(t_command *command, char *path)
 	//	exit(1);
 	if (command->last_command)
 	{
-		//printf("--------------------------------\n");
+		//printf("----------------PRINT------------------\n");
 		while (read(pipe_fds[0], output, 1))
+		{
 			write(1, output, 1);
+			//write(1, "IN\n", 3);
+		}
 		close(pipe_fds[0]);
+		//printf("--------------END-PRINT------------------\n");
 	}
 	return (0);
 }
