@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 13:13:34 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 19:02:01 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	clear_command_data(t_command *command)
 {	
-	split_free(command->command_parts, -1);
+	//split_free(command->command_parts, -1);
 	free(command->command);
 	free(command);
 	//printf("[+] CLEARED \n");
@@ -28,23 +28,53 @@ static int minishell(char *string, char **envp)
 	t_command			*clear_data;
 	int					command_number;
 	pid_t				pid;
-	
+	int					*pipe_fds;
+	char				output[1];
 	first_command = string_parser(string, envp);
 	command = first_command;
 	ft_pipe_array();
 	command_number = 0;
 	while (command)
 	{	
-		/*pid = fork();
+		pipe_fds = g_data->pipe_array[command->command_number];
+		printf("command number: %i\n", command_number);
+		pid = fork();
 		if (pid == -1)
-			exit(1);*/
-		command->command_number = command_number++;
-		command->command_parts = command_parts_parser(command);
-		command_distribution(command);
+			exit(1);
+		if (pid == 0)
+		{	
+			close(pipe_fds[0]);						
+			if (command->command_number == 0) 	
+			{													//close(pipefds[0]); rewrite, dose not close if << or <
+				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+					exit(1);
+			}
+			else
+			{
+				pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
+				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+					exit(1);
+				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+					exit(1);
+			}
+			command->command_number = command_number;
+			command->command_parts = command_parts_parser(command);
+			command_distribution(command);
+			exit(0);
+		}
+		wait4(pid, NULL, WUNTRACED, NULL);
+		//sleep(1);
+		close(pipe_fds[1]);
+		printf("last command: %i\n", command->last_command);
+		command_number++;
 		clear_data = command;
 		command = command->next;
 		clear_command_data(clear_data);
 	}
+	//printf("command number: %i\n", command_number);
+	while (read(pipe_fds[0], output, 1)) 
+		write(1, output, 1);
+	close(pipe_fds[0]);
 	g_data->command_counter = 0;
 	free(string);
 	return (0);
