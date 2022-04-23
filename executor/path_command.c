@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 19:33:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:17:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int execut_comand(t_command *command, char *path)
 {	
 	int		pipefds[2];
 	pid_t	pid;
-	char	*my_av[4];
 	char	output[1];
 
 	if (pipe(pipefds) == -1)

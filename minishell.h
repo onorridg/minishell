@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 18:11:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:50:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef	struct s_command
 {	
 	char				*command;
 	char				**command_parts;
-	//char				**envp;
+	int					last_command;
 	struct s_command 	*next;
 }	t_command;
 
@@ -88,12 +88,14 @@ typedef struct s_envp
 
 typedef struct s_data
 {	
+	int			command_counter;
+	int			**pipes_array;
 	int			exit_code;
 	char		**envp;
 	t_envp		*first_envp;
 	t_envp		*last_envp;
-	t_own_var *first_var;
-	t_own_var *last_var;
+	t_own_var 	*first_var;
+	t_own_var 	*last_var;
 }	t_data;
 
 

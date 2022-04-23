@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 18:41:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:29:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ static int minishell(char *string, char **envp)
 	first_command = string_parser(string, envp);
 	command = first_command;
 	while (command)
-	{
+	{	
+		
 		command->command_parts = command_parts_parser(command);
 		command_distribution(command);
 		clear_data = command;
 		command = command->next;
 		clear_command_data(clear_data);
 	}
+	g_data->command_counter = 0;
 	free(string);
 	return (0);
 }

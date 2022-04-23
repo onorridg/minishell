@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/20 16:18:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:51:12 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	set_terminal_configuration(char **envp)
 	g_data = (t_data *)malloc(sizeof(t_data));
 	if (!g_data)
 		exit(1);
+	g_data->command_counter = 0;
 	g_data->exit_code = 0;
 	g_data->envp = envp;
 	g_data->first_var = NULL;

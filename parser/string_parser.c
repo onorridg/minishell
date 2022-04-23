@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 18:04:31 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:26:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static t_command	*insert_command_into_node(char *command, char **envp, t_command
 		exit(1);
 	node->command = command;
 	node->command_parts = NULL;
-	//node->envp = envp;
+	node->last_command = FALSE;
 	node->next = NULL;
 	if (previous_node_ptr)
 		previous_node_ptr->next = node;
@@ -106,6 +106,8 @@ t_command	*string_parser(char *string, char **envp)
 			first_command = node;
 		i++;
 	}
+	node->last_command = TRUE;
+	g_data->command_counter = i;
 	/*while(first_command)
 	{
 		printf("%s\n", first_command->command);
