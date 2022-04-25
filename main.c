@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 16:16:18 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:58:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,20 @@ static int minishell(char *string, char **envp)
 	pipe_array();
 	command_number = 0;
 	while (command)
-	{
-		pipe_fds = g_data->pipe_array[command_number];
-		pid = fork();
-		if (pid == -1)
-			exit(1);
-		if (pid == 0)
-		{
-			close(pipe_fds[0]);						
-			if (command_number == 0) 	
-			{													//close(pipefds[0]); rewrite, dose not close if << or <
-				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-					exit(1);
-			}
-			else
-			{
-				pipe_fds[0] = g_data->pipe_array[command_number - 1][0];
-				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
-					exit(1);
-				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-					exit(1);
-			}
-			
-			command->command_number = command_number;
-			command->command_parts = command_parts_parser(command);
-			command_distribution(command);
-			exit(0);
-		}
-		//wait4(pid, NULL, WNOHANG, NULL);
-		close(pipe_fds[1]);
+	{	
+		command->command_number = command_number;
+		command->command_parts = command_parts_parser(command);
+		command_distribution(command);
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
-		clear_command_data(clear_data);
+		close(g_data->pipe_array[command_number - 1][1]);
+		//clear_command_data(clear_data);
 	}
-	while (read(pipe_fds[0], output, 1))
+	//close(g_data->pipe_array[command_number - 1][1]);
+	while (read(g_data->pipe_array[command_number - 1][0], output, 1))
 		write(1, output, 1);
-	close(pipe_fds[0]);
+	close(g_data->pipe_array[command_number - 1][0]);
 	g_data->command_counter = 0;
 	free(string);
 	return (0);
@@ -87,7 +64,7 @@ int main(int ac, char **av, char **envp)
 	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
-		str = readline(BEGIN(49, 33)"➜ root@mac:# "CLOSE);
+		str = readline(CLOSE BEGIN(49, 33)"➜ root@mac:# "CLOSE);
 		add_history(str);
 		if (str)
 			minishell(str, envp);

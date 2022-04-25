@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 17:23:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:30:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ BUILTIN	**set_ptr_func_to_arr(void)
 	builtins_arr[0] = ft_echo;
 	builtins_arr[1] = ft_cd;
 	builtins_arr[2] = ft_pwd;
-	builtins_arr[3] = plug; 	// export
+	builtins_arr[3] = ft_export; 	// export
 	builtins_arr[4] = ft_unset;
 	builtins_arr[5] = ft_env;
 	builtins_arr[6] = ft_exit;

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 16:09:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:29:18 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef int BUILTIN(t_command *command);
 
 int			ft_echo(t_command *command);
 int			ft_cd(t_command *command);
+int			ft_export(t_command *command);
 int			ft_pwd(t_command *command);
 int			ft_unset(t_command *command);
 int 		ft_env(t_command *command);
@@ -173,6 +174,6 @@ void rl_clear_history();
 
 
 // static
-void	command_part_parser(t_command *command);
+
 
 #endif
