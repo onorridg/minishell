@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 14:21:11 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:33:27 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char		*get_own_env(char *string);
 
 
 
-// executor
+/* executor */
 int			command_distribution(t_command *command);
 int			set_variable(char *string);
 
@@ -141,10 +141,13 @@ int			builtin_chek(char *builtin);
 char    	*get_command_path(t_command *command);
 BUILTIN		**set_ptr_func_to_arr(void);
 void 		error_handler(t_command *command);
+void 		pipe_array(void);
+char		**env_generator(void);
 
 
 
-// minilib
+
+/* minilib */
 char		**ft_split(char *string, char ch);
 int			split_free(char **words, int count); 
 int			ft_strcmp(char *str1, char *str2);
@@ -158,7 +161,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_whitespaces_len(char *string, int flag);
 int			ft_char_len(char *string, int flag);
-void 		ft_pipe_array(void);
+
 
 
 

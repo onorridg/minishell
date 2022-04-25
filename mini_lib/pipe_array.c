@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipe_array.c                                    :+:      :+:    :+:   */
+/*   pipe_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:30:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 13:06:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:35:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void ft_pipe_array(void)
+void pipe_array(void)
 {
 	int	**pipe_array;
 	int i;

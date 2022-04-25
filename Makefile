@@ -26,6 +26,7 @@ SRCS=main.c\
 	error/error_handler.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin_path.c\
+	mini_lib/ft_strjoin.c\
 	mini_lib/ft_strcmp.c\
 	mini_lib/ft_memset.c\
 	mini_lib/ft_set_mem_aloc.c\
@@ -34,7 +35,8 @@ SRCS=main.c\
 	mini_lib/ft_strlcpy.c\
 	mini_lib/ft_whitespaces_len.c\
 	mini_lib/ft_char_len.c\
-	mini_lib/ft_pipe_array.c
+	mini_lib/pipe_array.c\
+	mini_lib/env_generator.c
 
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 20:06:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:37:04 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ static int minishell(char *string, char **envp)
 	pid_t				pid;
 	int					*pipe_fds;
 	char				output[1];
+	
 	first_command = string_parser(string, envp);
 	command = first_command;
-	ft_pipe_array();
+	pipe_array();
 	command_number = 0;
 	while (command)
 	{
 		pipe_fds = g_data->pipe_array[command_number];
-		//printf("pipes: [%i]-[%i]\n", pipe_fds[0], pipe_fds[1]);
-		//printf("command: %s\n", command->command);
 		pid = fork();
 		if (pid == -1)
 			exit(1);
@@ -66,19 +65,10 @@ static int minishell(char *string, char **envp)
 		}
 		//wait4(pid, NULL, WNOHANG, NULL);
 		close(pipe_fds[1]);
-		/*if (command->last_command)
-		{
-			while (read(pipe_fds[0], output, 1))
-				write(1, output, 1);
-			close(pipe_fds[0]);
-		}*/
-		///printf("last command: %i\n", command->last_command);
-		//waitpid(pid, NULL, NULL);
-		//sleep(1);
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
-		//clear_command_data(clear_data);
+		clear_command_data(clear_data);
 	}
 	while (read(pipe_fds[0], output, 1))
 		write(1, output, 1);

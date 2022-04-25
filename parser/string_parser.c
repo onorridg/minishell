@@ -6,15 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/23 12:26:43 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:10:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-/*	
-	
-*/
-
 
 char	*value_to_variable(char *string)
 {
@@ -98,7 +94,6 @@ t_command	*string_parser(char *string, char **envp)
 		exit(1);
 	i = 0;
 	node = NULL;
-	//printf("\n");
 	while (commands_array[i])
 	{	
 		node = insert_command_into_node(commands_array[i], envp, node);
