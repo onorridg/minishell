@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 14:26:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:09:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 # define D_EXIT	6
 
 
-# define BLOD  "\001\033[1m\002"                 /* Подчеркнуть, жирным шрифтом, выделить */
-# define BEGIN(x,y) "\001\033["#x";"#y"m\002"    /* x: background, y: foreground */
-# define CLOSE "\001\033[0m\002"                 /* Закрыть все свойства */
+#define CLOSE "\001\033[0m\002"                 // Закрыть все свойства
+#define BLOD  "\001\033[1m\002"                 // Подчеркнуть, жирным шрифтом, выделить
+#define BEGIN(x,y) "\001\033["#x";"#y"m\002"    // x: background, y: foreground
 
 #include <unistd.h>             		/* pipe, getcwd, chdir */
 #include <stdlib.h>             		/* malloc, free */

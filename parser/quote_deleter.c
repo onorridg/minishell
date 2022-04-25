@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 13:15:37 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 13:53:41 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:03:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*quote_deleter(char	*string)
 	int		i;
 	
 	string_len = ft_strlen(string);
-	printf("string length %i\n", string_len);
+	//printf("string length %i\n", string_len);
 	if ((string[0] == '\'' || string[0] == '"') && string[0] == string[string_len])
 	{	
 		new_string = (char *)malloc(sizeof(char) * (string_len - 1));

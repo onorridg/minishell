@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 14:33:57 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:16:18 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int main(int ac, char **av, char **envp)
 	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
-		str = readline(BEGIN(49, 35) BLOD "➜ " BEGIN(49, 33)"root@mac:# "CLOSE);
+		str = readline(BEGIN(49, 33)"➜ root@mac:# "CLOSE);
 		add_history(str);
 		if (str)
 			minishell(str, envp);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 15:07:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:01:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	command_part_parser(t_command *command)
 	while (command->command_parts[i])
 	{	
 		//printf("command part: %s\n", command->command_parts[i]);
-		//new_string = quote_deleter(command->command_parts[i]);
-		/*if (new_string)
+		new_string = quote_deleter(command->command_parts[i]);
+		if (new_string)
 		{	
 			free(command->command_parts[i]);
-		}*/
-		command->command_parts[i] = new_string;
+			command->command_parts[i] = new_string;
+		}
 		i++;
 	}	
 }
@@ -50,7 +50,7 @@ int		path_command(t_command *command)
 
 	if (ft_strlen(command->command_parts[0]) > 0)
 	{	
-		//command_part_parser(command);
+		command_part_parser(command);
 		path = get_command_path(command);
 		if (path)
 			execut_comand(command, path);
