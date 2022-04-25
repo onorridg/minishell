@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 12:37:04 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:33:57 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int minishell(char *string, char **envp)
 	while (read(pipe_fds[0], output, 1))
 		write(1, output, 1);
 	close(pipe_fds[0]);
-	//printf("command number: %i\n", command_number);
 	g_data->command_counter = 0;
 	free(string);
 	return (0);

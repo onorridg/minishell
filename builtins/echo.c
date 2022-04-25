@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 17:10:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:35:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	print_variable(char *string)
 	char	*variable;
 	char	*value;
 
-	variable_len = ft_whitespaces_len(&string[1], FALSE);
+	//variable_len = ft_whitespaces_len(&string[1], FALSE);
 	variable_len = ft_char_len(&string[1], TRUE);
 	variable = ft_copy_str_len(&string[1], variable_len);
 	value = value_to_variable(variable);

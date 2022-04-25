@@ -6,13 +6,13 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:11:53 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 13:47:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:31:59 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	l_s1;
 	size_t	l_s2;

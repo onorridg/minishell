@@ -3,14 +3,14 @@ echo echo '""''$PATH''"'"''"
 echo echo "$USER|'"'$USER'|echo "|" 
 echo "$USER|'"'$USER'|echo "|test" | 
 ls -al | grep ^d | grep 13 | grep 14:21 | grep 136 | grep exit
-----------------------------------------------------------------------------------
 exit command dose not work
-
+"➜ root@mac:# clear
+TERM environment variable not set."
+----------------------------------------------------------------------------------
+ls -al | grep ^- > kek.txt | wc -l
 ls -la | wc >  test | wc -c
 ls -la | wc >  test > test2 > test3 | wc -c
 
-"➜ root@mac:# clear
-TERM environment variable not set."
 
 
 $SHLVL 

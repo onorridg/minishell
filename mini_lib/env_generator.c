@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env_generator.c                                 :+:      :+:    :+:   */
+/*   env_generator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:18:13 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 12:32:34 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:42:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char **env_generator(void)
 		node = node->next;
 	}
 	i = 0;
-	while(env_arr[i])
-		printf("%s\n", env_arr[i++]);
+	//while(env_arr[i])
+	//	printf("%s\n", env_arr[i++]);
 	return (env_arr);
 }
