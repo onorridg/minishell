@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= #-Wall -Wextra -Werror
+CFLAGS= -Werror #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 

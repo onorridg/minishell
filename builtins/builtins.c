@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 15:27:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:21:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int ft_exit(t_command *command)
 		}
 		else
 		{
-			write(1, "exit\n", 5);
+			write(g_data->pipe_array[command->command_number][1], "exit\n", 5);
 			if (command->command_parts[2])
-				write(1, "minishell: exit: too many arguments\n", 37);
+				write(g_data->pipe_array[command->command_number][1], "minishell: exit: too many arguments\n", 37);
 			else 
 				exit(number * sign);
 		}
 	}
-	write(1, "exit\n", 5);
+	write(g_data->pipe_array[command->command_number][1], "exit\n", 5);
 	exit(0);
 	return (0);
 }
@@ -66,8 +66,8 @@ int ft_pwd(t_command *command)
 	i = 0;
 
 	while (dir[i])
-		write(1, &dir[i++], 1);
-	write(1, "\n", 1);
+		write(g_data->pipe_array[command->command_number][1], &dir[i++], 1);
+	write(g_data->pipe_array[command->command_number][1], "\n", 1);
 	return 0;
 }
 
