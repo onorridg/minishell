@@ -6,8 +6,14 @@ ls -al | grep ^d | grep 13 | grep 14:21 | grep 136 | grep exit
 exit command dose not work
 "➜ root@mac:# clear
 TERM environment variable not set."
-----------------------------------------------------------------------------------
 ls -al | grep "$word "
+----------------------------------------------------------------------------------
+"
+➜ root@mac:# kek=test
+➜ root@mac:# test=42
+➜ root@mac:# export $kek
+"
+
 path command: replace varibale $ 
 cd $HOME
 "export $kek

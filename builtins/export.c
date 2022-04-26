@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 17:28:04 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 19:24:18 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ static int	set_new_env_entry(char *variable, char *value)
 static int export_arg(char *variable)
 {		
 	t_own_var	*var;
-	 
+	
 	var = g_data->first_var;
 	while (var)
 	{
 		if (ft_strcmp(variable, var->variable))
-		{
+		{	
+			printf("in\n");
 			set_new_env_entry(var->variable, var->value);
 			return (0);
 		}
@@ -54,7 +55,6 @@ static void display_export(int command_number)
 	pipe = g_data->pipe_array[command_number][1];
 	sorted_envp = alphabet_sort();
 	i = 0;
-	
 	while (sorted_envp[i])
 	{	
 		write(pipe,  "declare -x ", 11);
@@ -72,6 +72,7 @@ int	ft_export(t_command *command)
 	i = 1;
 	if (command->command_parts[i])
 	{	
+		parser_quote_and_variable(command);
 		while (command->command_parts[i])
 			export_arg(command->command_parts[i++]);
 	}

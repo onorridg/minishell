@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 17:26:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 19:26:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ int ft_exit(t_command *command)
 	int	sign;
 	int pipe;
 
+	parser_quote_and_variable(command); // нужен ????
 	pipe = g_data->pipe_array[command->command_number][1];
 	if (command->command_parts[1])
-	{	
+	{
 		chr_number = command->command_parts[1];
 		i = 0;
 		sign = 1;
@@ -80,6 +81,7 @@ int ft_cd(t_command *command)
 	int		result;
 	char	*home_path;
 	
+	parser_quote_and_variable(command);
 	if (command->command_parts[1])
 		result = chdir(command->command_parts[1]);
 	else

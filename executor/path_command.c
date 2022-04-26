@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 18:38:31 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 19:25:01 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-static void	command_part_parser(t_command *command)
+void	parser_quote_and_variable(t_command *command)
 {
 	int i;	
 	char *new_string;
@@ -32,6 +32,8 @@ static void	command_part_parser(t_command *command)
 		if (replace)
 		{
 			new_string = inser_value_to_string(command->command_parts[i]);
+			//printf("value: |%s|\n", new_string);
+			//fflush(stdout);
 			command->command_parts[i] = new_string;
 		}
 		i++;
@@ -112,7 +114,7 @@ int		path_command(t_command *command)
 
 	if (ft_strlen(command->command_parts[0]) > 0)
 	{	
-		command_part_parser(command);
+		parser_quote_and_variable(command);
 		path = get_command_path(command);
 		if (path)
 			execut_comand(command, path);
