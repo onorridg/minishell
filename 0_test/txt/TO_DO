@@ -7,6 +7,7 @@ exit command dose not work
 "➜ root@mac:# clear
 TERM environment variable not set."
 ----------------------------------------------------------------------------------
+ls -al | grep "$word "
 path command: replace varibale $ 
 cd $HOME
 "export $kek

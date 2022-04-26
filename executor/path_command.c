@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 15:23:59 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:38:31 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@ static void	command_part_parser(t_command *command)
 {
 	int i;	
 	char *new_string;
+	int	replace;
 	
 	i = 0;
 	while (command->command_parts[i])
 	{	
-		//new_string = inser_value_to_string(command->command_parts[i]);
+		replace = TRUE;
+		if (command->command_parts[i][0] == '\'')
+			replace = FALSE;
 		new_string = quote_deleter(command->command_parts[i]);
 		if (new_string)
-		{	
-			free(command->command_parts[i]);
+			command->command_parts[i] = new_string;
+		if (replace)
+		{
+			new_string = inser_value_to_string(command->command_parts[i]);
 			command->command_parts[i] = new_string;
 		}
 		i++;

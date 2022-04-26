@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 17:15:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:28:04 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,18 @@ static void display_export(int command_number)
 {
 	char	**sorted_envp;
 	int		i;
-	char    buff[100];
+	int		pipe;
+
+	pipe = g_data->pipe_array[command_number][1];
 	sorted_envp = alphabet_sort();
 	i = 0;
 	
 	while (sorted_envp[i])
 	{	
-		write(g_data->pipe_array[command_number][1],  "declare -x ", 11);
-		write(g_data->pipe_array[command_number][1], sorted_envp[i], ft_strlen(sorted_envp[i]));
+		write(pipe,  "declare -x ", 11);
+		write(pipe, sorted_envp[i], ft_strlen(sorted_envp[i]));
 		i++;
-		write(g_data->pipe_array[command_number][1], "\n", 2);
+		write(pipe, "\n", 1);
 	}
 	split_free(sorted_envp, -1);
 }
