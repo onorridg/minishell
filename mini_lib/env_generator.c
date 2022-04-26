@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:18:13 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 13:42:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:28:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char **env_generator(void)
 	char	**env_arr;
 	int		i;
 	
-	env_arr = (char **)malloc(sizeof(char *) * (env_counter()));
+	env_arr = (char **)malloc(sizeof(char *) * (env_counter() + 1));
 	if (!env_arr)
 		exit(1);
 	node = g_data->first_envp;
@@ -51,8 +51,6 @@ char **env_generator(void)
 		env_arr[i++] = variable_value_join(node->variable, node->value);
 		node = node->next;
 	}
-	i = 0;
-	//while(env_arr[i])
-	//	printf("%s\n", env_arr[i++]);
+	env_arr[i] = 0;
 	return (env_arr);
 }

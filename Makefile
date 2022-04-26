@@ -38,7 +38,10 @@ SRCS=main.c\
 	mini_lib/ft_whitespaces_len.c\
 	mini_lib/ft_char_len.c\
 	mini_lib/pipe_array.c\
-	mini_lib/env_generator.c
+	mini_lib/env_generator.c\
+	mini_lib/ft_strlen.c\
+	mini_lib/replace_varibale_in_string.c\
+	mini_lib/alphabet_sort.c
 
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 

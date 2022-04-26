@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 18:29:18 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:01:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ char		*value_to_variable(char *string);
 char 		*my_getenv(char *variable);
 char		*get_own_env(char *string);
 char		*quote_deleter(char	*string);
-
-
+char		*inser_value_to_string(char *string);
 
 /* executor */
 int			command_distribution(t_command *command);
@@ -145,6 +144,8 @@ BUILTIN		**set_ptr_func_to_arr(void);
 void 		error_handler(t_command *command);
 void 		pipe_array(void);
 char		**env_generator(void);
+char		**alphabet_sort(void);
+
 
 
 

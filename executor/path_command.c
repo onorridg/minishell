@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 19:58:23 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:23:59 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	command_part_parser(t_command *command)
 	
 	i = 0;
 	while (command->command_parts[i])
-	{
+	{	
+		//new_string = inser_value_to_string(command->command_parts[i]);
 		new_string = quote_deleter(command->command_parts[i]);
 		if (new_string)
 		{	
@@ -93,7 +94,7 @@ static int execut_comand(t_command *command, char *path)
 				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 					exit(1);
 			}
-		execve(path, command->command_parts, NULL);
+		execve(path, command->command_parts, env_generator());
 		exit(1);
 	}
 	//close(pipe_fds[1]);
