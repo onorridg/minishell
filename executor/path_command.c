@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 12:04:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:12:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	parser_quote_and_variable(t_command *command)
 			command->command_parts[i] = new_string;
 		}
 		i++;
-	}	
+	}
+	redirections(command);
 }
 
 static void command_part_replace_vriable(t_command *command)
@@ -87,11 +88,19 @@ static int execut_comand(t_command *command, char *path)
 		exit(1);
 	if (pid == 0)
 	{	
+		//printf("EXECVE PID!!!!\n");
+		//fflush(stdout);
 		close(pipe_fds[0]);						
 			if (command->command_number == 0) 	
 			{													//close(pipefds[0]); rewrite, dose not close if << or <
 				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+				{	
+					error_handler(command);
+					printf("ERORO DUP@\n");
+					write(1, strerror(errno), strlen(strerror(errno)));
+					fflush(stdout);
 					exit(1);
+				}
 			}
 			else
 			{

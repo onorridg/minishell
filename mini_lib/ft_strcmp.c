@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:29:30 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 19:17:31 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:15:30 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int ft_strcmp(char *str1, char *str2)
 			return (0);
 		i++;
 	}
+	//printf("str -> |%s| - |%s| <- stop\n", str1, str2);
 	if (i != com_len)
 		return (0);
 	return (1);

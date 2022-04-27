@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 13:16:48 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:00:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void		exec_open_pipe_command(t_command *command);
 
 
 // utils
-t_heredoc	*heredoc(char *stop);
+//t_heredoc	*heredoc(char *stop);
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
 char    	*get_command_path(t_command *command);

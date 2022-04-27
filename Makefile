@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -Werror #-Wall -Wextra -Werror
+CFLAGS= -g -Werror -DLLDB_USE_SYSTEM_DEBUGSERVER=ON #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
