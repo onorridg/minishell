@@ -22,8 +22,10 @@ SRCS=main.c\
 	parser/get_own_env.c\
 	parser/get_command_path.c\
 	parser/quote_deleter.c\
+	parser/redirections.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
+	executor/exec_open_pipe_command.c\
 	exit/ctrl_d_exit.c\
 	error/error_handler.c\
 	mini_lib/ft_split.c\

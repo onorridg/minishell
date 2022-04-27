@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 19:25:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:04:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int		path_command(t_command *command)
 			execve(command->command_parts[0], command->command_parts, env_generator());
 	}
 	else
-		printf("error pars last pipe\n");
+		exec_open_pipe_command(command);
+
+		//printf("error pars last pipe\n");
 	return 0;
 }

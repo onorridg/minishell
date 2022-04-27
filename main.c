@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 14:08:43 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:19:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int minishell(char *string, char **envp)
 	{	
 		command->command_number = command_number;
 		command->command_parts = command_parts_parser(command);
+		redirections(command);
 		command_distribution(command);
 		command_number += 1;
 		clear_data = command;
@@ -51,6 +52,8 @@ static int minishell(char *string, char **envp)
 		write(1, output, 1);
 	close(g_data->pipe_array[command_number - 1][0]);
 	g_data->command_counter = 0;
+	fflush(stderr);
+	fflush(stdout);
 	//free(string);
 	return (0);
 }
@@ -61,7 +64,7 @@ int main(int ac, char **av, char **envp)
 	
 	str = NULL;
 	set_terminal_configuration(envp);
-	//rl_outstream = stderr; // ??
+	rl_outstream = stderr; // ??
 	while (TRUE)
 	{
 		str = readline(CLOSE BEGIN(49, 33)"➜ root@mac:# "CLOSE);

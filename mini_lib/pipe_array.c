@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:30:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 12:35:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:03:44 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void pipe_array(void)
 			exit(1);
 		pipe_array[i++] = pipe_fd;
 	}
+	printf("pipes: %i\n", i);
 	pipe_array[i] = 0;
 	g_data->pipe_array = pipe_array;
 	/*i = 0;
