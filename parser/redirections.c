@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/28 12:10:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/28 19:57:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,21 @@ static void redirect_input(t_command *command, int part)
 	int		fd;
 	char 	buf[1];
 	int 	read_ch;
-	int		*pipe_fds;
+	int		pipe_fds[2];
 	
-	read_ch = 1;
-	if (command->command_parts[part + 1])
+	//fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
+	//dup2(fd, STDIN_FILENO);
+	//close(g_data->pipe_array[command->command_number][0]);
+	//g_data->pipe_array[command->command_number][0] = fd;
+	rewrite_command_part_arr(command, part);
+	//read_ch = 1;
+	/*if (command->command_parts[part + 1])
 	{	
-		pipe_fds = g_data->pipe_array[command->command_number];
-		//printf("pipe[%i][%i]\n", pipe_fds[0], pipe_fds[1]);
+		//pipe(pipe_fds);
 		set_new_pipe(command);
-		pipe_fds = g_data->pipe_array[command->command_number];
-		//printf("pipe[%i][%i]\n", pipe_fds[0], pipe_fds[1]);
-		//fflush(stdout);
-		fd = open(command->command_parts[part + 1], O_RDONLY);
+		pipe_fds[0] = g_data->pipe_array[command->command_number][0];
+		pipe_fds[1] = g_data->pipe_array[command->command_number][1];
+		fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
 		//printf("file fd: %i\n", fd);
 		if (fd == -1)
 		{	
@@ -99,24 +102,22 @@ static void redirect_input(t_command *command, int part)
 			write(pipe_fds[1], buf, 1);
 			buf[0] = 0;
 		}
-		//write(pipe_fds[1], "\0", 1);
+		write(pipe_fds[1], "\0", 1);
 		close(fd); 
-		close(pipe_fds[1]);
+		//close(pipe_fds[1]);
 		rewrite_command_part_arr(command, part);
-		//printf("KEK\n");
-		//fflush(stdout);
-		/*fd=0;
-		while (command->command_parts[fd])
-		{
-			printf("parts: %s\n", command->command_parts[fd++]);
-			fflush(stdout);
-		}*/
+		//fd=0;
+		//while (command->command_parts[fd])
+		//{
+		//	printf("parts: %s\n", command->command_parts[fd++]);
+		//	fflush(stdout);
+		//}
 	}
 	else 
 	{
 		printf("syntax error near unexpected token `newline'\n");
 		fflush(stdout);
-	}
+	}*/
 }
 
 void	heredoc_r(t_command *command, int part)
@@ -187,4 +188,6 @@ void	redirections(t_command *command)
 		else 
 			part++;
 	}
+	//printf("REDIRECTION OUT\n");
+	fflush(stdout);
 }

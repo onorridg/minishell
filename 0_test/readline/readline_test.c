@@ -11,13 +11,9 @@
 int main(int ac, char **av)
 {	
 	//if (command->command_parts[1])
-	chdir(av[1]);
-	//printf("%s\n", strerror(errno));
-	int i;
-	i = 0;
-	char ch[1];
-	errno = 255;
-	write(1, strerror(errno), strlen(strerror(errno)));
-	write(1, "\n", 1);
-	//execve("../../minishell", NULL, NULL);
+	int pipe_fds[2];
+	pipe(pipe_fds);
+
+	int fd = open("test,txt", O_RDONLY | O_NONBLOCK);
+	
 }
