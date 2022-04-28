@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 19:04:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:08:02 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,22 @@ static int minishell(char *string, char **envp)
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
-		close(g_data->pipe_array[command_number - 1][1]);
+		//close(g_data->pipe_array[command_number - 1][1]);
 		//clear_command_data(clear_data);
 	}
-	//close(g_data->pipe_array[command_number - 1][1]);
+	
+	//printf("OUT\n");
+	//fflush(stdout);
+	close(g_data->pipe_array[command_number - 1][1]);
 	while (read(g_data->pipe_array[command_number - 1][0], output, 1))
+	{
 		write(1, output, 1);
+		//write(1, "$", 1);
+	}
 	close(g_data->pipe_array[command_number - 1][0]);
+	//printf("OUT2\n");
+	//fflush(stdout);	
 	g_data->command_counter = 0;
-	fflush(stderr);
-	fflush(stdout);
 	//free(string);
 	return (0);
 }

@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g -Werror -DLLDB_USE_SYSTEM_DEBUGSERVER=ON #-Wall -Wextra -Werror
+CFLAGS= -g -fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
@@ -45,7 +45,7 @@ SRCS=main.c\
 	mini_lib/replace_varibale_in_string.c\
 	mini_lib/alphabet_sort.c
 
-READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
+READLINE_FLAGS= -lreadline #-L/Users/onorridg/.brew/opt/readline/lib
 
 OBJS=$(SRCS:.c=.o)
 

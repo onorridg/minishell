@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 20:00:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:10:30 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	set_new_pipe(t_command *command)
 		fflush(stdout);
 		exit(1);
 	}
-	printf("number command: %i\n", command->command_number);
+	//printf("number command: %i\n", command->command_number);
 	g_data->pipe_array[command->command_number][0] = pipe_fds[0];
 	g_data->pipe_array[command->command_number][1] = pipe_fds[1];
 }
@@ -80,13 +80,15 @@ static void redirect_input(t_command *command, int part)
 	
 	read_ch = 1;
 	if (command->command_parts[part + 1])
-	{
+	{	
+		pipe_fds = g_data->pipe_array[command->command_number];
+		//printf("pipe[%i][%i]\n", pipe_fds[0], pipe_fds[1]);
 		set_new_pipe(command);
 		pipe_fds = g_data->pipe_array[command->command_number];
-		printf("pipe[%i][%i]\n", pipe_fds[0], pipe_fds[1]);
-		fflush(stdout);
+		//printf("pipe[%i][%i]\n", pipe_fds[0], pipe_fds[1]);
+		//fflush(stdout);
 		fd = open(command->command_parts[part + 1], O_RDONLY);
-		printf("file fd: %i\n", fd);
+		//printf("file fd: %i\n", fd);
 		if (fd == -1)
 		{	
 			printf("[!] ERROR\n");
@@ -97,9 +99,12 @@ static void redirect_input(t_command *command, int part)
 			write(pipe_fds[1], buf, 1);
 			buf[0] = 0;
 		}
+		//write(pipe_fds[1], "\0", 1);
 		close(fd); 
 		close(pipe_fds[1]);
 		rewrite_command_part_arr(command, part);
+		//printf("KEK\n");
+		//fflush(stdout);
 		/*fd=0;
 		while (command->command_parts[fd])
 		{
@@ -125,7 +130,7 @@ void	heredoc_r(t_command *command, int part)
 	{	
 		stop = command->command_parts[part + 1];
 		//printf("stop word: %s\n", stop);
-		set_new_pipe(command);
+		//set_new_pipe(command);
 		pipe_fds = g_data->pipe_array[command->command_number];
 		while (TRUE)
 		{
@@ -167,8 +172,8 @@ void	redirections(t_command *command)
 	{
 		if (ft_strcmp(command->command_parts[part], "<"))
 		{	
-			printf("IN\n");
-			fflush(stdout);
+			//printf("IN\n");
+			//fflush(stdout);
 			redirect_input(command, part);
 			part = 0;
 		}

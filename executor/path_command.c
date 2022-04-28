@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 19:12:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:00:39 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,44 @@ static int execut_comand(t_command *command, char *path)
 	{	
 		//printf("EXECVE PID!!!!\n");
 		//fflush(stdout);
-		close(pipe_fds[0]);						
-			if (command->command_number == 0) 	
-			{													//close(pipefds[0]); rewrite, dose not close if << or <
-				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-				{	
-					error_handler(command);
-					printf("ERORO DUP@\n");
-					write(1, strerror(errno), strlen(strerror(errno)));
-					fflush(stdout);
-					exit(1);
-				}
+		
+		//close(pipe_fds[1]);					
+		if (command->command_number == 0) 	
+		{			
+												//close(pipefds[0]); rewrite, dose not close if << or <
+			/*if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+			{	
+				error_handler(command);
+				printf("ERORO DUP@\n");
+				write(1, strerror(errno), strlen(strerror(errno)));
+				fflush(stdout);
+				exit(1);
+			}*/
+			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+			{	
+				printf("ERORO DUP@\n");
+				write(1, strerror(errno), strlen(strerror(errno)));
+				fflush(stdout);
+				exit(1);
 			}
-			else
-			{
-				pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
-				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
-					exit(1);
-				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-					exit(1);
-			}
+			//printf("loh\n");
+			//fflush(stdout);
+		}
+		else
+		{	
+			//printf("KEK")
+			pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
+			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+				exit(1);
+			//if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+			//	exit(1);
+		}
 		execve(path, command->command_parts, env_generator());
+		printf("loh execve\n");
+		fflush(stdout);
 		exit(1);
 	}
+	wait(NULL);
 	//close(pipe_fds[1]);
 	//close(pipe_fds[0]);	
 	return (0);
