@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 15:53:48 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:56:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,6 @@ static void command_part_replace_vriable(t_command *command)
 	
 }
 
-/*static void execute_command_with_redirection(t_command *command, char *path)
-{
-	
-}*/
-
-/*static void execut_comand(t_command *command, char *path)
-{	
-	int		*pipe_fds;
-	pid_t	pid;
-	
-	execve(path, command->command_parts, env_generator());
-	exit(1);
-}*/
-
 static int execut_comand(t_command *command, char *path)
 {	
 	int		*pipe_fds;
@@ -128,16 +114,12 @@ static int execut_comand(t_command *command, char *path)
 				exit(1);
 		}	
 		execve(path, command->command_parts, env_generator());
-		//printf("loh execve\n");
-		//fflush(stdout);
 		exit(1);
 	}
-	//close(pipe_fds[0]);
 	wait(NULL);
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
 	close(pipe_fds[1]);
-	//close(pipe_fds[0]);
 	return (0);
 }
 

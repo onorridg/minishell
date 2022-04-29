@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 14:56:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:00:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,14 @@ static void rewrite_command_part_arr(t_command *command, int part)
 		new_arr[i] = command->command_parts[i];
 		i++;
 	}
-	//free(command->command_parts[i]);
-	//free(command->command_parts[i + 1]);
+	free(command->command_parts[i]);
+	free(command->command_parts[i + 1]);
 	k = i + 2;
 	while(command->command_parts[k])
 		new_arr[i++] = command->command_parts[k++];
-	//free(command->command_parts);
+	free(command->command_parts);
 	new_arr[i] = NULL;
 	command->command_parts = new_arr;
-	i = 0;
-	/*while (command->command_parts[i])
-		printf("part: %s\n", command->command_parts[i++]);
-	fflush(stdout);*/
-	
 }
 
 static void get_pipe(t_command *command)
@@ -148,12 +143,6 @@ void	here_doc(t_command *command, int part)
 			}
 		}
 		rewrite_command_part_arr(command, part);
-		/*i = 0;
-		while (command->command_parts[i])
-		{
-			printf("parts: %s\n", command->command_parts[i]);
-			fflush(stdout);
-		}*/
 	}
 	else 
 	{
