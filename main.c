@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/28 18:56:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:53:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,20 @@ static int minishell(char *string, char **envp)
 	pipe_array();
 	command_number = 0;
 	while (command)
-	{	
+	{
 		command->command_number = command_number;
 		command->command_parts = command_parts_parser(command);
-		//redirections(command);
 		command_distribution(command);
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
-		//close(g_data->pipe_array[command_number - 1][1]);
 		clear_command_data(clear_data);
 	}
-	//close(g_data->pipe_array[command_number - 1][1]);
-	while (read(g_data->pipe_array[command_number - 1][0], output, 1))
+	close(g_data->pipe_array[command_number - 1][1]);
+	//fprintf(stderr, "PRINT RESULT\n");
+	while (read(g_data->pipe_array[command_number - 1][0], output, 1) > 0)
 	{
 		write(1, output, 1);
-		//write(1, "$", 1);
 	}
 	close(g_data->pipe_array[command_number - 1][0]);
 	//printf("OUT2\n");

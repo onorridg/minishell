@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_distribution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 12:02:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:42:42 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int command_distribution(t_command *command)
 		return 0;
 	//printf("number: %i\n", builtin_number);
 	//fflush(stdout);
-	if (command->command_parts[0] && !command->command_parts[1]
-			&& ft_find_char_in_string(command->command_parts[0], '=') != -1)
-	{	
-		//printf("infffff\n");
+	if (command->command_parts[0] && ft_find_char_in_string(command->command_parts[0], '=') != -1)
+	{	//!command->command_parts[1]
+		close(g_data->pipe_array[command->command_number][0]);
+		close(g_data->pipe_array[command->command_number][1]);
 		set_variable(command->command);
 		//exit(0);
 	}

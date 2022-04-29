@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 14:42:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:53:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ static int execut_comand(t_command *command, char *path)
 	char	output[1];
 	char buf[1];
 	
-	//printf("[+] EXECUT\n");
-	pipe_fds = g_data->pipe_array[command->command_number];
-	//fflush(stdout);	
+	pipe_fds = g_data->pipe_array[command->command_number];	
 	pid = fork();
 	if (pid == -1)
 		exit(1);
@@ -96,21 +94,24 @@ static int execut_comand(t_command *command, char *path)
 		{
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 			{
-				printf("ERORO DUP@\n");
+				printf("ERORO DUP [1]@\n");
 				write(1, strerror(errno), strlen(strerror(errno)));
 				fflush(stdout);
 				exit(1);
 			}
-			if (command->file_pipe[0] == -1 && dup2(pipe_fds[0], STDIN_FILENO) == -1)
-			{	
-				printf("ERORO DUP@\n");
-				write(1, strerror(errno), strlen(strerror(errno)));
-				fflush(stdout);
-				exit(1);
+			if (command->file_pipe[0] < 0)
+			{
+				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+				{	
+					printf("ERORO DUP [0]@\n");
+					write(1, strerror(errno), strlen(strerror(errno)));
+					fflush(stdout);
+					exit(1);
+				}
 			}
 			else if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
 			{
-				printf("ERORO DUP@\n");
+				printf("ERORO DUP file@\n");
 				write(1, strerror(errno), strlen(strerror(errno)));
 				fflush(stdout);
 				exit(1);
@@ -143,13 +144,12 @@ static int execut_comand(t_command *command, char *path)
 int		path_command(t_command *command)
 {	char *path;
 
-	
 	if (ft_strlen(command->command_parts[0]) > 0)
-	{	
-		
+	{
 		parser_quote_and_variable(command);
+		//printf("[+] PATH COMMAND IN\n");
+		fflush(stdin);
 		path = get_command_path(command);
-		//printf("{+}KEK\n");
 		fflush(stdout);
 		if (path)
 			execut_comand(command, path);
