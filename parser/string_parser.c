@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 18:23:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:37:49 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static t_command	*insert_command_into_node(char *command, char **envp, t_command
 	node->command_parts = NULL;
 	node->last_command = FALSE;
 	node->next = NULL;
+	node->file_pipe[0] = -1;
+	node->file_pipe[1] = -1;
 	if (previous_node_ptr)
 		previous_node_ptr->next = node;
 	return (node);
@@ -105,6 +107,7 @@ t_command	*string_parser(char *string, char **envp)
 	}
 	node->last_command = TRUE;
 	g_data->command_counter = i;
+	
 	/*while(first_command)
 	{
 		printf("%s\n", first_command->command);

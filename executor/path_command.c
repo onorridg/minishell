@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/28 20:03:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:42:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ static int execut_comand(t_command *command, char *path)
 	int		*pipe_fds;
 	pid_t	pid;
 	char	output[1];
+	char buf[1];
 	
-	
-	pipe_fds = g_data->pipe_array[command->command_number];
 	//printf("[+] EXECUT\n");
-	fflush(stdout);	
+	pipe_fds = g_data->pipe_array[command->command_number];
+	//fflush(stdout);	
 	pid = fork();
 	if (pid == -1)
 		exit(1);
@@ -93,10 +93,7 @@ static int execut_comand(t_command *command, char *path)
 	if (pid == 0)
 	{
 		if (command->command_number == 0) 	
-		{			
-			printf("[+] IF DONE ");
-			//printf("Vommand: %s NUmber %i\n", command->command_parts[0], command->command_number);
-			fflush(stdout);							//close(pipefds[0]); rewrite, dose not close if << or <
+		{
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 			{
 				printf("ERORO DUP@\n");
@@ -104,18 +101,20 @@ static int execut_comand(t_command *command, char *path)
 				fflush(stdout);
 				exit(1);
 			}
-			
-			int fd = open("kek.txt", O_RDONLY, 0777);
-			if (dup2(fd, STDIN_FILENO) == -1)
+			if (command->file_pipe[0] == -1 && dup2(pipe_fds[0], STDIN_FILENO) == -1)
 			{	
 				printf("ERORO DUP@\n");
 				write(1, strerror(errno), strlen(strerror(errno)));
 				fflush(stdout);
 				exit(1);
 			}
-			//close(pipe_fds[1]);
-			printf("[+] IF DONE\n");
-			fflush(stdout);
+			else if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
+			{
+				printf("ERORO DUP@\n");
+				write(1, strerror(errno), strlen(strerror(errno)));
+				fflush(stdout);
+				exit(1);
+			}
 		}
 		else
 		{
@@ -128,13 +127,15 @@ static int execut_comand(t_command *command, char *path)
 				exit(1);
 		}	
 		execve(path, command->command_parts, env_generator());
-		printf("loh execve\n");
-		fflush(stdout);
+		//printf("loh execve\n");
+		//fflush(stdout);
 		exit(1);
 	}
-	close(pipe_fds[1]);
 	//close(pipe_fds[0]);
 	wait(NULL);
+	if (command->file_pipe[0] != -1)
+		close(command->file_pipe[0]);
+	close(pipe_fds[1]);
 	//close(pipe_fds[0]);
 	return (0);
 }
@@ -153,7 +154,8 @@ int		path_command(t_command *command)
 		if (path)
 			execut_comand(command, path);
 		else
-			execve(command->command_parts[0], command->command_parts, env_generator());
+			execut_comand(command, command->command_parts[0]);
+			//execve(command->command_parts[0], command->command_parts, env_generator());
 	}
 	else
 	{	
