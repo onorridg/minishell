@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 15:56:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:25:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,32 @@ static int execut_comand(t_command *command, char *path)
 	if (pid == 0)
 	{
 		if (command->command_number == 0) 	
-		{
-			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+		{	
+			if (command->file_pipe[1] < 0)
 			{
-				printf("ERORO DUP [1]@\n");
-				write(1, strerror(errno), strlen(strerror(errno)));
-				fflush(stdout);
-				exit(1);
+				fprintf(stderr, "STDOUT FUCK [%i]\n", command->file_pipe[1]);
+				fflush(stderr);
+				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+				{
+					printf("ERORO DUP [1]@\n");
+					write(1, strerror(errno), strlen(strerror(errno)));
+					fflush(stdout);
+					exit(1);
+				}
 			}
+			else 
+			{
+				if (dup2(command->file_pipe[1], STDIN_FILENO) == -1)
+				{
+					fprintf(stderr, "ERORO DUP file@\n");
+					write(1, strerror(errno), strlen(strerror(errno)));
+					fflush(stderr);
+					exit(1);
+				}
+				fprintf(stderr, "[+]STDOUT DONE [%i]\n", command->file_pipe[1]);
+				fflush(stderr);
+			}
+				
 			if (command->file_pipe[0] < 0)
 			{
 				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
@@ -119,6 +137,8 @@ static int execut_comand(t_command *command, char *path)
 	wait(NULL);
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
+	//if (command->file_pipe[1] != -1)
+	//	close(command->file_pipe[1]);
 	close(pipe_fds[1]);
 	return (0);
 }

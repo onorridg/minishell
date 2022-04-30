@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 16:00:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:24:25 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,7 @@ static void get_pipe(t_command *command)
 
 }
 
-static void redirect_input(t_command *command, int part)
-{	
-	int		fd;
-	
-	fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
-	command->file_pipe[0] = fd;
-	rewrite_command_part_arr(command, part);
-}
+
 
 void	here_doc(t_command *command, int part)
 {	
@@ -151,6 +144,32 @@ void	here_doc(t_command *command, int part)
 	}
 }
 
+static void redirection_output(t_command *command, int part)
+{	
+	int fd;
+	char *file_n;
+	
+	file_n = command->command_parts[part + 1];
+	fd = open(file_n, O_CREAT | O_RDWR, 00777);
+	if (fd < 0)
+	{
+		printf("FCK\n");
+		exit(1);
+	}
+	command->file_pipe[1] = fd;
+	//command->file_pipe[0] = fd;
+	rewrite_command_part_arr(command, part); 
+}
+
+static void redirect_input(t_command *command, int part)
+{	
+	int		fd;
+	
+	fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
+	command->file_pipe[0] = fd;
+	rewrite_command_part_arr(command, part);
+}
+
 void	redirections(t_command *command)
 {	
 	int part;
@@ -161,6 +180,11 @@ void	redirections(t_command *command)
 		if (ft_strcmp(command->command_parts[part], "<"))
 		{
 			redirect_input(command, part);
+			part = 0;
+		}
+		else if (ft_strcmp(command->command_parts[part], ">"))
+		{
+			redirection_output(command, part);
 			part = 0;
 		}
 		else if (ft_strcmp(command->command_parts[part], "<<"))
