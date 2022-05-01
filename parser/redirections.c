@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 22:24:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:50:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	here_doc(t_command *command, int part)
 	int 	i;
 	int 	pipe_write;
 	
+	command->here_doc = TRUE;
 	if (command->command_parts[part + 1])
 	{	
 		get_pipe(command);
@@ -150,14 +151,13 @@ static void redirection_output(t_command *command, int part)
 	char *file_n;
 	
 	file_n = command->command_parts[part + 1];
-	fd = open(file_n, O_CREAT | O_RDWR, 00777);
+	fd = open(file_n, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (fd < 0)
 	{
 		printf("FCK\n");
 		exit(1);
 	}
 	command->file_pipe[1] = fd;
-	//command->file_pipe[0] = fd;
 	rewrite_command_part_arr(command, part); 
 }
 

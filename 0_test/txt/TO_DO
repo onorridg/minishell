@@ -25,7 +25,14 @@ bash: export: `42': not a valid identifier"
 
 << EOF grep "key" < kek.txt
 
+< result.txt grep ^d | grep 12 | wc -l > output
+
 ----------------------------------------------------------------------------------
+
+< result.txt  grep 12  | grep 45 | wc -l
+
+< result.txt  grep 12  | wc -l
+
 
 grep " " <kek.txt
 

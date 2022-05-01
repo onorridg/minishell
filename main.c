@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 22:14:39 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/01 20:30:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ static int minishell(char *string, char **envp)
 		clear_command_data(clear_data);
 	}
 	close(g_data->pipe_array[command_number - 1][1]);
-	/*while (read(g_data->pipe_array[command_number - 1][0], output, 1) > 0)
-	{
-		write(1, output, 1);
-	}*/
 	close(g_data->pipe_array[command_number - 1][0]);	
 	g_data->command_counter = 0;
 	//free(string);
@@ -65,7 +61,7 @@ int main(int ac, char **av, char **envp)
 	rl_outstream = stderr; // ??
 	while (TRUE)
 	{
-		str = readline(CLOSE BEGIN(49, 33)"➜ root@mac:# "CLOSE);
+		str = readline(CLOSE BEGIN(49, 33)"root@mac:# "CLOSE);
 		add_history(str);
 		if (str)
 			minishell(str, envp);

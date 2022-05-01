@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 15:39:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:40:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static t_command	*insert_command_into_node(char *command, char **envp, t_command
 	node->next = NULL;
 	node->file_pipe[0] = -1;
 	node->file_pipe[1] = -1;
+	node->here_doc = FALSE;
 	if (previous_node_ptr)
 		previous_node_ptr->next = node;
 	return (node);

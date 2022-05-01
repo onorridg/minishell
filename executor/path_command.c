@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/29 22:25:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/01 22:07:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,72 +73,45 @@ static int execut_comand(t_command *command, char *path)
 	pid = fork();
 	if (pid == -1)
 		exit(1);
-	
 	if (pid == 0)
 	{
-		if (command->command_number == 0) 	
-		{	
-			if (command->file_pipe[1] < 0)
-			{
-				fprintf(stderr, "STDOUT FUCK [%i]\n", command->file_pipe[1]);
-				fflush(stderr);
-				if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-				{
-					printf("ERORO DUP [1]@\n");
-					write(1, strerror(errno), strlen(strerror(errno)));
-					fflush(stdout);
-					exit(1);
-				}
-			}
-			else 
-			{
-				if (dup2(command->file_pipe[1], STDIN_FILENO) == -1)
-				{
-					fprintf(stderr, "ERORO DUP file@\n");
-					write(1, strerror(errno), strlen(strerror(errno)));
-					fflush(stderr);
-					exit(1);
-				}
-				fprintf(stderr, "[+]STDOUT DONE [%i]\n", command->file_pipe[1]);
-				fflush(stderr);
-			}
-				
-			if (command->file_pipe[0] < 0)
-			{
-				if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
-				{	
-					printf("ERORO DUP [0]@\n");
-					write(1, strerror(errno), strlen(strerror(errno)));
-					fflush(stdout);
-					exit(1);
-				}
-			}
-			else if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
-			{
-				printf("ERORO DUP file@\n");
-				write(1, strerror(errno), strlen(strerror(errno)));
-				fflush(stdout);
+		if ((command->file_pipe[1] < 0 || command->here_doc == TRUE) && command->last_command == FALSE) //
+		{
+			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 				exit(1);
-			}
+			//fprintf(stderr, "STDOUT DONE\n");
+			//fflush(stderr);
+		}
+		else if (command->file_pipe[1] > 0 && command->here_doc == FALSE)
+		{
+			if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1)
+				exit(1);
+			//if (command->file_pipe[1] > 0 )
+			close(pipe_fds[1]);
+		}
+		
+		if (command->command_number > 0)
+				pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
+		if (command->file_pipe[0] < 0)
+		{
+			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+				exit(1);
 		}
 		else
 		{
-			close(pipe_fds[0]);
-			pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
-			//close(g_data->pipe_array[command->command_number - 1][1]);
-			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
+			if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
 				exit(1);
-			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
-				exit(1);
-		}	
+			//fprintf(stderr, "STDIN DONE\n");
+			//fflush(stderr);
+		}
 		execve(path, command->command_parts, env_generator());
 		exit(1);
 	}
 	wait(NULL);
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
-	//if (command->file_pipe[1] != -1)
-	//	close(command->file_pipe[1]);
+	if (command->file_pipe[1] != -1)
+		close(command->file_pipe[1]);
 	close(pipe_fds[1]);
 	return (0);
 }
