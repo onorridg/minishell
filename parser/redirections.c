@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/01 21:50:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:45:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,21 @@ static void get_pipe(t_command *command)
 
 }
 
-
+void redirect_output_append_mode(t_command *command, int part)
+{
+	int 	fd;
+	char	*file_n;
+	
+	file_n = command->command_parts[part + 1];
+	fd = open(file_n, O_WRONLY | O_APPEND, 0666);
+	if (fd < 0)
+	{
+		printf("FCK\n");
+		exit(1);
+	}
+	command->file_pipe[1] = fd;
+	rewrite_command_part_arr(command, part);
+}
 
 void	here_doc(t_command *command, int part)
 {	
@@ -190,6 +204,11 @@ void	redirections(t_command *command)
 		else if (ft_strcmp(command->command_parts[part], "<<"))
 		{
 			here_doc(command, part);
+			part = 0;
+		}
+		else if (ft_strcmp(command->command_parts[part], ">>"))
+		{
+			redirect_output_append_mode(command, part);
 			part = 0;
 		}
 		else 
