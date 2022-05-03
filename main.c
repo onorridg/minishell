@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/01 20:30:08 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:42:14 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int minishell(char *string, char **envp)
 	t_command			*command;
 	t_command			*clear_data;
 	int					command_number;
-	pid_t				pid;
 	int					*pipe_fds;
-	char				output[1];
 	
 	first_command = string_parser(string, envp);
+	if (!first_command)
+		return (0);
 	command = first_command;
 	pipe_array();
 	command_number = 0;

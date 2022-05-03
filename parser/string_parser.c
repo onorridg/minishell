@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/01 21:40:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:40:05 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_command	*string_parser(char *string, char **envp)
 	
 	commands_array = ft_split(string, '|');
 	if (!commands_array)
-		exit(1);
+		return (0);
 	i = 0;
 	node = NULL;
 	while (commands_array[i])

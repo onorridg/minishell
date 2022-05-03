@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/27 12:09:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:39:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,10 @@ char **ft_split(char *s, char ch)
     string = s;
 	count = 0;
     count = get_count(string, ch);
-	if (count == 0)
+	if (count == 0 && ft_strlen(string) > 0)
 		count = 1;  	// when press enter, mb need fix
+	if (count == 0)
+		return (0);
 	//if (ch == '|')
 	//	printf("parts: %i\n", count);
     words = malloc(sizeof(char *) * (count + 1));

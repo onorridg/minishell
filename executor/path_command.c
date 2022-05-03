@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/01 22:07:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:21:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ static int execut_comand(t_command *command, char *path)
 {	
 	int		*pipe_fds;
 	pid_t	pid;
-	char	output[1];
-	char buf[1];
+	int		stt;
 	
 	pipe_fds = g_data->pipe_array[command->command_number];	
 	pid = fork();
@@ -79,8 +78,6 @@ static int execut_comand(t_command *command, char *path)
 		{
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 				exit(1);
-			//fprintf(stderr, "STDOUT DONE\n");
-			//fflush(stderr);
 		}
 		else if (command->file_pipe[1] > 0 && command->here_doc == FALSE)
 		{
@@ -101,13 +98,14 @@ static int execut_comand(t_command *command, char *path)
 		{
 			if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
 				exit(1);
-			//fprintf(stderr, "STDIN DONE\n");
-			//fflush(stderr);
 		}
 		execve(path, command->command_parts, env_generator());
 		exit(1);
 	}
-	wait(NULL);
+	//wait(NULL);
+	waitpid(pid, &stt, 0);
+	if (WIFEXITED(stt))
+		g_data->exit_code = WEXITSTATUS(stt);
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
 	if (command->file_pipe[1] != -1)

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/01 21:39:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:13:02 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,11 @@ int			ft_pwd(t_command *command);
 int			ft_unset(t_command *command);
 int 		ft_env(t_command *command);
 int 		ft_exit(t_command *command);
-int			path_command(t_command *command);
 int 		plug(t_command *command);
+void		display_exit_code(int exit_code);
+
+
+int			path_command(t_command *command);
 
 // exit
 void 		ctrl_d_exit(void);
