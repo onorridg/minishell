@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:26:00 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:04:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int command_distribution(t_command *command)
 	int		builtin_number;
 	
 	if (command->command_parts[0] && ft_strcmp(command->command_parts[0], "$?"))
-	{
-		display_exit_code(g_data->exit_code);
-		write(1, "\n", 1);
+	{	
+		fprintf(stderr, "exit code: %i\n", g_data->exit_code);
+		fflush(stderr);
+		//display_exit_code(g_data->exit_code);
+		//write(1, "\n", 1);
 		return (0);
 	}
 	builtin_functions = set_ptr_func_to_arr();

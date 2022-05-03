@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 19:26:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:21:01 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int ft_exit(t_command *command)
 		}
 		else
 		{
-			write(pipe, "exit\n", 5);
+			write(1, "exit\n", 5);
 			if (command->command_parts[2])
 				write(pipe, "minishell: exit: too many arguments\n", 36);
 			else 
 				exit(number * sign);
 		}
 	}
-	write(pipe, "exit\n", 5);
+	write(1, "exit\n", 5);
 	exit(0);
 	return (0);
 }
