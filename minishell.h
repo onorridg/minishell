@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:13:02 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:59:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ int			ft_unset(t_command *command);
 int 		ft_env(t_command *command);
 int 		ft_exit(t_command *command);
 int 		plug(t_command *command);
-void		display_exit_code(int exit_code);
+void    	set_exit_code(int exit_code);
+
 
 
 int			path_command(t_command *command);
@@ -141,7 +142,7 @@ void		redirections(t_command *command);
 
 /* executor */
 int			command_distribution(t_command *command);
-int			set_variable(char *string);
+int			set_variable(char *string, char **my_data);
 void		exec_open_pipe_command(t_command *command);
 
 
@@ -174,6 +175,13 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_strjoin(char *s1, char *s2);
 int			ft_whitespaces_len(char *string, int flag);
 int			ft_char_len(char *string, int flag);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
+char		*ft_strdup(const char *s);
+char		*ft_itoa(int n);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+
+
+
 
 
 

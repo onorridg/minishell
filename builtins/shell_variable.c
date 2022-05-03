@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 18:55:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:09:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	set_data_to_variable(char **data)
 
 static int	set_env_variable(char **data)
 {
-	t_envp	*envp;
-	char	*clear_data;
+	t_envp		*envp;
+	t_own_var	*own_envp;
+	char		*clear_data;
 
 	envp = g_data->first_envp;
 	while (envp)
@@ -63,6 +64,20 @@ static int	set_env_variable(char **data)
 		}
 		envp = envp->next;
 	}
+	own_envp = g_data->first_var;
+	while (own_envp)
+	{
+		if (ft_strcmp(own_envp->variable, data[0]))
+		{
+			clear_data = own_envp->value;
+			printf("data = %s\n", data[1]);
+			own_envp->value = ft_set_mem_aloc(data[1]);
+			free(clear_data);
+			split_free(data, -1);
+			return (1);
+		}
+		own_envp = own_envp->next;
+	}
 	return (0);
 }
 
@@ -76,12 +91,13 @@ static void	print_local_err(char *string)
 
 /* allowed alphabet, numbers (but not like as first character in name) */
 
-int	set_variable(char *string)
+int	set_variable(char *string, char **my_data)
 {
 	char		**data;
 
-	data = ft_split(string, '=');
-	if (!data)
+	if (!my_data)
+		data = ft_split(string, '=');
+	if (!data && !my_data)
 		exit(1);
 	if (set_env_variable(data))
 		return (0);

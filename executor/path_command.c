@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:21:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:14:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ static int execut_comand(t_command *command, char *path)
 	//wait(NULL);
 	waitpid(pid, &stt, 0);
 	if (WIFEXITED(stt))
+	{
 		g_data->exit_code = WEXITSTATUS(stt);
+		//set_exit_code(g_data->exit_code);
+	}
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
 	if (command->file_pipe[1] != -1)

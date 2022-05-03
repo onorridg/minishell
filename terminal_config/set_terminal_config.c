@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_terminal_config.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/25 14:05:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:13:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void	set_terminal_configuration(char **envp)
 	g_data->first_var = NULL;
 	g_data->last_var = NULL;
 	create_envp_list(envp);
+	//set_exit_code(0);
 }	

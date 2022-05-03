@@ -44,7 +44,11 @@ SRCS=main.c\
 	mini_lib/env_generator.c\
 	mini_lib/ft_strlen.c\
 	mini_lib/replace_varibale_in_string.c\
-	mini_lib/alphabet_sort.c
+	mini_lib/alphabet_sort.c\
+	mini_lib/ft_memcmp.c\
+	mini_lib/ft_memcpy.c\
+	mini_lib/ft_strdup.c\
+	mini_lib/ft_itoa.c
 
 READLINE_FLAGS= -lreadline #-L/Users/onorridg/.brew/opt/readline/lib
 
