@@ -1,0 +1,16 @@
+Simple Command & global
+- Test only spaces or tabs.
+
+echo
+- Execute the echo command with or without arguments or -n
+
+Signals
+- Try ctrl-C after running a blocking command like cat without arguments or grep “something“
+- Try ctrl-D after running a blocking command like cat without arguments or grep “something“
+
+export
+- Export environment variables, create new ones and replace old ones
+
+Environment Path
+- Set the $PATH to a multiple directory value (directory1:directory2) and check that directories are checked in order
+from left to right

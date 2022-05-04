@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 14:36:44 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:17:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ static int execut_comand(t_command *command, char *path)
 	if (WIFEXITED(stt))
 	{
 		g_data->exit_code = WEXITSTATUS(stt);
-		fprintf(stderr, "Exit code: %i\n", g_data->exit_code);
-		fflush(stderr);
+		//fprintf(stderr, "Exit code: %i\n", g_data->exit_code);
+		//fflush(stderr);
 		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)

@@ -1,16 +1,3 @@
-0_test
-bash_res
-builtins
-error
-executor
-exit
-main.c
-main.o
-Makefile
-mini_lib
-minishell
-minishell.h
-output
-parser
-result.txt
-terminal_config
+10
+-rwxrwxr-x  1 onorridg onorridg 114568 May  4 14:57 minishell
+-rwxrwxr-x  1 onorridg onorridg   1273 May  2 10:45 result.txt

@@ -23,6 +23,7 @@ SRCS=main.c\
 	parser/get_command_path.c\
 	parser/quote_deleter.c\
 	parser/redirections.c\
+	parser/redirection_utils.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	executor/exec_open_pipe_command.c\

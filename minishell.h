@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 14:29:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:56:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,12 @@ void 		error_handler(t_command *command);
 void 		pipe_array(void);
 char		**env_generator(void);
 char		**alphabet_sort(void);
+void 		error_redirection_handler(t_command *command, char *file_n);
+void 		rewrite_command_part_arr(t_command *command, int part);
+void		get_pipe(t_command *command);
+
+
+
 
 
 

@@ -55,10 +55,29 @@ pipes: 1
 
 ----------------------------------------------------------------------------------
 
+"root@mac:# unset PATH
+pipes: 1
+root@mac:# ls"                              --> dose not display correct error 
 
-grep " " <kek.txt
+"ls filethatdoesntexist | grep bla | more"  --> dose not display correct error
+"dsbksdgbksdghsd"                           --> dose not display correct error
+"cat | cat | ls behave "normally"           --> dose not display correct error
+"ls -sl ldl fllf lgl gl hlhl h"             --> dose not display correct error
 
-< tets < test grep " " needed error heandler
+"cat | cat | ls behave "normally"           --> dose not correct work               !!!!!!!!!!
+
+"ec -l"                                     --> dose not return error 
+
+"wc -l"                                     --> dose not work ctrl+d
+
+press ctrl+d when open pipe                 --> segfault
+
+"echo -n"                                   --> segfault
+
+grep " " <kek.txt                           --> dose not pars "<"
+
+< tets < test grep " "                      --> needed error heandler
+
 
 ls -al | grep ^- > kek.txt | wc -l
 ls -la | wc >  test | wc -c
