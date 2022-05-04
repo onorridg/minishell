@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 13:14:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:16:31 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int execut_comand(t_command *command, char *path)
 	if (WIFEXITED(stt))
 	{
 		g_data->exit_code = WEXITSTATUS(stt);
-		//set_exit_code(g_data->exit_code);
+		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
@@ -121,12 +121,15 @@ int		path_command(t_command *command)
 {	char *path;
 
 	if (ft_strlen(command->command_parts[0]) > 0)
-	{
+	{	
+		//fprintf(stderr, "IN PARSE QUOTE\n");
+		//fflush(stderr);
 		parser_quote_and_variable(command);
-		//printf("[+] PATH COMMAND IN\n");
-		fflush(stdin);
+		//fprintf(stderr, "OUT PARSE QUOTE\n");
+		//fflush(stderr);
+		if (g_data->error_status == FAIL)
+			return (1);
 		path = get_command_path(command);
-		fflush(stdout);
 		if (path)
 			execut_comand(command, path);
 		else

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:40:05 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:56:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*value_to_variable(char *string)
 	char 		*value;
 	t_envp		*var;
 
-	printf("string -> %s\n", string);
-	fflush(stdout);
+	//printf("string -> %s\n", string);
+	//fflush(stdout);
 	value = NULL;
 	var = g_data->first_envp;
 	value = my_getenv(string);

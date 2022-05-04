@@ -1,2 +1,16 @@
-6
-12 45
+0_test
+bash_res
+builtins
+error
+executor
+exit
+main.c
+main.o
+Makefile
+mini_lib
+minishell
+minishell.h
+output
+parser
+result.txt
+terminal_config

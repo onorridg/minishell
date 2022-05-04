@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 12:59:41 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:14:30 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_envp
 
 typedef struct s_data
 {	
+	int			error_status;
 	int			command_counter;
 	int			**pipe_array;
 	int			exit_code;
@@ -142,7 +143,8 @@ void		redirections(t_command *command);
 
 /* executor */
 int			command_distribution(t_command *command);
-int			set_variable(char *string, char **my_data);
+int			set_variable(char *string);
+int			set_env_variable(char **data);
 void		exec_open_pipe_command(t_command *command);
 
 

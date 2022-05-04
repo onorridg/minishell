@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 13:09:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:03:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_data_to_variable(char **data)
 		swap->next = g_data->last_var;
 }
 
-static int	set_env_variable(char **data)
+int	set_env_variable(char **data)
 {
 	t_envp		*envp;
 	t_own_var	*own_envp;
@@ -70,7 +70,6 @@ static int	set_env_variable(char **data)
 		if (ft_strcmp(own_envp->variable, data[0]))
 		{
 			clear_data = own_envp->value;
-			printf("data = %s\n", data[1]);
 			own_envp->value = ft_set_mem_aloc(data[1]);
 			free(clear_data);
 			split_free(data, -1);
@@ -91,13 +90,12 @@ static void	print_local_err(char *string)
 
 /* allowed alphabet, numbers (but not like as first character in name) */
 
-int	set_variable(char *string, char **my_data)
+int	set_variable(char *string)
 {
 	char		**data;
 
-	if (!my_data)
-		data = ft_split(string, '=');
-	if (!data && !my_data)
+	data = ft_split(string, '=');
+	if (!data)
 		exit(1);
 	if (set_env_variable(data))
 		return (0);

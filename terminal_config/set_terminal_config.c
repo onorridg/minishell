@@ -6,11 +6,22 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 13:13:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:15:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void set_status_code(void)
+{
+	g_data->first_var = (t_own_var *)malloc(sizeof(t_own_var));
+	if (!g_data->first_var)
+		exit(1);
+	g_data->first_var->variable = ft_set_mem_aloc("?");
+	g_data->first_var->value = ft_set_mem_aloc("0");
+	g_data->first_var->next = NULL;
+	g_data->last_var = g_data->first_var;
+}
 
 static int create_envp_list(char **envp)
 {
@@ -84,8 +95,7 @@ void	set_terminal_configuration(char **envp)
 	g_data->command_counter = 0;
 	g_data->exit_code = 0;
 	g_data->envp = envp;
-	g_data->first_var = NULL;
-	g_data->last_var = NULL;
 	create_envp_list(envp);
-	//set_exit_code(0);
+	set_status_code();
+	g_data->error_status = FALSE;
 }	

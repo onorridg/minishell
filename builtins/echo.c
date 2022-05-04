@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 16:38:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:44:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	print_variable(int command_number, char *string)
 	char	*value;
 
 	//variable_len = ft_whitespaces_len(&string[1], FALSE);
-	variable_len = ft_char_len(&string[1], TRUE);
+	if (ft_strcmp(string, "$?"))
+		variable_len = 1;
+	else
+		variable_len = ft_char_len(&string[1], TRUE);
 	variable = ft_copy_str_len(&string[1], variable_len);
 	value = value_to_variable(variable);
 	write(g_data->pipe_array[command_number][1], value, ft_strlen(value));

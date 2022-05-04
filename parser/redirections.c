@@ -6,51 +6,21 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/02 10:45:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*static void redirection_out_append(t_command * command)
+void error_redirection_handler(t_command *command, char *file_n)
 {
-	int		fd;
-	char 	buf[1];
-	int 	read_ch;
-	int		file_pipe_write;
-	
-	if (command->command_parts[part + 1])
-	{	
-		//pipe(pipe_fds);
-		get_file_pipe(command);
-		file_pipe_write = command->file_pipe[1];
-		fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
-		//printf("file fd: %i\n", fd);
-		if (fd == -1)
-		{	
-			printf("[!] ERROR\n");
-			error_handler(command);
-			exit(1);
-		}
-		while (read(fd, buf, 1) >= 0)
-		{	
-			//printf("|%c|\n", buf[0]);
-			//fflush(stdout);
-			if (buf[0] == '\0')
-				break;
-			write(file_pipe_write, buf, 1);
-			buf[0] = 0;
-		}
-		close(fd);
-		close(file_pipe_write);
-		rewrite_command_part_arr(command, part);
-	}
-	else 
-	{
-		printf("syntax error near unexpected token `newline'\n");
-		fflush(stdout);
-	}
-}*/
+	g_data->error_status = FAIL;
+	write(1, "minishell: ", 11);
+	write(1, file_n, ft_strlen(file_n));
+	write(1, ": ", 2);
+	write(1, strerror(errno), strlen(strerror(errno)));
+	write(1, "\n", 1);
+}
 
 static char **alloc_mem_for_arr(char **array)
 {
@@ -112,14 +82,19 @@ void redirect_output_append_mode(t_command *command, int part)
 	char	*file_n;
 	
 	file_n = command->command_parts[part + 1];
-	fd = open(file_n, O_WRONLY | O_APPEND, 0666);
-	if (fd < 0)
+	if (access(file_n, 0) != -1 && access(file_n, 2) == -1)
+		error_redirection_handler(command, file_n);
+	else
 	{
-		printf("FCK\n");
-		exit(1);
+		fd = open(file_n, O_WRONLY | O_APPEND, 0666);
+		if (fd < 0)
+		{
+			printf("FCK\n");
+			exit(1);
+		}
+		command->file_pipe[1] = fd;
+		rewrite_command_part_arr(command, part);
 	}
-	command->file_pipe[1] = fd;
-	rewrite_command_part_arr(command, part);
 }
 
 void	here_doc(t_command *command, int part)
@@ -165,23 +140,35 @@ static void redirection_output(t_command *command, int part)
 	char *file_n;
 	
 	file_n = command->command_parts[part + 1];
-	fd = open(file_n, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	if (fd < 0)
+	if (access(file_n, 0) != -1 && access(file_n, 2) == -1)
+		error_redirection_handler(command, file_n);
+	else 
 	{
-		printf("FCK\n");
-		exit(1);
+		fd = open(file_n, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		if (fd < 0)
+		{
+			printf("WTF\n");
+			exit(1);
+		}
+		command->file_pipe[1] = fd;
+		rewrite_command_part_arr(command, part);
 	}
-	command->file_pipe[1] = fd;
-	rewrite_command_part_arr(command, part); 
 }
 
 static void redirect_input(t_command *command, int part)
-{	
+{
 	int		fd;
+	char	*file_n;
 	
-	fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
-	command->file_pipe[0] = fd;
-	rewrite_command_part_arr(command, part);
+	file_n = command->command_parts[part + 1];
+	if (access(file_n, 0) == -1 || access(file_n, 3) == -1)
+		error_redirection_handler(command, file_n);
+	else 
+	{
+		fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
+		command->file_pipe[0] = fd;
+		rewrite_command_part_arr(command, part);
+	}
 }
 
 void	redirections(t_command *command)
@@ -189,7 +176,7 @@ void	redirections(t_command *command)
 	int part;
 	
 	part = 0;
-	while(command->command_parts[part])
+	while(command->command_parts[part] && g_data->error_status != FAIL)
 	{
 		if (ft_strcmp(command->command_parts[part], "<"))
 		{

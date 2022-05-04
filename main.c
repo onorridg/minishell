@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 12:19:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:20:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,27 @@ static int minishell(char *string, char **envp)
 	{
 		command->command_number = command_number;
 		command->command_parts = command_parts_parser(command);
+		//fprintf(stderr, "IN COMMAND EXECUTION\n");
+		//fflush(stderr);
 		command_distribution(command);
+		//fprintf(stderr, "OUT COMMAND EXECUTION\n");
+		//fflush(stderr);
+		if (g_data->error_status == FAIL)
+			break;
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
 		clear_command_data(clear_data);
 	}
-	close(g_data->pipe_array[command_number - 1][1]);
-	while (read(g_data->pipe_array[command_number - 1][0], output, 1) > 0)
-		write(1, output, 1);
-	close(g_data->pipe_array[command_number - 1][0]);	
+	if (g_data->error_status != FAIL)
+	{
+		close(g_data->pipe_array[command_number - 1][1]);
+		while (read(g_data->pipe_array[command_number - 1][0], output, 1) > 0)
+			write(1, output, 1);
+		close(g_data->pipe_array[command_number - 1][0]);	
+	}
 	g_data->command_counter = 0;
+	g_data->error_status = FALSE;
 	//free(string);
 	return (0);
 }
