@@ -15,7 +15,6 @@ SRCS=main.c\
 	builtins/shell_variable.c\
 	builtins/unset_variable.c\
 	builtins/export.c\
-	builtins/heredoc.c\
 	builtins/exit_code.c\
 	parser/command_utils.c\
 	parser/string_parser.c\

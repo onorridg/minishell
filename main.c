@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 13:20:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:29:04 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int minishell(char *string, char **envp)
 		//fflush(stderr);
 		command_distribution(command);
 		//fprintf(stderr, "OUT COMMAND EXECUTION\n");
-		//fflush(stderr);
+		//fflush(stderr); 
 		if (g_data->error_status == FAIL)
 			break;
 		command_number += 1;

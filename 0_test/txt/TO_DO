@@ -31,7 +31,6 @@ bash: export: `42': not a valid identifier"
 
 < result.txt  grep 12  | wc -l
 
-----------------------------------------------------------------------------------
 
 "
 root@mac:# chmod 000 output
@@ -54,6 +53,7 @@ pipes: 1
 [1]    13500 segmentation fault (core dumped)  ./minishell
 "
 
+----------------------------------------------------------------------------------
 
 
 grep " " <kek.txt

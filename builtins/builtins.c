@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 12:21:01 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:30:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int ft_exit(t_command *command)
 	int	sign;
 	int pipe;
 
-	parser_quote_and_variable(command); // нужен ????
+	parser_quote_and_variable(command); 
 	pipe = g_data->pipe_array[command->command_number][1];
 	if (command->command_parts[1])
 	{
