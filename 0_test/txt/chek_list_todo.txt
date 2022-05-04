@@ -1,9 +1,3 @@
-Simple Command & global
-- Test only spaces or tabs.
-
-echo
-- Execute the echo command with or without arguments or -n
-
 Signals
 - Try ctrl-C after running a blocking command like cat without arguments or grep “something“
 - Try ctrl-D after running a blocking command like cat without arguments or grep “something“

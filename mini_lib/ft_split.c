@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:39:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:06:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ char **ft_split(char *s, char ch)
         return (0);
     if(get_words(words, count, string, ch))
         return (0);
+	//if (ch == '|')
+	//	printf("SPLIT NORMAL OUT\n");
     return (words);
 }
 

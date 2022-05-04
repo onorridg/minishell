@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 11:56:32 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:17:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ char	*spaces_deleter(char *string)
 	char	*new_string;
 	
 	i = 0;
-	while (string[i] == '\n' || string[i] == '\t' || string[i] == '\v'
-		|| string[i] == '\r' || string[i] == '\f' || string[i] == ' ')
+	while (string[i] && (string[i] == '\n' || string[i] == '\t' || string[i] == '\v'
+		|| string[i] == '\r' || string[i] == '\f' || string[i] == ' '))
 		i++;
 	if (i != 0)
-	{
+	{	
+		//printf("command: |%s|\n", string);
 		new_string = ft_set_mem_aloc(&string[i]);
 		free(string);
 		return (new_string);
@@ -57,12 +58,11 @@ char	**command_parts_parser(t_command *command)
 	
 	command_parts = ft_split(command->command, ' ');
 	if(!command_parts)
-		exit(1);
+		return NULL;
 	i = 0;
 	while(command_parts[i])
 	{	
 		command_parts[i] = spaces_deleter(command_parts[i]);
-		//printf("command: |%s|\n", command_parts[i]);
 		i++;
 	}
 	return command_parts;

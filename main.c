@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 16:24:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:45:42 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 static void	clear_command_data(t_command *command)
 {	
 	//split_free(command->command_parts, -1);
-	free(command->command);
-	free(command);
+	if (command && command->command)
+		free(command->command);
+	if (command)
+		free(command);
 	//printf("[+] CLEARED \n");
 }
 
@@ -37,14 +39,21 @@ static int minishell(char *string, char **envp)
 	pipe_array();
 	command_number = 0;
 	while (command)
-	{
+	{	
 		command->command_number = command_number;
+		command->command = spaces_deleter(command->command);
+		if (command->command[0] == '\0' && command_number != 0)
+			exec_open_pipe_command(command);
 		command->command_parts = command_parts_parser(command);
-		//fprintf(stderr, "IN COMMAND EXECUTION\n");
-		//fflush(stderr);
+		if (!command->command_parts)
+		{	
+			g_data->error_status = FAIL;
+			free(command);
+			break;
+		}
+		//printf("IN COMMAND DISTRIBUTION\n");
 		command_distribution(command);
-		//fprintf(stderr, "OUT COMMAND EXECUTION\n");
-		//fflush(stderr); 
+		//printf("OUT COMMAND DISTRIBUTION\n");
 		if (g_data->error_status == FAIL)
 			break;
 		command_number += 1;

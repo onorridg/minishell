@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 15:17:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:44:09 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,11 @@ int		path_command(t_command *command)
 	}
 	else
 	{	
-		printf("open pipe\n");
+		printf("open pipe\n[!] Now blocked\n");
 		fflush(stdout);
-		exec_open_pipe_command(command);
+		//exec_open_pipe_command(command);
 	}
-
-		//printf("error pars last pipe\n");
+	//if (g_data->exit_code != 0) mb needed exit code upper 120 ???
+	//	error_handler(command);
 	return 0;
 }

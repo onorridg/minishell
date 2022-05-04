@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:57:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 12:34:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:40:57 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void display_error(int error_number, t_command *command)
 		write(1, ": ", 2);
 		write(1, command->command_parts[1], ft_strlen(command->command_parts[1]));
 	}
-	write(pipe, ": ", 2);
+	write(1, ": ", 2);
 	if (errno != 255)
 		write(1, strerror(errno), strlen(strerror(errno)));
 	else

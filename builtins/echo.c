@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 11:44:32 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:48:07 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	miss_flag(int *j, t_command *command, int *newline)
 	{
 		*j = 2;
 		*newline = FALSE;
-		while (ft_strcmp(command->command_parts[*j], "-n"))
+		while (command->command_parts[*j] && ft_strcmp(command->command_parts[*j], "-n"))
 			*j += 1;
 	}
 	return (*j);
@@ -97,5 +97,6 @@ int	ft_echo(t_command *command)
 	}
 	if (newline)
 		write(g_data->pipe_array[command->command_number][1], "\n", 1);
+	close(g_data->pipe_array[command->command_number][1]);
 	return (0);
 }
