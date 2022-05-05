@@ -96,6 +96,8 @@ ls -la | wc >  test > test2 > test3 | wc -c
 
 
 $SHLVL 
+exit code: https://tldp.org/LDP/abs/html/exitcodes.html
 exit status: https://stackoverflow.com/c/42network/questions/1545
 exite code: https://unix.stackexchange.com/questions/110348/how-do-i-get-the-list-of-exit-codes-and-or-return-codes-and-meaning-for-a-comm
+exit code: https://stackoverflow.com/questions/1101957/are-there-any-standard-exit-status-codes-in-linux
 pipe: https://stackoverflow.com/c/42network/questions/1470
