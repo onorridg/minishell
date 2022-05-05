@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 14:56:34 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:56:00 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ typedef struct s_envp
 }	t_envp;
 
 typedef struct s_data
-{	
-	int			error_status;
+{
+	int			error_redirection;
+	int			error_command;
 	int			command_counter;
 	int			**pipe_array;
 	int			exit_code;
@@ -160,6 +161,8 @@ char		**alphabet_sort(void);
 void 		error_redirection_handler(t_command *command, char *file_n);
 void 		rewrite_command_part_arr(t_command *command, int part);
 void		get_pipe(t_command *command);
+void		set_signal_configuration(void);
+
 
 
 

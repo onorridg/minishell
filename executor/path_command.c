@@ -6,23 +6,21 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 14:00:24 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:17:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-
-void	parser_quote_and_variable(t_command *command)
+void parser_quote_and_variable(t_command *command)
 {
-	int i;	
+	int i;
 	char *new_string;
-	int	replace;
-	
+	int replace;
+
 	i = 0;
 	while (command->command_parts[i])
-	{	
+	{
 		replace = TRUE;
 		if (command->command_parts[i][0] == '\'')
 			replace = FALSE;
@@ -32,8 +30,8 @@ void	parser_quote_and_variable(t_command *command)
 		if (replace)
 		{
 			new_string = inser_value_to_string(command->command_parts[i]);
-			//printf("value: |%s|\n", new_string);
-			//fflush(stdout);
+			// printf("value: |%s|\n", new_string);
+			// fflush(stdout);
 			command->command_parts[i] = new_string;
 		}
 		i++;
@@ -43,37 +41,38 @@ void	parser_quote_and_variable(t_command *command)
 
 static void command_part_replace_vriable(t_command *command)
 {
-	int	i;
+	int i;
 	int j;
-	
+
 	i = 0;
 	while (command->command_parts[i])
-	{	
+	{
 		j = 0;
 		while (command->command_parts[i][j])
 		{
 			if (command->command_parts[i][j] == '$')
 			{
-				return;	
+				return;
 			}
 		}
 		i++;
 	}
-	
 }
 
 static int execut_comand(t_command *command, char *path)
-{	
-	int		*pipe_fds;
-	pid_t	pid;
-	int		stt;
-	
-	pipe_fds = g_data->pipe_array[command->command_number];	
+{
+	int *pipe_fds;
+	pid_t pid;
+	int stt;
+
+	pipe_fds = g_data->pipe_array[command->command_number];
 	pid = fork();
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if ((command->file_pipe[1] < 0 || command->here_doc == TRUE) && command->last_command == FALSE) //
 		{
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
@@ -83,12 +82,12 @@ static int execut_comand(t_command *command, char *path)
 		{
 			if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1)
 				exit(1);
-			//if (command->file_pipe[1] > 0 )
+			// if (command->file_pipe[1] > 0 )
 			close(pipe_fds[1]);
 		}
-		
+
 		if (command->command_number > 0)
-				pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
+			pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
 		if (command->file_pipe[0] < 0)
 		{
 			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
@@ -100,16 +99,22 @@ static int execut_comand(t_command *command, char *path)
 				exit(1);
 		}
 		execve(path, command->command_parts, env_generator());
-		//fprintf(stderr, "lol kek\n");
-		//fflush(stderr);
+		close(pipe_fds[1]);
+		//close(pipe_fds[0]);
+		g_data->exit_code = 127;
+		errno = 127;
+		write(1, command->command_parts[0], strlen(command->command_parts[0]));
+		write(1, ": command not found\n", 20);
+		exit(127);
 	}
-	//wait(NULL);
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &stt, 0);
+	set_signal_configuration();
 	if (WIFEXITED(stt))
 	{
 		g_data->exit_code = WEXITSTATUS(stt);
-		//fprintf(stderr, "Exit code: %i\n", g_data->exit_code);
-		//fflush(stderr);
+		if (g_data->exit_code != 0)
+			g_data->error_command = FAIL;
 		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)
@@ -120,32 +125,32 @@ static int execut_comand(t_command *command, char *path)
 	return (0);
 }
 
-int		path_command(t_command *command)
-{	char *path;
+int path_command(t_command *command)
+{
+	char *path;
 
 	if (ft_strlen(command->command_parts[0]) > 0)
-	{	
-		//fprintf(stderr, "IN PARSE QUOTE\n");
-		//fflush(stderr);
+	{
 		parser_quote_and_variable(command);
-		//fprintf(stderr, "OUT PARSE QUOTE\n");
-		//fflush(stderr);
-		if (g_data->error_status == FAIL)
+		if (g_data->error_command == FAIL || g_data->error_redirection == FAIL)
+		{
+			close(g_data->pipe_array[command->command_number][1]);
 			return (1);
+		}
 		path = get_command_path(command);
 		if (path)
 			execut_comand(command, path);
 		else
 			execut_comand(command, command->command_parts[0]);
-			//execve(command->command_parts[0], command->command_parts, env_generator());
+		// execve(command->command_parts[0], command->command_parts, env_generator());
 	}
 	else
-	{	
+	{
 		printf("open pipe\n[!] Now blocked\n");
 		fflush(stdout);
-		//exec_open_pipe_command(command);
+		// exec_open_pipe_command(command);
 	}
-	//if (g_data->exit_code != 0) mb needed exit code upper 120 ???
+	// if (g_data->exit_code != 0) mb needed exit code upper 120 ???
 	//	error_handler(command);
 	return 0;
 }

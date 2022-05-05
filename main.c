@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 14:16:14 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 19:30:25 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ static int minishell(char *string, char **envp)
 	command_number = 0;
 	while (command)
 	{	
+		//printf("command %i\n", command_number);
+		g_data->error_redirection = FALSE;
+		g_data->error_command = FALSE;
 		command->command_number = command_number;
 		command->command = spaces_deleter(command->command);
 		if (command->command[0] == '\0' && command_number != 0)
@@ -47,21 +50,21 @@ static int minishell(char *string, char **envp)
 		command->command_parts = command_parts_parser(command);
 		if (!command->command_parts)
 		{	
-			g_data->error_status = FAIL;
+			write(1, "minishell: ", 11);
+			write(1, "syntax error near unexpected token `|'\n", 39);
+			g_data->error_redirection = FAIL;
 			free(command);
 			break;
 		}
-		//printf("IN COMMAND DISTRIBUTION\n");
 		command_distribution(command);
-		//printf("OUT COMMAND DISTRIBUTION\n");
-		if (g_data->error_status == FAIL)
-			break;
 		command_number += 1;
 		clear_data = command;
 		command = command->next;
 		clear_command_data(clear_data);
+		if (g_data->error_command == FAIL)
+			break;
 	}
-	if (g_data->error_status != FAIL)
+	if (g_data->error_redirection != FAIL)
 	{
 		close(g_data->pipe_array[command_number - 1][1]);
 		while (read(g_data->pipe_array[command_number - 1][0], output, 1) > 0)
@@ -70,7 +73,8 @@ static int minishell(char *string, char **envp)
 	}
 	//g_data->command_counter = 0;
 	set_exit_code(g_data->command_counter);
-	g_data->error_status = FALSE;
+	g_data->error_command = FALSE;
+	g_data->error_redirection = FALSE;
 	//free(string);
 	return (0);
 }

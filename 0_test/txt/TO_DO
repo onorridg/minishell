@@ -70,23 +70,21 @@ root@mac:# ls
 
 export PATH=$PATH:/place/with/the/file
 
-----------------------------------------------------------------------------------
-
-ls > output | wc -l
-
-"dsbksdgbksdghsd"                           --> dose not display correct error
-
 "cat | cat | ls behave "normally""          --> dose not display correct error
 
 "cat | cat | ls behave "normally"           --> dose not correct work               !!!!!!!!!!
 
+"dsbksdgbksdghsd"                           --> dose not display correct error
+
 "ec -l"                                     --> dose not return error 
+
+----------------------------------------------------------------------------------
+
+ls > output | wc -l (whene chmod 000)
 
 "wc -l"                                     --> dose not work ctrl+d
 
 grep " " <kek.txt                           --> dose not pars "<"
-
-
 
 ls -al | grep ^- > kek.txt | wc -l
 ls -la | wc >  test | wc -c
@@ -96,4 +94,5 @@ ls -la | wc >  test > test2 > test3 | wc -c
 
 $SHLVL 
 exit status: https://stackoverflow.com/c/42network/questions/1545
+exite code: https://unix.stackexchange.com/questions/110348/how-do-i-get-the-list-of-exit-codes-and-or-return-codes-and-meaning-for-a-comm
 pipe: https://stackoverflow.com/c/42network/questions/1470

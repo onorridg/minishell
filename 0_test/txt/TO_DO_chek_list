@@ -2,3 +2,6 @@ Signals
 - Try ctrl-\ after running a blocking command like cat without arguments or grep “something“
 - Try ctrl-C after running a blocking command like cat without arguments or grep “something“
 - Try ctrl-D after running a blocking command like cat without arguments or grep “something“
+
+
+bash exit codes - https://unix.stackexchange.com/questions/110348/how-do-i-get-the-list-of-exit-codes-and-or-return-codes-and-meaning-for-a-comm

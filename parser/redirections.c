@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 14:56:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:57:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	redirections(t_command *command)
 	int part;
 	
 	part = 0;
-	while(command->command_parts[part] && g_data->error_status != FAIL)
+	while(command->command_parts[part] && g_data->error_redirection != FAIL)
 	{
 		if (ft_strcmp(command->command_parts[part], "<"))
 		{
