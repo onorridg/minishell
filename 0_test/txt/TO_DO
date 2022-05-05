@@ -78,9 +78,12 @@ export PATH=$PATH:/place/with/the/file
 
 "ec -l"                                     --> dose not return error 
 
+ls > output | wc -l (whene chmod 000)
+
 ----------------------------------------------------------------------------------
 
-ls > output | wc -l (whene chmod 000)
+WIFSIGNALED, WTERMSIG
+
 
 "wc -l"                                     --> dose not work ctrl+d
 
