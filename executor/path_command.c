@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 22:44:09 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:00:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ static int execut_comand(t_command *command, char *path)
 				exit(1);
 		}
 		execve(path, command->command_parts, env_generator());
-		exit(1);
+		//fprintf(stderr, "lol kek\n");
+		//fflush(stderr);
 	}
 	//wait(NULL);
 	waitpid(pid, &stt, 0);

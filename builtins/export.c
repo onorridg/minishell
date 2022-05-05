@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 19:24:18 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:55:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,39 @@ static int	set_new_env_entry(char *variable, char *value)
 }
 
 static int export_arg(char *variable)
-{		
+{	
+	t_envp		*envp;	
 	t_own_var	*var;
-	
+	char		**data;
+
+	data = ft_split(variable, '=');
+	envp = g_data->first_envp;
+	while (data[1] && ft_strlen(data[1]) > 0 && envp)
+	{
+		if (ft_strcmp(data[0], envp->variable))
+		{
+			envp->value = data[1];
+			free(data[0]);
+			free(data);
+			return (0);
+		}
+		envp = envp->next;
+	}
 	var = g_data->first_var;
 	while (var)
 	{
 		if (ft_strcmp(variable, var->variable))
-		{	
-			printf("in\n");
+		{
 			set_new_env_entry(var->variable, var->value);
+			split_free(data, -1);
 			return (0);
 		}
 		var = var->next;
 	}
-	return (1);
+	if (data[0] && data[1] && ft_strlen(data[1]) > 0)
+		set_new_env_entry(data[0], data[1]);
+	free(data);
+	return (0);
 
 }
 

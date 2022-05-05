@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 16:31:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:39:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	hdl(int sig)
 	return;
 }
 
-static void set_signal_configuration(void)
+void set_signal_configuration(t_command *command)
 {
 	struct sigaction	act;
 	sigset_t			set;
@@ -88,7 +88,7 @@ void	set_terminal_configuration(char **envp)
 	tp.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(STDIN_FILENO, 0, &tp) == -1)
     	exit(1);
-	set_signal_configuration();
+	//set_signal_configuration();
 	g_data = NULL;
 	g_data = (t_data *)malloc(sizeof(t_data));
 	if (!g_data)

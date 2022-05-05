@@ -58,7 +58,6 @@ press ctrl+d when open pipe                 --> segfault
 < tets < test grep " "                      --> needed error heandler
 
 echo | cat -e                               --> stuck, dose note close write pipe
-----------------------------------------------------------------------------------
 
 "root@mac:# unset PATH
 pipes: 1
@@ -66,9 +65,18 @@ root@mac:# ls
 "                                           --> dose not display correct error 
 
 "ls filethatdoesntexist | grep bla | more"  --> dose not display correct error
-"dsbksdgbksdghsd"                           --> dose not display correct error
-"cat | cat | ls behave "normally""          --> dose not display correct error
+
 "ls -sl ldl fllf lgl gl hlhl h"             --> dose not display correct error
+
+export PATH=$PATH:/place/with/the/file
+
+----------------------------------------------------------------------------------
+
+ls > output | wc -l
+
+"dsbksdgbksdghsd"                           --> dose not display correct error
+
+"cat | cat | ls behave "normally""          --> dose not display correct error
 
 "cat | cat | ls behave "normally"           --> dose not correct work               !!!!!!!!!!
 

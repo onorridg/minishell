@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 22:45:42 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:16:14 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static int minishell(char *string, char **envp)
 			write(1, output, 1);
 		close(g_data->pipe_array[command_number - 1][0]);	
 	}
-	g_data->command_counter = 0;
+	//g_data->command_counter = 0;
+	set_exit_code(g_data->command_counter);
 	g_data->error_status = FALSE;
 	//free(string);
 	return (0);
@@ -80,7 +81,7 @@ int main(int ac, char **av, char **envp)
 	
 	str = NULL;
 	set_terminal_configuration(envp);
-	//rl_outstream = stderr; // ??
+	rl_outstream = stderr; // ??
 	while (TRUE)
 	{
 		str = readline(BEGIN(49, 33)"root@mac:# "CLOSE);
