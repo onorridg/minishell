@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g -fcommon  #-Wall -Wextra -Werror
+CFLAGS= -g #-fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
@@ -50,7 +50,7 @@ SRCS=main.c\
 	mini_lib/ft_strdup.c\
 	mini_lib/ft_itoa.c
 
-READLINE_FLAGS= -lreadline #-L/Users/onorridg/.brew/opt/readline/lib
+READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 
 OBJS=$(SRCS:.c=.o)
 

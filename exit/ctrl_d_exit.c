@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl_d_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:44:19 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 16:32:08 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:32:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void ctrl_d_exit(void)
 	rl_on_new_line();
 	rl_replace_line("", 0);
     rl_redisplay();
-	write(1, "exit\n", 5);
+	write(1, "exit\n", 6);
 	exit(0);
 }

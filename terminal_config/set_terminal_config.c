@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_terminal_config.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 18:57:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:32:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	set_terminal_configuration(char **envp)
 	struct termios tp;
 	if (tcgetattr(STDIN_FILENO, &tp) == -1)
     	exit(1);
+	//tp.c_iflag &= ~BRKINT;
 	tp.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(STDIN_FILENO, 0, &tp) == -1)
     	exit(1);
