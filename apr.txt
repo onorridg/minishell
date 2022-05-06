@@ -1,9 +1,0 @@
--rw-rw-r--  1 onorridg onorridg    429 Apr 28 10:19 .gitignore
--rw-rw-r--  1 onorridg onorridg   1367 Apr 28 10:27 Makefile
--rw-rw-r--  1 onorridg onorridg   5034 Apr 29 14:32 minishell.h
--rw-rw-r--  1 onorridg onorridg     25 Apr 28 10:19 test
--rw-rw-r--  1 onorridg onorridg      0 May  1 21:03 kek.txt
--rw-rw-r--  1 onorridg onorridg   2132 May  1 20:30 main.c
--rw-rw-r--  1 onorridg onorridg  11056 May  1 20:35 main.o
--rwxrwxr-x  1 onorridg onorridg 102784 May  1 21:04 minishell
--rwxrwxr-x  1 onorridg onorridg      0 May  1 21:04 result.txt

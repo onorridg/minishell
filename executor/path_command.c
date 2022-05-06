@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:59:26 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:14:47 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,26 @@ static int execut_comand(t_command *command, char *path)
 		//close(pipe_fds[0]);
 		g_data->exit_code = 127;
 		errno = 127;
-		write(1, command->command_parts[0], strlen(command->command_parts[0]));
-		write(1, ": command not found\n", 20);
+		//write(1, command->command_parts[0], strlen(command->command_parts[0]));
+		//write(1, ": command not found\n", 20);
 		exit(127);
 	}
-	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, hdl_child_sigint);
+	signal(SIGQUIT, hdl_child_sigquit);
 	waitpid(pid, &stt, 0);
 	set_signal_configuration();
 	if (WIFEXITED(stt))
 	{
 		g_data->exit_code = WEXITSTATUS(stt);
 		if (g_data->exit_code != 0)
+		{	
+			if (g_data->exit_code == 127)
+			{
+				write(1, command->command_parts[0], strlen(command->command_parts[0]));
+				write(1, ": command not found\n", 20);
+			}
 			g_data->error_command = FAIL;
+		}
 		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)

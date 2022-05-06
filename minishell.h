@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 17:01:24 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:13:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ void 		rewrite_command_part_arr(t_command *command, int part);
 void		get_pipe(t_command *command);
 void		set_signal_configuration(void);
 void 		free_pipe_array(void);
+void		hdl_child_sigint(int sig);
+void		hdl_child_sigquit(int sig);
+
 
 
 

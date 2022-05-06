@@ -10,6 +10,7 @@ MAKEFILE=Makefile
 
 SRCS=main.c\
 	terminal_config/set_terminal_config.c\
+	terminal_config/child_signals.c\
 	builtins/builtins.c\
 	builtins/echo.c\
 	builtins/shell_variable.c\
