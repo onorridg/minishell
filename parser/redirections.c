@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 18:57:13 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:59:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void redirect_output_append_mode(t_command *command, int part)
 		error_redirection_handler(command, file_n);
 	else
 	{
-		fd = open(file_n, O_WRONLY | O_APPEND, 0666);
+		fd = open(file_n, O_CREAT | O_WRONLY | O_APPEND, 0666);
 		if (fd < 0)
 		{
 			printf("FCK\n");
@@ -68,6 +68,8 @@ void	here_doc(t_command *command, int part)
 		printf("syntax error near unexpected token `newline'\n");
 		fflush(stdout);
 	}
+	//fprintf(stderr, "EXIT here_doc\n");
+	//fflush(stderr);
 }
 
 static void redirection_output(t_command *command, int part)
@@ -112,7 +114,7 @@ void	redirections(t_command *command)
 	int part;
 	
 	part = 0;
-	while(command->command_parts[part] && g_data->error_redirection != FAIL)
+	while(command->command_parts && command->command_parts[part] && g_data->error_redirection != FAIL)
 	{
 		if (ft_strcmp(command->command_parts[part], "<"))
 		{

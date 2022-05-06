@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 15:43:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:06:12 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_env(t_command *command)
 	{
 		write(w_pipe, variable_node->variable, ft_strlen(variable_node->variable));
 		write(w_pipe, "=", 1);
-		write(w_pipe, variable_node->value, ft_strlen(variable_node->value));
+		if (variable_node->value)
+			write(w_pipe, variable_node->value, ft_strlen(variable_node->value));
 		write(w_pipe, "\n", 1);
 		variable_node = variable_node->next;
 	}

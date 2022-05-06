@@ -1,0 +1,894 @@
+==54753== Memcheck, a memory error detector
+==54753== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==54753== Using Valgrind-3.18.0.GIT-lbmacos-3568e0bf6f-20210831 and LibVEX; rerun with -h for copyright info
+==54753== Command: ./minishell
+==54753== Parent PID: 54566
+==54753== 
+--54753-- 
+--54753-- Valgrind options:
+--54753--    --suppressions=valgrind_readline_leaks_ignore.txt
+--54753--    --leak-check=full
+--54753--    --show-leak-kinds=all
+--54753--    --track-origins=yes
+--54753--    --verbose
+--54753--    --log-file=valgrind-out.txt
+--54753-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--54753--   Darwin Kernel Version 18.7.0: Tue Jun 22 19:37:08 PDT 2021; root:xnu-4903.278.70~1/RELEASE_X86_64
+--54753-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--54753-- Page sizes: currently 4096, max supported 4096
+--54753-- Valgrind library directory: /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind
+--54753-- ./minishell (rx at 0x100000000, rw at 0x100006000)
+--54753--    reading syms   from primary file (69 562)
+--54753--    dSYM= ./minishell.dSYM/Contents/Resources/DWARF/minishell
+--54753--    dSYM does not have correct UUID (out of date?)
+--54753-- run: /usr/bin/dsymutil "./minishell"
+--54753--    dsyms= ./minishell.dSYM/Contents/Resources/DWARF/minishell
+--54753--    reading dwarf3 from dsyms file
+--54753-- /usr/lib/dyld (rx at 0x10000c000, rw at 0x100077000)
+--54753--    reading syms   from primary file (5 2133)
+--54753-- Scheduler: using generic scheduler lock implementation.
+--54753-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
+--54753-- Reading suppressions file: /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/default.supp
+==54753== embedded gdbserver: reading from /var/folders/zz/zyxvpxvq6csfxvn_n0001xq4000gds/T//vgdb-pipe-from-vgdb-to-54753-by-onorridg-on-???
+==54753== embedded gdbserver: writing to   /var/folders/zz/zyxvpxvq6csfxvn_n0001xq4000gds/T//vgdb-pipe-to-vgdb-from-54753-by-onorridg-on-???
+==54753== embedded gdbserver: shared mem   /var/folders/zz/zyxvpxvq6csfxvn_n0001xq4000gds/T//vgdb-pipe-shared-mem-vgdb-54753-by-onorridg-on-???
+==54753== 
+==54753== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==54753== don't want to do, unless you know exactly what you're doing,
+==54753== or are doing some strange experiment):
+==54753==   /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/../../bin/vgdb --pid=54753 ...command...
+==54753== 
+==54753== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==54753==   /path/to/gdb ./minishell
+==54753== and then give GDB the following command
+==54753==   target remote | /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/../../bin/vgdb --pid=54753
+==54753== --pid is optional if only one valgrind process is running
+==54753== 
+--54753-- REDIR: 0x10004d120 (dyld:strcmp) redirected to 0x258058ce6 (???)
+--54753-- REDIR: 0x1000475f6 (dyld:arc4random) redirected to 0x258058d84 (???)
+--54753-- REDIR: 0x10004c500 (dyld:strlen) redirected to 0x258058cb5 (???)
+--54753-- REDIR: 0x10004d420 (dyld:strcpy) redirected to 0x258058d02 (???)
+--54753-- REDIR: 0x10004a6f0 (dyld:strcat) redirected to 0x258058cc6 (???)
+--54753-- REDIR: 0x10004c2f0 (dyld:strlcat) redirected to 0x258058d1f (???)
+--54753-- /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x1000d7000, rw at 0x1000db000)
+--54753--    reading syms   from primary file (3 52)
+--54753--    dSYM= /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--54753-- /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x1000de000, rw at 0x1000e5000)
+--54753--    reading syms   from primary file (75 61)
+--54753--    dSYM= /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--54753-- /Users/onorridg/.brew/Cellar/readline/8.1.2/lib/libreadline.8.1.dylib (rx at 0x1000ea000, rw at 0x100110000)
+--54753--    reading syms   from primary file (717 335)
+--54753--    dSYM= /Users/onorridg/.brew/Cellar/readline/8.1.2/lib/libreadline.8.1.dylib.dSYM/Contents/Resources/DWARF/libreadline.8.1.dylib
+--54753-- /usr/lib/libSystem.B.dylib (rx at 0x100127000, rw at 0x100129000)
+--54753--    reading syms   from primary file (29 7)
+--54753-- /usr/lib/libncurses.5.4.dylib (rx at 0x10012e000, rw at 0x10015f000)
+--54753--    reading syms   from primary file (613 1)
+--54753-- /usr/lib/system/libcache.dylib (rx at 0x10016f000, rw at 0x100174000)
+--54753--    reading syms   from primary file (32 28)
+--54753-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x100179000, rw at 0x100184000)
+--54753--    reading syms   from primary file (222 164)
+--54753-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x100191000, rw at 0x100199000)
+--54753--    reading syms   from primary file (510 8)
+--54753-- /usr/lib/system/libcopyfile.dylib (rx at 0x1001a6000, rw at 0x1001b0000)
+--54753--    reading syms   from primary file (11 37)
+--54753-- /usr/lib/system/libcorecrypto.dylib (rx at 0x1001b6000, rw at 0x10023c000)
+--54753--    reading syms   from primary file (525 697)
+--54753-- /usr/lib/system/libdispatch.dylib (rx at 0x100258000, rw at 0x100292000)
+--54753--    reading syms   from primary file (300 878)
+--54753-- /usr/lib/system/libdyld.dylib (rx at 0x1002c2000, rw at 0x1002ef000)
+--54753--    reading syms   from primary file (107 1127)
+--54753-- /usr/lib/system/libkeymgr.dylib (rx at 0x10030d000, rw at 0x10030e000)
+--54753--    reading syms   from primary file (11 2)
+--54753-- /usr/lib/system/libmacho.dylib (rx at 0x100319000, rw at 0x10031f000)
+--54753--    reading syms   from primary file (105 2)
+--54753-- /usr/lib/system/libquarantine.dylib (rx at 0x100325000, rw at 0x100328000)
+--54753--    reading syms   from primary file (71 12)
+--54753-- /usr/lib/system/libremovefile.dylib (rx at 0x10032e000, rw at 0x100330000)
+--54753--    reading syms   from primary file (12 6)
+--54753-- /usr/lib/system/libsystem_asl.dylib (rx at 0x100335000, rw at 0x10034d000)
+--54753--    reading syms   from primary file (220 227)
+--54753-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x10035a000, rw at 0x10035b000)
+--54753--    reading syms   from primary file (21 7)
+--54753-- /usr/lib/system/libsystem_c.dylib (rx at 0x10035f000, rw at 0x1003e7000)
+--54753--    reading syms   from primary file (1342 803)
+--54753-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x10040f000, rw at 0x100413000)
+--54753--    reading syms   from primary file (38 64)
+--54753-- /usr/lib/system/libsystem_coreservices.dylib (rx at 0x100419000, rw at 0x10041d000)
+--54753--    reading syms   from primary file (14 43)
+--54753-- /usr/lib/system/libsystem_darwin.dylib (rx at 0x100422000, rw at 0x100429000)
+--54753--    reading syms   from primary file (40 331)
+--54753-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x100433000, rw at 0x10043a000)
+--54753--    reading syms   from primary file (39 34)
+--54753-- /usr/lib/system/libsystem_info.dylib (rx at 0x10043f000, rw at 0x10048b000)
+--54753--    reading syms   from primary file (426 719)
+--54753-- /usr/lib/system/libsystem_m.dylib (rx at 0x1004a1000, rw at 0x1004ed000)
+--54753--    reading syms   from primary file (811 1)
+--54753-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x1004fb000, rw at 0x100526000)
+--54753--    reading syms   from primary file (156 420)
+--54753-- /usr/lib/system/libsystem_networkextension.dylib (rx at 0x100535000, rw at 0x100540000)
+--54753--    reading syms   from primary file (99 180)
+--54753-- /usr/lib/system/libsystem_notify.dylib (rx at 0x10054b000, rw at 0x100553000)
+--54753--    reading syms   from primary file (23 1)
+--54753-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x100559000, rw at 0x10055d000)
+--54753--    reading syms   from primary file (100 13)
+--54753-- /usr/lib/system/libsystem_secinit.dylib (rx at 0x100563000, rw at 0x100566000)
+--54753--    reading syms   from primary file (4 7)
+--54753-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x10056b000, rw at 0x100594000)
+--54753--    reading syms   from primary file (1307 120)
+--54753-- /usr/lib/system/libsystem_platform.dylib (rx at 0x1005ae000, rw at 0x1005b8000)
+--54753--    reading syms   from primary file (166 105)
+--54753-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x1005c0000, rw at 0x1005cb000)
+--54753--    reading syms   from primary file (186 99)
+--54753-- /usr/lib/system/libsystem_symptoms.dylib (rx at 0x1005d5000, rw at 0x1005dd000)
+--54753--    reading syms   from primary file (10 89)
+--54753-- /usr/lib/system/libsystem_trace.dylib (rx at 0x1005e3000, rw at 0x1005f9000)
+--54753--    reading syms   from primary file (128 237)
+--54753-- /usr/lib/system/libunwind.dylib (rx at 0x100608000, rw at 0x10060e000)
+--54753--    reading syms   from primary file (102 52)
+--54753-- /usr/lib/system/libxpc.dylib (rx at 0x100615000, rw at 0x100645000)
+--54753--    reading syms   from primary file (590 928)
+--54753-- /usr/lib/libobjc.A.dylib (rx at 0x100668000, rw at 0x100dee000)
+--54753--    reading syms   from primary file (360 900)
+--54753-- /usr/lib/libc++abi.dylib (rx at 0x100fa5000, rw at 0x100fbb000)
+--54753--    reading syms   from primary file (375 604)
+--54753-- /usr/lib/libc++.1.dylib (rx at 0x100fd1000, rw at 0x101025000)
+--54753--    reading syms   from primary file (2023 1671)
+--54753-- REDIR: 0x1005af740 (libsystem_platform.dylib:_platform_memcmp) redirected to 0x1000e1c53 (_platform_memcmp)
+--54753-- REDIR: 0x1005affc0 (libsystem_platform.dylib:_platform_strncmp) redirected to 0x1000e15ed (_platform_strncmp)
+--54753-- REDIR: 0x1005b0360 (libsystem_platform.dylib:_platform_strcmp) redirected to 0x1000e1667 (_platform_strcmp)
+--54753-- REDIR: 0x1004ff3a6 (libsystem_malloc.dylib:calloc) redirected to 0x1000dff36 (calloc)
+--54753-- REDIR: 0x1004ff52c (libsystem_malloc.dylib:malloc_default_zone) redirected to 0x1000e0c61 (malloc_default_zone)
+--54753-- REDIR: 0x1004fcc32 (libsystem_malloc.dylib:malloc_zone_malloc) redirected to 0x1000dfb88 (malloc_zone_malloc)
+--54753-- REDIR: 0x1004ff3e1 (libsystem_malloc.dylib:malloc_zone_calloc) redirected to 0x1000e0122 (malloc_zone_calloc)
+--54753-- REDIR: 0x1004fcbfd (libsystem_malloc.dylib:malloc) redirected to 0x1000df920 (malloc)
+--54753-- REDIR: 0x1004ff536 (libsystem_malloc.dylib:malloc_zone_from_ptr) redirected to 0x1000e0ca2 (malloc_zone_from_ptr)
+--54753-- REDIR: 0x1004ff839 (libsystem_malloc.dylib:free) redirected to 0x1000dfcfc (free)
+--54753-- REDIR: 0x10050287d (libsystem_malloc.dylib:realloc) redirected to 0x1000e02b4 (realloc)
+--54753-- REDIR: 0x1005b01a0 (libsystem_platform.dylib:_platform_strchr$VARIANT$Haswell) redirected to 0x1000e0f13 (_platform_strchr$VARIANT$Haswell)
+--54753-- REDIR: 0x1003b7fc4 (libsystem_c.dylib:strrchr) redirected to 0x1000e0ead (strrchr)
+--54753-- REDIR: 0x1005b06c0 (libsystem_platform.dylib:_platform_memchr$VARIANT$Haswell) redirected to 0x1000e16e8 (_platform_memchr$VARIANT$Haswell)
+--54801-- REDIR: 0x1003dedd2 (libsystem_c.dylib:__strncpy_chk) redirected to 0x1000e13f9 (__strncpy_chk)
+==54753== 
+==54753== HEAP SUMMARY:
+==54753==     in use at exit: 308,414 bytes in 546 blocks
+==54753==   total heap usage: 769 allocs, 223 frees, 331,556 bytes allocated
+==54753== 
+==54753== Searching for pointers to 546 not-freed blocks
+==54753== Checked 10,866,784 bytes
+==54753== 
+==54753== 2 bytes in 1 blocks are still reachable in loss record 1 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004A63: ft_set_mem_aloc (ft_set_mem_aloc.c:20)
+==54753==    by 0x10000109F: set_status_code (set_terminal_config.c:20)
+==54753==    by 0x100000EE9: set_terminal_configuration (set_terminal_config.c:101)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 2 bytes in 1 blocks are still reachable in loss record 2 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004A63: ft_set_mem_aloc (ft_set_mem_aloc.c:20)
+==54753==    by 0x100001C5E: set_env_variable (shell_variable.c:76)
+==54753==    by 0x100002545: set_exit_code (exit_code.c:25)
+==54753==    by 0x100000CA9: minishell (main.c:75)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 7 bytes in 2 blocks are indirectly lost in loss record 4 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004451: get_words (ft_split.c:72)
+==54753==    by 0x1000041DF: ft_split (ft_split.c:141)
+==54753==    by 0x1000029CD: string_parser (string_parser.c:97)
+==54753==    by 0x100000A8D: minishell (main.c:36)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 7 bytes in 2 blocks are indirectly lost in loss record 5 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004451: get_words (ft_split.c:72)
+==54753==    by 0x1000041DF: ft_split (ft_split.c:141)
+==54753==    by 0x10000292D: command_parts_parser (string_parser.c:59)
+==54753==    by 0x100000B2F: minishell (main.c:50)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 14 bytes in 1 blocks are still reachable in loss record 10 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1003C0518: __setenv_locked (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003C091A: setenv (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x100617099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753==    by 0x10000E71E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==54753== 
+==54753== 16 bytes in 1 blocks are still reachable in loss record 13 of 118
+==54753==    at 0x1000E01B1: malloc_zone_calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BB5A: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AAB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 16 bytes in 1 blocks are still reachable in loss record 14 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1003C020F: _owned_ptr_alloc (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003C08EC: setenv (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x100617099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753==    by 0x10000E71E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==54753== 
+==54753== 24 bytes in 1 blocks are still reachable in loss record 16 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 24 bytes in 1 blocks are still reachable in loss record 17 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AA91: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 24 bytes in 1 blocks are still reachable in loss record 18 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066C1A8: _mapStrHash(_NXMapTable*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AF3C: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 24 bytes in 1 blocks are still reachable in loss record 19 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B874: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066D417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100681067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 24 bytes in 1 blocks are still reachable in loss record 20 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10000106D: set_status_code (set_terminal_config.c:17)
+==54753==    by 0x100000EE9: set_terminal_configuration (set_terminal_config.c:101)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 24 bytes in 1 blocks are possibly lost in loss record 21 of 118
+==54753==    at 0x1000E01B1: malloc_zone_calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BDE3: freeBuckets(NXHashTable*, int) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BAFE: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AAB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 24 bytes in 1 blocks are possibly lost in loss record 22 of 118
+==54753==    at 0x1000E01B1: malloc_zone_calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BDE3: freeBuckets(NXHashTable*, int) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BEC7: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BE1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B921: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066D417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100681067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 26 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B9EF: isEqualPrototype(void const*, void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B89C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 27 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BA10: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B89C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 28 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BAD4: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B89C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 29 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B902: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 30 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B9EF: isEqualPrototype(void const*, void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AAB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 31 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BAD4: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AAB4: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 32 bytes in 1 blocks are still reachable in loss record 32 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B902: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066D417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100681067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 32 bytes in 2 blocks are indirectly lost in loss record 33 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1000041AF: ft_split (ft_split.c:138)
+==54753==    by 0x10000292D: command_parts_parser (string_parser.c:59)
+==54753==    by 0x100000B2F: minishell (main.c:50)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 40 bytes in 1 blocks are still reachable in loss record 35 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100617201: xpc_array_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616CB3: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753== 
+==54753== 48 bytes in 1 blocks are still reachable in loss record 37 of 118
+==54753==    at 0x1000E01B1: malloc_zone_calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BE94: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BE1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BAFE: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B9BF: hashPrototype(void const*, void const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B89C: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100687646: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066A0F8: objc_opt::objc_stringhash_t::getIndex(char const*) const (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066993B: objc_image_info* getDataSection<objc_image_info>(mach_header_64 const*, char const*, unsigned long*, unsigned long*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753== 
+==54753== 48 bytes in 1 blocks are still reachable in loss record 38 of 118
+==54753==    at 0x1000E01B1: malloc_zone_calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066BE94: remapClass(objc_class*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066BE1E: TimeLogger::log(char const*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B921: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066D417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100681067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 48 bytes in 2 blocks are still reachable in loss record 39 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100669742: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x1001289C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753== 
+==54753== 48 bytes in 2 blocks are possibly lost in loss record 40 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100669742: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x1001289C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753== 
+==54753== 56 bytes in 1 blocks are still reachable in loss record 41 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x10062A624: _xpc_pipe_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617460: _xpc_create_bootstrap_pipe (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616FF8: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 42 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 43 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 44 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 45 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 46 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100617294: _xpc_calloc (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617218: xpc_array_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616CB3: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753==    by 0x10000E71E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==54753== 
+==54753== 64 bytes in 1 blocks are still reachable in loss record 47 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1003C0221: _owned_ptr_alloc (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003C08EC: setenv (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x100617099: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753==    by 0x10000E71E: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==54753== 
+==54753== 72 bytes in 1 blocks are still reachable in loss record 48 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100000E94: set_terminal_configuration (set_terminal_config.c:94)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 120 bytes in 1 blocks are still reachable in loss record 52 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x1002602F6: _dispatch_lane_create_with_target (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x1005E4C73: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==54753==    by 0x1001289CE: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001EE04: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==54753== 
+==54753== 142 (96 direct, 46 indirect) bytes in 2 blocks are definitely lost in loss record 53 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100002AAD: insert_command_into_node (string_parser.c:75)
+==54753==    by 0x100002A24: string_parser (string_parser.c:104)
+==54753==    by 0x100000A8D: minishell (main.c:36)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 144 bytes in 2 blocks are definitely lost in loss record 54 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1000026A1: set_ptr_func_to_arr (command_utils.c:41)
+==54753==    by 0x1000036E0: command_distribution (command_distribution.c:20)
+==54753==    by 0x100000BA4: minishell (main.c:59)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 167 bytes in 1 blocks are definitely lost in loss record 55 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004A63: ft_set_mem_aloc (ft_set_mem_aloc.c:20)
+==54753==    by 0x100002B96: my_getenv (my_getenv.c:26)
+==54753==    by 0x100002C57: get_command_path (get_command_path.c:21)
+==54753==    by 0x10000394D: path_command (path_command.c:139)
+==54753==    by 0x1000037BD: command_distribution (command_distribution.c:31)
+==54753==    by 0x100000BA4: minishell (main.c:59)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 192 bytes in 1 blocks are still reachable in loss record 56 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100617692: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x10061754D: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 192 bytes in 1 blocks are still reachable in loss record 57 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100617692: xpc_dictionary_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617C80: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100010873: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==54753==    by 0x100617BA1: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617002: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 256 bytes in 4 blocks are still reachable in loss record 59 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 256 bytes in 4 blocks are still reachable in loss record 60 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 280 bytes in 7 blocks are still reachable in loss record 62 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066E4EB: objc_msgLookup (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AEF3: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x10063148B: _xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x10061774D: xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617704: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 282 bytes in 2 blocks are still reachable in loss record 63 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100617AB8: _xpc_malloc (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617973: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617CE9: _xpc_dyld_image_callback (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100010873: dyld::registerLoadCallback(void (*)(mach_header const*, char const*, bool)) (in /usr/lib/dyld)
+==54753==    by 0x100617BA1: _xpc_collect_images (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617002: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 361 bytes in 7 blocks are still reachable in loss record 65 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1003B7C03: strdup (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x100617732: xpc_string_create (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617704: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 367 bytes in 7 blocks are still reachable in loss record 66 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100617AB8: _xpc_malloc (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617973: _xpc_dictionary_insert (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617715: xpc_dictionary_set_string (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100617579: _xpc_collect_environment (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x100616FFD: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==54753==    by 0x1001289C9: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753==    by 0x100024591: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x100024797: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==54753==    by 0x10001FBE9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001FB7F: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753==    by 0x10001ED72: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==54753== 
+==54753== 528 bytes in 1 blocks are possibly lost in loss record 68 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B968: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066D417: NXMapRemove (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100681067: _unload_image (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== 736 bytes in 1 blocks are still reachable in loss record 70 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100382CC0: arc4_init (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x100382E1C: arc4random_buf (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x10066AA24: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 864 bytes in 36 blocks are still reachable in loss record 71 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100000F71: create_envp_list (set_terminal_config.c:37)
+==54753==    by 0x100000EE1: set_terminal_configuration (set_terminal_config.c:100)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 864 bytes in 36 blocks are definitely lost in loss record 72 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x1000041AF: ft_split (ft_split.c:138)
+==54753==    by 0x100000FAD: create_envp_list (set_terminal_config.c:40)
+==54753==    by 0x100000EE1: set_terminal_configuration (set_terminal_config.c:100)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 1,602 bytes in 72 blocks are still reachable in loss record 82 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x100004451: get_words (ft_split.c:72)
+==54753==    by 0x1000041DF: ft_split (ft_split.c:141)
+==54753==    by 0x100000FAD: create_envp_list (set_terminal_config.c:40)
+==54753==    by 0x100000EE1: set_terminal_configuration (set_terminal_config.c:100)
+==54753==    by 0x1000009FA: main (main.c:88)
+==54753== 
+==54753== 2,064 bytes in 1 blocks are possibly lost in loss record 84 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066B968: NXHashGet (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B846: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066AA91: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 2,064 bytes in 1 blocks are possibly lost in loss record 85 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066C845: objc_class::setHasCustomRR(bool) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066C70F: addSubclass(objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B021: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 3,200 bytes in 50 blocks are still reachable in loss record 87 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x1001289C4: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==54753== 
+==54753== 3,200 bytes in 50 blocks are still reachable in loss record 88 of 118
+==54753==    at 0x1000DFFF0: calloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10068098C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100669A4F: _hasObjcContents (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10067C55F: __objc_personality_v0 (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10001147A: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==54753==    by 0x10001162D: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==54753==    by 0x1002C3A26: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==54753==    by 0x100669233: environ_init (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10025AE35: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==54753==    by 0x100266AD1: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==54753== 
+==54753== 4,096 bytes in 1 blocks are still reachable in loss record 93 of 118
+==54753==    at 0x1000DF995: malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10039CDE8: __smakebuf (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003B089C: __swsetup (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003CA03E: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1003A1E21: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x10039FF71: printf (in /usr/lib/system/libsystem_c.dylib)
+==54753==    by 0x1000051DB: pipe_array (pipe_array.c:34)
+==54753==    by 0x100000AB5: minishell (main.c:40)
+==54753==    by 0x100000A42: main (main.c:95)
+==54753== 
+==54753== 4,112 bytes in 1 blocks are possibly lost in loss record 94 of 118
+==54753==    at 0x1000DFC0A: malloc_zone_malloc (in /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==54753==    by 0x10066C845: objc_class::setHasCustomRR(bool) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066C70F: addSubclass(objc_class*, objc_class*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x1006876A8: std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, std::__1::__unordered_map_hasher<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerHash, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*>, objc_references_support::DisguisedPointerEqual, true>, objc_references_support::ObjcAllocator<std::__1::__hash_value_type<unsigned long, objc_references_support::ObjectAssociationMap*> > >::__rehash(unsigned long) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100677E29: updateCustomRR_AWZ(objc_class*, method_t*) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066CEC4: addMethod(objc_class*, objc_selector*, void (*)(), char const*, bool) (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680FDE: realizeAllClasses() (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A8C: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x100680A6B: _objc_flush_caches (in /usr/lib/libobjc.A.dylib)
+==54753==    by 0x10066B266: _read_images (in /usr/lib/libobjc.A.dylib)
+==54753== 
+==54753== LEAK SUMMARY:
+==54753==    definitely lost: 1,271 bytes in 41 blocks
+==54753==    indirectly lost: 46 bytes in 6 blocks
+==54753==      possibly lost: 8,864 bytes in 8 blocks
+==54753==    still reachable: 17,094 bytes in 274 blocks
+==54753==         suppressed: 281,139 bytes in 217 blocks
+==54753== 
+==54753== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 409 from 15)
+--54753-- 
+--54753-- used_suppression:     56 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 410,832 bytes in 208 blocks
+--54753-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,131 bytes in 9 blocks
+--54753-- used_suppression:      1 OSX1014:dyld-3 /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/default.supp:742
+--54753-- used_suppression:    400 OSX1014:dyld-1 /Users/onorridg/.brew/Cellar/valgrind/HEAD-3568e0b/libexec/valgrind/default.supp:726
+==54753== 
+==54753== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 409 from 15)

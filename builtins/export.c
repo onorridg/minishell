@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 12:55:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:33:52 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int export_arg(char *variable)
 		}
 		var = var->next;
 	}
-	if (data[0] && data[1] && ft_strlen(data[1]) > 0)
+	if (data[0])
 		set_new_env_entry(data[0], data[1]);
 	free(data);
 	return (0);
@@ -80,6 +80,7 @@ static void display_export(int command_number)
 		i++;
 		write(pipe, "\n", 1);
 	}
+	close(pipe);
 	split_free(sorted_envp, -1);
 }
 

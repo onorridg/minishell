@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:12:54 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/22 18:14:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:06:19 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ char    *get_command_path(t_command *command)
 		free(path);
 		i++;
 	}
+	split_free(arr_paths, -1);
 	return (0);
 }

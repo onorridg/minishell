@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 22:17:34 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:09:47 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ t_command	*string_parser(char *string, char **envp)
 			first_command = node;
 		i++;
 	}
+	free(commands_array);
 	node->last_command = TRUE;
 	g_data->command_counter = i;
 	

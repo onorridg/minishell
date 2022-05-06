@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 15:55:19 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:06:23 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,31 @@ static int minishell(char *string, char **envp)
 	pipe_array();
 	command_number = 0;
 	while (command)
-	{	
-		//printf("command %i\n", command_number);
+	{
 		g_data->error_redirection = FALSE;
 		g_data->error_command = FALSE;
 		command->command_number = command_number;
-		command->command = spaces_deleter(command->command);
-		if (command->command[0] == '\0' && command_number != 0)
-			exec_open_pipe_command(command);
-		command->command_parts = command_parts_parser(command);
-		if (!command->command_parts)
-		{	
+		/*if (ft_find_char_in_string(string, '|') != -1)
+		{
 			write(1, "minishell: ", 11);
 			write(1, "syntax error near unexpected token `|'\n", 39);
 			g_data->error_redirection = FAIL;
 			free(command);
+			break;
+		}*/
+		command->command = spaces_deleter(command->command);
+		if (command->command[0] == '\0' && command_number != 0)
+			exec_open_pipe_command(command);
+		command->command_parts = command_parts_parser(command);
+		if (!command->command || !command->command_parts)
+		{	
+			if (ft_find_char_in_string(string, '|') != -1)
+			{
+				write(1, "minishell: ", 11);
+				write(1, "syntax error near unexpected token `|'\n", 39);
+			}
+			free(command);
+			g_data->error_redirection = FAIL;
 			break;
 		}
 		command_distribution(command);
@@ -76,6 +86,7 @@ static int minishell(char *string, char **envp)
 	set_exit_code(g_data->command_counter);
 	g_data->error_command = FALSE;
 	g_data->error_redirection = FALSE;
+	free_pipe_array();
 	free(string);
 	return (0);
 }

@@ -28,6 +28,7 @@ SRCS=main.c\
 	executor/path_command.c\
 	executor/exec_open_pipe_command.c\
 	exit/ctrl_d_exit.c\
+	exit/free_pipe_array.c\
 	error/error_handler.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin_path.c\

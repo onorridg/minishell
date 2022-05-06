@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 16:08:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:59:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,12 @@ int path_command(t_command *command)
 {
 	char *path;
 
-	if (ft_strlen(command->command_parts[0]) > 0)
+	if (command->command_parts[0] && ft_strlen(command->command_parts[0]) > 0)
 	{
 		parser_quote_and_variable(command);
+		//printf("OUT parsing\n");
+		if (!command->command_parts)
+			return (1);
 		if (g_data->error_command == FAIL || g_data->error_redirection == FAIL)
 		{
 			close(g_data->pipe_array[command->command_number][1]);
@@ -141,6 +144,7 @@ int path_command(t_command *command)
 			execut_comand(command, path);
 		else
 			execut_comand(command, command->command_parts[0]);
+		free(path);
 		// execve(command->command_parts[0], command->command_parts, env_generator());
 	}
 	else

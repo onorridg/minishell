@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 18:56:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:50:07 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ void rewrite_command_part_arr(t_command *command, int part)
 	while(command->command_parts[k])
 		new_arr[i++] = command->command_parts[k++];
 	free(command->command_parts);
-	new_arr[i] = NULL;
-	command->command_parts = new_arr;
+	printf("i");
+	if (i == 0)
+		command->command_parts = NULL;
+	else
+	{ 
+		new_arr[i] = NULL;
+		command->command_parts = new_arr;
+	}
 }
 
 void get_pipe(t_command *command)
