@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:18:13 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:32:39 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:22:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char **env_generator(void)
 		if (node->value)
 			env_arr[i++] = variable_value_join(node->variable, node->value);
 		else
-			env_arr[i++] = variable_value_join(node->variable, "");
+			env_arr[i++] = variable_value_join(node->variable, "\"\"");
 		node = node->next;
 	}
 	env_arr[i] = 0;

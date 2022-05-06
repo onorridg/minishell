@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:59:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:44:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void redirect_output_append_mode(t_command *command, int part)
 	char	*file_n;
 	
 	file_n = command->command_parts[part + 1];
-	if (access(file_n, 0) != -1 && access(file_n, 2) == -1)
+	if (access(file_n, F_OK) != -1 && access(file_n, W_OK) == -1)
 		error_redirection_handler(command, file_n);
 	else
 	{
@@ -78,7 +78,7 @@ static void redirection_output(t_command *command, int part)
 	char *file_n;
 	
 	file_n = command->command_parts[part + 1];
-	if (access(file_n, 0) != -1 && access(file_n, 2) == -1)
+	if (access(file_n, F_OK) != -1 && access(file_n, W_OK) == -1)
 		error_redirection_handler(command, file_n);
 	else 
 	{
@@ -99,7 +99,7 @@ static void redirect_input(t_command *command, int part)
 	char	*file_n;
 	
 	file_n = command->command_parts[part + 1];
-	if (access(file_n, 0) == -1 || access(file_n, 3) == -1)
+	if (access(file_n, F_OK) != -1 && access(file_n, R_OK) == -1)
 		error_redirection_handler(command, file_n);
 	else 
 	{
