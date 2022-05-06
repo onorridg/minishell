@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/05 19:30:25 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:55:19 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void	clear_command_data(t_command *command)
 {	
-	//split_free(command->command_parts, -1);
+	if (command && command->command_parts)
+		split_free(command->command_parts, -1);
 	if (command && command->command)
 		free(command->command);
 	if (command)
@@ -75,7 +76,7 @@ static int minishell(char *string, char **envp)
 	set_exit_code(g_data->command_counter);
 	g_data->error_command = FALSE;
 	g_data->error_redirection = FALSE;
-	//free(string);
+	free(string);
 	return (0);
 }
 

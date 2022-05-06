@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 15:45:09 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:08:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,39 +77,27 @@ static int execut_comand(t_command *command, char *path)
 		{
 			if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 				exit(1);
-			fprintf(stderr, "IN 1\n");
-			fflush(stderr);
 		}
 		else if (command->file_pipe[1] > 0 && command->here_doc == FALSE)
 		{
 			if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1)
 				exit(1);
 			// if (command->file_pipe[1] > 0 )
-			fprintf(stderr, "IN 2\n");
-			fflush(stderr);
 			close(pipe_fds[1]);
 		}
 
 		if (command->command_number > 0)
 			pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
-		if (command->file_pipe[0] < 0 && command->last_command == FALSE)
+		if (command->file_pipe[0] < 0 && command->command_number > 0)
 		{
 			if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
 				exit(1);
-			fprintf(stderr, "IN 3\n");
-			fflush(stderr);
 		}
-		else if (command->last_command == FALSE)
+		else if (command->file_pipe[0] > 0)
 		{
 			if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
 				exit(1);
-			fprintf(stderr, "IN 4\n");
-			fflush(stderr);
 		}
-		//close(pipe_fds[1]);
-		//close(pipe_fds[0]);
-		//close(1);
-		//close(0);
 		execve(path, command->command_parts, env_generator());
 		//close(pipe_fds[0]);
 		g_data->exit_code = 127;
