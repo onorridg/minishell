@@ -6,16 +6,28 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 15:11:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:51:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static int export_error_hdl(char *variable, char *value)
+{
+	write(1, "minishell: export: `", 20);
+	write(1, variable, ft_strlen(variable));
+	write(1, "=", 1);
+	write(1, value, ft_strlen(value));
+	write(1, "': not a valid identifier\n", 26);
+	return (1);
+}
+
 static int	set_new_env_entry(char *variable, char *value)
 {	
 	t_envp	*node;
 
+	if (variable[ft_char_len(variable, TRUE)])
+		return (export_error_hdl(variable, value));
 	node = (t_envp *)malloc(sizeof(t_envp));
 	if (!node)
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 15:28:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:21:39 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,10 @@ void parser_quote_and_variable(t_command *command)
 	while (command->command_parts[i])
 	{
 		command->command_parts[i] = inser_value_to_string(command->command_parts[i]);
-		//printf("i_value: |%s|\n", command->command_parts[i]);
 		command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
-		//printf("q_value: |%s|\n", command->command_parts[i]);
-		//fflush(stdout);
 		i++;
 	}
 	redirections(command);
-}
-
-static void command_part_replace_vriable(t_command *command)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (command->command_parts[i])
-	{
-		j = 0;
-		while (command->command_parts[i][j])
-		{
-			if (command->command_parts[i][j] == '$')
-			{
-				return;
-			}
-		}
-		i++;
-	}
 }
 
 static int execut_comand(t_command *command, char *path)
@@ -106,10 +83,12 @@ static int execut_comand(t_command *command, char *path)
 		g_data->exit_code = WEXITSTATUS(stt);
 		if (g_data->exit_code != 0)
 		{	
+			g_data->error_command = FAIL;
 			if (g_data->exit_code == 127)
 			{
 				write(1, command->command_parts[0], strlen(command->command_parts[0]));
 				write(1, ": command not found\n", 20);
+				//close(g_data->pipe_array[command->command_number][0]);
 			}
 			g_data->error_command = FAIL;
 		}

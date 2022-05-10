@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 14:59:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:25:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int minishell(char *string, char **envp)
 			break;
 		}*/
 		command->command = spaces_deleter(command->command);
-		if (command->command[0] == '\0' && command_number != 0)
+		if (command->command[0] == '\0' && command_number != 0 && !command->next)
 			exec_open_pipe_command(command);
 		command->command_parts = command_parts_parser(command);
 		if (!command->command || !command->command_parts)
