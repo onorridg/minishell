@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 19:06:23 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:59:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int minishell(char *string, char **envp)
 			g_data->error_redirection = FAIL;
 			break;
 		}
+		parser_quote_and_variable(command);
 		command_distribution(command);
 		command_number += 1;
 		clear_data = command;

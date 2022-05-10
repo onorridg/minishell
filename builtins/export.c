@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:33:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:11:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ft_export(t_command *command)
 	i = 1;
 	if (command->command_parts[i])
 	{	
-		parser_quote_and_variable(command);
+		//parser_quote_and_variable(command);
 		while (command->command_parts[i])
 			export_arg(command->command_parts[i++]);
 	}

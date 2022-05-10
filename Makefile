@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g -O0 #-fcommon  #-Wall -Wextra -Werror
+CFLAGS= -g -O0 -fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
@@ -23,6 +23,7 @@ SRCS=main.c\
 	parser/get_own_env.c\
 	parser/get_command_path.c\
 	parser/quote_deleter.c\
+	parser/quote_parse.c\
 	parser/redirections.c\
 	parser/redirection_utils.c\
 	executor/command_distribution.c\

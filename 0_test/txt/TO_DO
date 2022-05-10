@@ -84,10 +84,20 @@ djdjdj > kek
 
 "wc -l"                                     --> dose not work ctrl+d
 
-----------------------------------------------------------------------------------
+"$one"'$two'$three
 
 'e'"x"p'o'r't'
+
 ec"ho"
+
+"
+root@mac:# export t=n
+root@mac:# echo -$t -n "-"'n' hello
+"
+export a=l d=s; $a$d 		???
+
+----------------------------------------------------------------------------------
+
 export '"l"'=c
 
 "
@@ -97,13 +107,6 @@ minishell: ls: No such file or directory
 ls: command not found
 root@mac:#
 "
-
-"
-root@mac:# export t=n
-root@mac:# echo -$t -n "-"'n' hello
-"
-
-export a=l d=s; $a$d 		???
 
 echo $PWD > as ; cat as
 

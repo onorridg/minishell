@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_distribution.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:59:41 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:22:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int command_distribution(t_command *command)
 	}
 	//fprintf(stderr, "command disribution\n");
 	//fflush(stderr);
-	if (command->command_parts[0])
+	else if (command->command_parts[0])
 		builtin_functions[builtin_number](command);
 		//printf(RED BLOD"BASH:"CLOSE" %s\n", command->command);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 20:13:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:54:49 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,12 @@ char		*spaces_deleter(char *string);
 char		*value_to_variable(char *string);
 char 		*my_getenv(char *variable);
 char		*get_own_env(char *string);
-char		*quote_deleter(char	*string);
+char		*quote_deleter(char	*string); 			// dose not use; delete
 char		*inser_value_to_string(char *string);
 void		parser_quote_and_variable(t_command *command);
 void		redirections(t_command *command);
+char    	*quote_parse(char *string);
+
 
 
 /* executor */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 20:14:47 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:28:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,17 @@
 
 void parser_quote_and_variable(t_command *command)
 {
-	int i;
-	char *new_string;
-	int replace;
+	int 	i;
+	int 	replace;
 
 	i = 0;
 	while (command->command_parts[i])
 	{
-		replace = TRUE;
-		if (command->command_parts[i][0] == '\'')
-			replace = FALSE;
-		new_string = quote_deleter(command->command_parts[i]);
-		if (new_string)
-			command->command_parts[i] = new_string;
-		if (replace)
-		{
-			new_string = inser_value_to_string(command->command_parts[i]);
-			// printf("value: |%s|\n", new_string);
-			// fflush(stdout);
-			command->command_parts[i] = new_string;
-		}
+		command->command_parts[i] = inser_value_to_string(command->command_parts[i]);
+		//printf("i_value: |%s|\n", command->command_parts[i]);
+		command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
+		//printf("q_value: |%s|\n", command->command_parts[i]);
+		//fflush(stdout);
 		i++;
 	}
 	redirections(command);
@@ -138,7 +129,7 @@ int path_command(t_command *command)
 
 	if (command->command_parts[0] && ft_strlen(command->command_parts[0]) > 0)
 	{
-		parser_quote_and_variable(command);
+		//parser_quote_and_variable(command);
 		//printf("OUT parsing\n");
 		if (!command->command_parts)
 			return (1);

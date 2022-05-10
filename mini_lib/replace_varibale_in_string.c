@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 18:49:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:10:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *get_left_string_part(char *string)
+char *get_left_string_part(char *string, int stop)
 {
 	int 	i;
 	char	*left_part;
 
 	i = 0;
-	left_part = (char *)malloc(sizeof(char) * (ft_find_char_in_string(string, '$') + 1));
+	left_part = (char *)malloc(sizeof(char) * (stop + 1));
 	if (!left_part)
 		exit(1);
-	while(string[i] && string[i] != '$')
+	while(string[i] && i < stop)
 	{
 		left_part[i] = string[i];
 		i++;
@@ -80,39 +80,56 @@ char	*value_to_string(char *string)
 char *inser_value_to_string(char *string)
 {
 	int 	i;
+	char	quote;
 	char	*left_part;
 	char	*right_part;
 	char	*value;
+	char	*new_string;
 
 	i = 0;
-	if (string[i] != '\'')
+	quote = 0;
+	while (string[i])
 	{
-		while (string[i])
+		if (string[i] == '\'' || string[i] == '"')
 		{
-			if (string[i] == '$')
+			if (quote == 0)
+				quote = string[i];
+			else if (quote == string[i])
+				quote = 0;
+			//printf("quote[%i] = %c\n", i, quote);
+			i++;
+		}
+		else if (string[i] == '$' && (quote == 0 || quote == '"'))
+		{
+			i += 1;
+			value = value_to_string(&string[i]);
+			//printf("value: |%s|\n", value);
+			left_part = get_left_string_part(string, i - 1);
+			//printf("left_part: |%s|\n", left_part);
+			right_part = get_right_string_part(&string[i]);
+			//printf("rifht_part|%s|\n", right_part);
+			free(string);
+			if (value)
 			{
-				i += 1;
-				value = value_to_string(&string[i]);
-				left_part = get_left_string_part(string);
-				right_part = get_right_string_part(&string[i]);
-				if (value)
-				{
-					string = ft_strjoin(left_part, value);
-					string = ft_strjoin(string, right_part);
-				}
-				else
-				{
-					string = ft_strjoin(left_part, " ");
-					string = ft_strjoin(string, right_part);
-				}
-				//free(left_part);
-				//free(value);
-				//free(right_part);
-				i = 0;
+				new_string = ft_strjoin(left_part, value);
+				string = ft_strjoin(new_string, right_part);
+				free(new_string);
 			}
 			else
-				i++;
+			{
+				new_string = ft_strjoin(left_part, " ");
+				string = ft_strjoin(new_string, right_part);
+				free(new_string);
+			}
+			//printf("string: |%s|\n\n", string);
+			free(left_part);
+			free(value);
+			free(right_part);
+			quote = 0;
+			i = 0;
 		}
+		else
+			i++;
 	}
 	//printf("string: |%s|\n", string);
 	//fflush(stdout);
