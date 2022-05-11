@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 15:14:00 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:30:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,18 @@ static int export_arg(char *variable)
 	char		**data;
 
 	data = ft_split(variable, '=');
+	if (!data[0][0] || !data[1])
+		return (0);
 	envp = g_data->first_envp;
-	while (data[1] && ft_strlen(data[1]) > 0 && envp)
+	while (envp)
 	{
 		if (ft_strcmp(data[0], envp->variable))
-		{
-			envp->value = data[1];
+		{	
+			printf("|%s| - |%s|\n", data[0], envp->variable);
+			if (data[1])
+				envp->value = data[1];
+			else	
+				envp->value = "";
 			free(data[0]);
 			free(data);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:39:14 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 12:39:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:25:02 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int ft_strlen(char *str)
     int i;
 
     i = 0;
+	if (!str)
+		return (0);
     while(str[i])
         i++;
     return i;
