@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 08:36:39 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:57:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static void	clear_command_data(t_command *command)
 {	
@@ -33,35 +32,31 @@ static int minishell(char *string, char **envp)
 	int					*pipe_fds;
 	char 				*output[1];
 	
+	if (pipe_err_parser(string))
+		return(1);
 	first_command = string_parser(string, envp);
 	if (!first_command)
 		return (0);
 	command = first_command;
 	pipe_array();
 	command_number = 0;
-	while (command)
+	while (command && g_data->error_command != FAIL)
 	{
 		g_data->error_redirection = FALSE;
 		g_data->error_command = FALSE;
 		command->command_number = command_number;
-		/*if (ft_find_char_in_string(string, '|') != -1)
-		{
-			write(1, "minishell: ", 11);
-			write(1, "syntax error near unexpected token `|'\n", 39);
-			g_data->error_redirection = FAIL;
-			free(command);
-			break;
-		}*/
 		command->command = spaces_deleter(command->command);
-		if (command->command[0] == '\0' && command_number != 0 && !command->next)
+		
+		if (command && command->command[0] == '\0' && command_number != 0 && !command->next)
 			exec_open_pipe_command(command);
 		command->command_parts = command_parts_parser(command);
 		if (!command->command || !command->command_parts)
 		{	
 			if (ft_find_char_in_string(string, '|') != -1)
 			{
-				write(1, "minishell: ", 11);
-				write(1, "syntax error near unexpected token `|'\n", 39);
+				write(1, "minishell: syntax error: unexpected end of file\n", 48);
+				g_data->exit_code = 258;
+				set_exit_code(258);
 			}
 			free(command);
 			g_data->error_redirection = FAIL;
@@ -73,8 +68,6 @@ static int minishell(char *string, char **envp)
 		clear_data = command;
 		command = command->next;
 		clear_command_data(clear_data);
-		if (g_data->error_command == FAIL)
-			break;
 	}
 	if (g_data->error_redirection != FAIL)
 	{
@@ -84,7 +77,7 @@ static int minishell(char *string, char **envp)
 		close(g_data->pipe_array[command_number - 1][0]);	
 	}
 	//g_data->command_counter = 0;
-	set_exit_code(g_data->command_counter);
+	//set_exit_code(g_data->command_counter);
 	g_data->error_command = FALSE;
 	g_data->error_redirection = FALSE;
 	free_pipe_array();

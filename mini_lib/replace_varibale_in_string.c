@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 08:41:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:54:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ char *get_left_string_part(char *string, int stop)
 	return (left_part);
 }
 
-char *get_right_string_part(char *string)
+char *get_right_string_part(char *string, char *full_string)
 {
 	int 	i;
 	int		j;
 	int 	string_len;
 	char	*right_part;
 	
-	i = ft_char_len(string, TRUE);
+	if (ft_strcmp(full_string, "$?"))
+		i = 1;
+	else 
+		i = ft_char_len(string, TRUE);
 	string_len = ft_strlen(&string[i]);
 	right_part = (char *)malloc(sizeof(char) * (string_len + 1));
 	if (!right_part)
@@ -66,7 +69,8 @@ char	*value_to_string(char *string)
 	char 		*value;
 	t_envp		*var;
 
-	string = parse_variable(string);
+	if (!ft_strcmp(string, "?"))
+		string = parse_variable(string);
 	value = NULL;
 	var = g_data->first_envp;
 	value = my_getenv(string);
@@ -103,7 +107,7 @@ char *inser_value_to_string(char *string)
 			i += 1;
 			value = value_to_string(&string[i]);
 			left_part = get_left_string_part(string, i - 1);
-			right_part = get_right_string_part(&string[i]);
+			right_part = get_right_string_part(&string[i], string);
 			free(string);
 			if (value)
 			{

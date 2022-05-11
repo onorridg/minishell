@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:57:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/04 22:40:57 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:16:59 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void display_error(int error_number, t_command *command)
 	int pipe;
 
 	pipe = g_data->pipe_array[command->command_number][1];
-	errno = error_number;
+	//errno = error_number;
 	write(1, "minishell: ", 11);
 	write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));
 	if (command->command_parts[1])

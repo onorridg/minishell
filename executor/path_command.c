@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 08:41:00 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:58:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void parser_quote_and_variable(t_command *command)
+void    parser_quote_and_variable(t_command *command)
 {
 	int 	i;
 	int 	replace;
@@ -79,11 +79,15 @@ static int execut_comand(t_command *command, char *path)
 		if (g_data->exit_code != 0)
 		{	
 			g_data->error_command = FAIL;
-			write(1, command->command_parts[0], strlen(command->command_parts[0]));
-			write(1, ": command not found\n", 20);
+			if (access(path, X_OK) == -1)
+			{
+				write(1, "minishell: ", 11);
+				write(1, command->command_parts[0], strlen(command->command_parts[0]));
+				write(1, ": command not found\n", 20);
+			}
 			//close(g_data->pipe_array[command->command_number][0]);
-			g_data->error_command = FAIL;
 		}
+		printf("exit_code: %i\n", g_data->exit_code);
 		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)

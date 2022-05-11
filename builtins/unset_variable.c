@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 17:24:42 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:14:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ int	ft_unset(t_command *command)
 			uset_own_variable(command->command_parts[1],
 				g_data->first_var, NULL);
 	}
+	set_exit_code(0);
 	return (0);
 }

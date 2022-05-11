@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 14:54:49 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 14:05:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_data
 	int			command_counter;
 	int			**pipe_array;
 	int			exit_code;
+	int			command_count;
 	char		**envp;
 	t_envp		*first_envp;
 	t_envp		*last_envp;
@@ -141,6 +142,9 @@ char		*inser_value_to_string(char *string);
 void		parser_quote_and_variable(t_command *command);
 void		redirections(t_command *command);
 char    	*quote_parse(char *string);
+int			*is_redirection(t_command *command);
+int			pipe_err_parser(char *command);
+
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 19:51:46 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:14:00 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int export_error_hdl(char *variable, char *value)
 	write(1, "=", 1);
 	write(1, value, ft_strlen(value));
 	write(1, "': not a valid identifier\n", 26);
+	set_exit_code(127);
 	return (1);
 }
 
@@ -63,7 +64,8 @@ static int export_arg(char *variable)
 	{
 		if (ft_strcmp(variable, var->variable))
 		{
-			set_new_env_entry(var->variable, var->value);
+			if (set_new_env_entry(var->variable, var->value) == 1)
+				return (1);
 			split_free(data, -1);
 			return (0);
 		}
@@ -72,6 +74,7 @@ static int export_arg(char *variable)
 	if (data[0])
 		set_new_env_entry(data[0], data[1]);
 	free(data);
+	set_exit_code(0);
 	return (0);
 
 }
@@ -94,6 +97,7 @@ static void display_export(int command_number)
 	}
 	close(pipe);
 	split_free(sorted_envp, -1);
+	set_exit_code(0);
 }
 
 int	ft_export(t_command *command)
@@ -102,8 +106,7 @@ int	ft_export(t_command *command)
 	
 	i = 1;
 	if (command->command_parts[i])
-	{	
-		//parser_quote_and_variable(command);
+	{
 		while (command->command_parts[i])
 			export_arg(command->command_parts[i++]);
 	}

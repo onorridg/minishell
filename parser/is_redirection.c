@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_open_pipe_command.c                           :+:      :+:    :+:   */
+/*   is_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 11:42:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 13:19:21 by onorridg         ###   ########.fr       */
+/*   Created: 2022/05/11 11:56:48 by onorridg          #+#    #+#             */
+/*   Updated: 2022/05/11 12:11:00 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include	"../minishell.h"
 
-static t_command	*alloc_mem_com(void)
+int	*is_redirection(t_command *command)
 {
-	return ((t_command *)malloc(sizeof(t_command)));
-}
-
-void	exec_open_pipe_command(t_command *command)
-{
-	char		*str;
-	//printf("command_number[%i] == g_data->command_count[%i]\n", command->command_number, g_data->command_count);
+	int	*pipes;
 	
-	str = readline("> ");
-	if (!str)
-		return;
-	if (!command)
+	pipes = (int *)malloc(sizeof(int) * 2);
+	if (!pipes)
 		exit(1);
-	command->command = str;	
+	pipes[0] = g_data->pipe_array[command->command_number][0];
+	pipes[1] = g_data->pipe_array[command->command_number][1];
+	if (command->file_pipe[0] != -1)
+		pipes[0] = command->file_pipe[0];
+	if (command->file_pipe[1] != -1)
+		pipes[1] = command->file_pipe[1];
+	return (pipes);
 }
