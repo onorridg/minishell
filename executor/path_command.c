@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 17:43:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 18:31:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void    parser_quote_and_variable(t_command *command)
 		command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
 		i++;
 	}
-	printf("redirections\n");
 	redirections(command);
 }
 
