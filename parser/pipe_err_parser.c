@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:04:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:38:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:27:40 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ int pipe_err_parser(char *command)
 	i = ft_whitespaces_len(&command[i], TRUE);
 	if (command[i] == '|')
 		return (display_pipe_err(command));
-	while (command[i] && command[i] != '|')
+	while(command[i])
+	{
+		while (command[i] && command[i] != '|')
+			i++;
 		i++;
-	i++;
-	i += ft_whitespaces_len(&command[i], TRUE);
-	if (command[i] == '|')
-		return (display_pipe_err(command));
+		i += ft_whitespaces_len(&command[i], TRUE);
+		if (command[i] == '|')
+			return (display_pipe_err(command));
+	}
 	return (0);
 }

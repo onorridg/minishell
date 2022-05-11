@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:58:22 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:29:04 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int execut_comand(t_command *command, char *path)
 			}
 			//close(g_data->pipe_array[command->command_number][0]);
 		}
-		printf("exit_code: %i\n", g_data->exit_code);
+		//printf("exit_code: %i\n", g_data->exit_code);
 		set_exit_code(g_data->exit_code);
 	}
 	if (command->file_pipe[0] != -1)
