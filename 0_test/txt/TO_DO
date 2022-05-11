@@ -101,7 +101,6 @@ export '"l"'=c
 
 ls -al | grep "^d" | | grep "May 9"
 
-----------------------------------------------------------------------------------
 
 "
 root@mac:# unset PATH
@@ -110,6 +109,13 @@ minishell: ls: No such file or directory
 ls: command not found
 root@mac:#
 "
+
+----------------------------------------------------------------------------------
+
+ls || wc
+
+echo $?
+
 
 echo $PWD > as ; cat as
 

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 14:10:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 08:41:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,14 @@ char *inser_value_to_string(char *string)
 				quote = string[i];
 			else if (quote == string[i])
 				quote = 0;
-			//printf("quote[%i] = %c\n", i, quote);
 			i++;
 		}
 		else if (string[i] == '$' && (quote == 0 || quote == '"'))
 		{
 			i += 1;
 			value = value_to_string(&string[i]);
-			//printf("value: |%s|\n", value);
 			left_part = get_left_string_part(string, i - 1);
-			//printf("left_part: |%s|\n", left_part);
 			right_part = get_right_string_part(&string[i]);
-			//printf("rifht_part|%s|\n", right_part);
 			free(string);
 			if (value)
 			{
@@ -121,7 +117,6 @@ char *inser_value_to_string(char *string)
 				string = ft_strjoin(new_string, right_part);
 				free(new_string);
 			}
-			//printf("string: |%s|\n\n", string);
 			free(left_part);
 			free(value);
 			free(right_part);
@@ -131,13 +126,5 @@ char *inser_value_to_string(char *string)
 		else
 			i++;
 	}
-	//printf("string: |%s|\n", string);
-	//fflush(stdout);
 	return (string);
 }
-
-/*int main(void)
-{
-	//inser_value_to_string("one $USER two three $TEST");
-	inser_value_to_string("1$USER    2$USER    3$USER lol");
-}*/

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 20:21:39 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 08:41:00 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ static int execut_comand(t_command *command, char *path)
 				exit(1);
 		}
 		execve(path, command->command_parts, env_generator());
-		//close(pipe_fds[0]);
-		g_data->exit_code = 127;
-		errno = 127;
-		//write(1, command->command_parts[0], strlen(command->command_parts[0]));
-		//write(1, ": command not found\n", 20);
 		exit(127);
 	}
 	signal(SIGINT, hdl_child_sigint);
@@ -84,12 +79,9 @@ static int execut_comand(t_command *command, char *path)
 		if (g_data->exit_code != 0)
 		{	
 			g_data->error_command = FAIL;
-			if (g_data->exit_code == 127)
-			{
-				write(1, command->command_parts[0], strlen(command->command_parts[0]));
-				write(1, ": command not found\n", 20);
-				//close(g_data->pipe_array[command->command_number][0]);
-			}
+			write(1, command->command_parts[0], strlen(command->command_parts[0]));
+			write(1, ": command not found\n", 20);
+			//close(g_data->pipe_array[command->command_number][0]);
 			g_data->error_command = FAIL;
 		}
 		set_exit_code(g_data->exit_code);
@@ -118,10 +110,10 @@ int path_command(t_command *command)
 			return (1);
 		}
 		path = get_command_path(command);
-		if (path)
-			execut_comand(command, path);
+		if (path) 
+				execut_comand(command, path);
 		else
-			execut_comand(command, command->command_parts[0]);
+				execut_comand(command, command->command_parts[0]);
 		free(path);
 		// execve(command->command_parts[0], command->command_parts, env_generator());
 	}

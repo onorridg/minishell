@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/10 20:25:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 08:36:39 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int main(int ac, char **av, char **envp)
 	
 	str = NULL;
 	set_terminal_configuration(envp);
-	rl_outstream = stderr; // ??
+	//rl_outstream = stderr; // ??
 	while (TRUE)
 	{
 		str = readline(BEGIN(49, 33)"root@mac:# "CLOSE);
