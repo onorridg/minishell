@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:05:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 18:56:05 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void		redirections(t_command *command);
 char    	*quote_parse(char *string);
 int			*is_redirection(t_command *command);
 int			pipe_err_parser(char *command);
+void		additional_redirection_parser(t_command *command);
+
 
 
 

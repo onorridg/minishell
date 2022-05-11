@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 18:28:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:40:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ int ft_exit(t_command *command)
 int ft_pwd(t_command *command)
 {	
 	int		i;
-	char	dir[DIR_MAX];
+	char	*dir;
 	int		*pipes;
 	
 	//pipes = g_data->pipe_array[command->command_number][1];
 	pipes = is_redirection(command);
-	if (!getcwd(dir, DIR_MAX))
+	//if (!getcwd(dir, DIR_MAX))
+	dir = my_getenv("PWD");
+	if(!dir) 
 		error_handler(command);
 	i = 0;
 
@@ -90,7 +92,9 @@ int ft_cd(t_command *command)
 {	
 	int		result;
 	char	*home_path;
-	
+	char	dir[DIR_MAX];
+	char	**pwd;
+
 	//parser_quote_and_variable(command);
 	if (command->command_parts[1])
 		result = chdir(command->command_parts[1]);
@@ -112,5 +116,11 @@ int ft_cd(t_command *command)
 	}
 	else 
 		set_exit_code(0);
+	getcwd(dir, DIR_MAX);
+	pwd = (char **)malloc(sizeof(char *) * 3);
+	pwd[0] = ft_set_mem_aloc("PWD");
+	pwd[1] = ft_set_mem_aloc(dir);
+	pwd[2] = 0;
+	set_env_variable(pwd);
 	return (0);
 }

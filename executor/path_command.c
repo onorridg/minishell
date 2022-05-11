@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 18:31:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:07:47 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int execut_comand(t_command *command, char *path)
 	int *pipe_fds;
 	pid_t pid;
 	int stt;
+	char 				*output[1];
+
 
 	pipe_fds = g_data->pipe_array[command->command_number];
 	pid = fork();
@@ -74,14 +76,11 @@ static int execut_comand(t_command *command, char *path)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &stt, 0);
-	//signal(SIGINT, hdl_child_sigint);
-	//signal(SIGQUIT, hdl_child_sigquit);
 	set_signal_configuration();
 	if (WIFEXITED(stt))
 	{
-		//g_data->exit_code = WEXITSTATUS(stt);
-		g_data->exit_code = stt;
-		if (g_data->exit_code != 0)
+		set_exit_code(WEXITSTATUS(stt));
+		if (WEXITSTATUS(stt) != 0)
 		{	
 			g_data->error_command = FAIL;
 			if (access(path, X_OK) == -1)
@@ -90,10 +89,7 @@ static int execut_comand(t_command *command, char *path)
 				write(1, command->command_parts[0], strlen(command->command_parts[0]));
 				write(1, ": command not found\n", 20);
 			}
-			//close(g_data->pipe_array[command->command_number][0]);
 		}
-		//printf("exit_code: %i\n", g_data->exit_code);
-		set_exit_code(g_data->exit_code);
 	}
 	else if (WTERMSIG(stt))
 	{
