@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 12:30:20 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:05:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:27:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void pipe_array(void)
 		if (!pipe_fd)
 			exit(1);
 		if (pipe(pipe_fd) == -1)
+		{	
+			write(1, "pipe limit exceeded\n", 20);
 			exit(1);
+		}
 		pipe_array[i++] = pipe_fd;
 	}
 	//printf("pipes: %i\n", i);
