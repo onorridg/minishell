@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 15:18:06 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 18:28:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int ft_exit(t_command *command)
 	int pipe;
 
 	//parser_quote_and_variable(command); 
+	number = 0;
 	pipe = g_data->pipe_array[command->command_number][1];
 	if (command->command_parts[1])
 	{
@@ -37,9 +38,12 @@ int ft_exit(t_command *command)
 		{
 			sign = -1;
 			i++;
-		}	
+		}
 		while(chr_number[i] >= '0' && chr_number[i] <= '9')
-			number = number * 10 + (chr_number[i++] - '0');
+		{
+			number = number * 10 + (chr_number[i] - '0');
+			i++;
+		}
 		if (chr_number[i])
 		{
 			errno = 255;
@@ -53,7 +57,7 @@ int ft_exit(t_command *command)
 				set_exit_code(1);
 				return (1);
 			}
-			else 
+			else
 				exit(number * sign);
 		}
 	}
