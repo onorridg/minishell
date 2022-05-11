@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:57:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:43:11 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,21 @@ static int minishell(char *string, char **envp)
 			g_data->error_redirection = FAIL;
 			break;
 		}
+		printf("KEK\n");
 		parser_quote_and_variable(command);
+		printf("KEK\n");
+		if (!command->command || !command->command_parts || !command->command_parts[0])
+		{	
+			if (ft_find_char_in_string(string, '|') != -1)
+			{
+				write(1, "minishell: syntax error near unexpected token `newline'\n", 56);
+				g_data->exit_code = 258;
+				set_exit_code(258);
+			}
+			free(command);
+			g_data->error_redirection = FAIL;
+			break;
+		}
 		command_distribution(command);
 		command_number += 1;
 		clear_data = command;

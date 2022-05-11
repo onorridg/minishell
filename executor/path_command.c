@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 15:29:04 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:43:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    parser_quote_and_variable(t_command *command)
 		command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
 		i++;
 	}
+	printf("redirections\n");
 	redirections(command);
 }
 
@@ -37,6 +38,8 @@ static int execut_comand(t_command *command, char *path)
 	pid = fork();
 	if (pid == -1)
 		exit(1);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_DFL);
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -69,13 +72,16 @@ static int execut_comand(t_command *command, char *path)
 		execve(path, command->command_parts, env_generator());
 		exit(127);
 	}
-	signal(SIGINT, hdl_child_sigint);
-	signal(SIGQUIT, hdl_child_sigquit);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &stt, 0);
+	//signal(SIGINT, hdl_child_sigint);
+	//signal(SIGQUIT, hdl_child_sigquit);
 	set_signal_configuration();
 	if (WIFEXITED(stt))
 	{
-		g_data->exit_code = WEXITSTATUS(stt);
+		//g_data->exit_code = WEXITSTATUS(stt);
+		g_data->exit_code = stt;
 		if (g_data->exit_code != 0)
 		{	
 			g_data->error_command = FAIL;
@@ -89,6 +95,19 @@ static int execut_comand(t_command *command, char *path)
 		}
 		//printf("exit_code: %i\n", g_data->exit_code);
 		set_exit_code(g_data->exit_code);
+	}
+	else if (WTERMSIG(stt))
+	{
+		if (stt == 2)
+		{	
+			hdl_child_sigint(stt);
+			set_exit_code(130);
+		}
+		else if (stt == 3)
+		{
+			hdl_child_sigquit(stt);
+			set_exit_code(131);
+		}
 	}
 	if (command->file_pipe[0] != -1)
 		close(command->file_pipe[0]);
@@ -115,9 +134,9 @@ int path_command(t_command *command)
 		}
 		path = get_command_path(command);
 		if (path) 
-				execut_comand(command, path);
+			execut_comand(command, path);
 		else
-				execut_comand(command, command->command_parts[0]);
+			execut_comand(command, command->command_parts[0]);
 		free(path);
 		// execve(command->command_parts[0], command->command_parts, env_generator());
 	}
