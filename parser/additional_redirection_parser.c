@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 15:33:29 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:35:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,21 @@ static int split_redirection_len(char *string)
 	while (string[i])
 	{
 		if ((string[i] == '<' && string[i + 1] == '<') || (string[i] == '>' && string[i + 1] == '>'))
-		{	
-			if (string[i + 2]) 
-				count += 2;
-			else
-				count += 1;
-			i += 2;
+		{
+			count += 1;
+			i++;
 		}
 		else if ((string[i] == '<') || (string[i] == '>'))
 		{
-			if (string[i + 1])
-				count += 2;
-			else
-				count += 1;
+			count += 1;
+			i++;
 		}
-		i++;
+		else
+		{
+			while (string[i] && string[i] != '<' && string[i] != '>')
+				i++;
+			count += 1;
+		}
 	}
 	return (count);
 }
@@ -150,10 +150,16 @@ static void split_redirection(t_command *command, int part)
 	start = 0;
 	while (i < len)
 	{	
+		//printf("start: %s\n", &command->command_parts[part][start]);
 		new_command_parts[i] = set_redirection_string(command->command_parts[part], &start);
 		i++;
 	}
 	new_command_parts[i] = 0;
+	i = 0;
+	//printf("\n");
+	//while (new_command_parts[i])
+	//	printf("%s\n", new_command_parts[i++]);
+	//printf("\n");
 	rewrite_command_parts(command, part, new_command_parts, len);
 }
 
@@ -190,9 +196,9 @@ void additional_redirection_parser(t_command *command)
 		else 
 			i++;
 	}
-	/*i = 0;
-	while (command->command_parts[i])
-		printf("|%s|\n", command->command_parts[i++]);
-	exit(0);*/
+	i = 0;
+	//while (command->command_parts[i])
+	//	printf("|%s|\n", command->command_parts[i++]);
+	//exit(0);
 }
 // a0 >a1>>a2<<a3<a4 a5 
