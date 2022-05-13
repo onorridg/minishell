@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 20:18:17 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:25:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void    parser_quote_and_variable(t_command *command)
 	while (command->command_parts[i])
 	{
 		command->command_parts[i] = inser_value_to_string(command->command_parts[i]);
+		//command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
+		i++;
+	}
+	i = 0;
+	while (command->command_parts[i])
+	{
 		command->command_parts[i] = quote_parse(command->command_parts[i]); //quote_deleter(command->command_parts[i]);
 		i++;
 	}
