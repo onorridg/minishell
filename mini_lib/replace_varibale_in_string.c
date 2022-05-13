@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 10:24:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:37:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	**split_value(char *value)
+/*static char	**split_value(char *value)
 {
 	char	**values;
 	
@@ -21,8 +21,8 @@ static char	**split_value(char *value)
 		exit(1);
 	if (value[1])
 		return (value);
-	return (NULL);
-}
+	return (0);
+}*/
 
 char *get_left_string_part(char *string, int stop)
 {

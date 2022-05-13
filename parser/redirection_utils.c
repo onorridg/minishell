@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 20:55:14 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:24:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void get_pipe(t_command *command)
 	
 	if (pipe(pipe_fds) == -1)
 	{	
-		printf("new pipe fail\n");
-		fflush(stdout);
+		write(1, "new pipe fail\n", 15);
 		exit(1);
 	}
 	if (command->file_pipe[0] != -1)
