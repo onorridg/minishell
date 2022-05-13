@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:18:13 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 16:28:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:52:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*variable_value_join(char *variable, char *value)
 {
 	char	*env_string;
-	
+
 	env_string = ft_strjoin(variable, "=");
 	return (ft_strjoin(env_string, value));
 }
@@ -35,12 +35,12 @@ static int	env_counter(void)
 	return (count);
 }
 
-char **env_generator(void)
+char	**env_generator(void)
 {
 	t_envp	*node;
 	char	**env_arr;
 	int		i;
-	
+
 	env_arr = (char **)malloc(sizeof(char *) * (env_counter() + 1));
 	if (!env_arr)
 		exit(1);

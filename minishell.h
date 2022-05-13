@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 18:56:05 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:54:18 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,14 @@ typedef struct s_data
 	t_own_var 	*last_var;
 }	t_data;
 
+typedef struct s_split
+{
+	int		word_len;
+	int		i;
+	int		j;
+	int		k;
+	char	flag;
+} t_split;
 
 // start configuration
 t_data		*g_data;
@@ -120,8 +128,15 @@ int			ft_pwd(t_command *command);
 int			ft_unset(t_command *command);
 int 		ft_env(t_command *command);
 int 		ft_exit(t_command *command);
-int 		plug(t_command *command);
 void    	set_exit_code(int exit_code);
+int			get_envp(char **data);
+int 		get_own_envp(char **data, char *variable);
+int			set_new_env_entry(char *variable, char *value);
+int			set_my_env_variable(char **data);
+
+
+
+
 
 
 
@@ -137,14 +152,19 @@ char		*spaces_deleter(char *string);
 char		*value_to_variable(char *string);
 char 		*my_getenv(char *variable);
 char		*get_own_env(char *string);
-char		*quote_deleter(char	*string); 			// dose not use; delete
-char		*inser_value_to_string(char *string);
+//char		*inser_value_to_string(char *string);
+char		*inser_value_to_string(char *str, int i, char quote, char *val);
 void		parser_quote_and_variable(t_command *command);
 void		redirections(t_command *command);
 char    	*quote_parse(char *string);
 int			*is_redirection(t_command *command);
 int			pipe_err_parser(char *command);
 void		additional_redirection_parser(t_command *command);
+void		free_replace_variable(char *new_string, char *left_part, char *value, char *right_part);
+int			set_qoute_replace_variable(char *quote, char *str, int i);
+
+
+
 
 
 
@@ -154,7 +174,17 @@ void		additional_redirection_parser(t_command *command);
 int			command_distribution(t_command *command);
 int			set_variable(char *string);
 int			set_env_variable(char **data);
-void		exec_open_pipe_command(t_command *command);
+int			exec_open_pipe_command(t_command *command);
+void		set_pipe_config(t_command *command, int *pipe_fds);
+void		get_status_code(int stt, char *path, t_command *command);
+void		get_status_code_signal(int stt);
+void		set_fork_signal(int flag);
+void 		close_fork_pipe(t_command *command, int *pipe_fds);
+
+
+
+
+
 
 
 // utils
@@ -202,6 +232,8 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strdup(const char *s);
 char		*ft_itoa(int n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
+void		is_quote(t_split *data, char *string);
+
 
 
 

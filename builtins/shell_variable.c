@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/06 18:06:12 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 17:41:10 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	ft_env(t_command *command)
 	variable_node = g_data->first_envp;
 	while (variable_node)
 	{
-		write(w_pipe, variable_node->variable, ft_strlen(variable_node->variable));
+		write(w_pipe, variable_node->variable,
+			ft_strlen(variable_node->variable));
 		write(w_pipe, "=", 1);
 		if (variable_node->value)
-			write(w_pipe, variable_node->value, ft_strlen(variable_node->value));
+			write(w_pipe, variable_node->value,
+				ft_strlen(variable_node->value));
 		write(w_pipe, "\n", 1);
 		variable_node = variable_node->next;
 	}
@@ -64,23 +66,13 @@ int	set_env_variable(char **data)
 			envp->value = ft_set_mem_aloc(data[1]);
 			free(clear_data);
 			split_free(data, -1);
-			return (1);
+			return (0);
 		}
 		envp = envp->next;
 	}
 	own_envp = g_data->first_var;
-	while (own_envp)
-	{
-		if (ft_strcmp(own_envp->variable, data[0]))
-		{
-			clear_data = own_envp->value;
-			own_envp->value = ft_set_mem_aloc(data[1]);
-			free(clear_data);
-			split_free(data, -1);
-			return (1);
-		}
-		own_envp = own_envp->next;
-	}
+	if (set_my_env_variable(data))
+		return (1);
 	return (0);
 }
 
@@ -92,8 +84,6 @@ static void	print_local_err(char *string)
 	write(1, ": command not found\n", 21);
 }
 
-/* allowed alphabet, numbers (but not like as first character in name) */
-
 int	set_variable(char *string)
 {
 	char		**data;
@@ -101,7 +91,7 @@ int	set_variable(char *string)
 	data = ft_split(string, '=');
 	if (!data)
 		exit(1);
-	if (set_env_variable(data))
+	if (!set_env_variable(data))
 		return (0);
 	else if (data && data[1] && !data[2] && ft_strlen(data[1]) <= LINE_MAX - 1)
 	{

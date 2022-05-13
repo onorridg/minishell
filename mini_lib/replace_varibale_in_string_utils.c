@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_signals.c                                    :+:      :+:    :+:   */
+/*   replace_varibale_in_string_utils.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 20:05:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:58:57 by onorridg         ###   ########.fr       */
+/*   Created: 2022/05/13 19:37:28 by onorridg          #+#    #+#             */
+/*   Updated: 2022/05/13 19:57:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	hdl_child_sigint(int sig)
-{
-	write(1, "^C\n", 3);
-	return ;
+int	set_qoute_replace_variable(char *quote, char *str, int i)
+{	
+	if (str[i] == '\'' || str[i] == '"')
+	{
+		if (*quote == 0)
+			*quote = str[i];
+		else if (*quote == str[i])
+			*quote = 0;
+		return (1);
+	}
+	return (0);
 }
 
-void	hdl_child_sigquit(int sig)
+void	free_replace_variable(char *new_string, char *left_part,
+	char *value, char *right_part)
 {
-	write(1, "^\\Quit: 3\n", 11);
-	return ;
+	free(new_string);
+	free(left_part);
+	free(value);
+	free(right_part);
 }

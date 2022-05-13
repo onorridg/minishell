@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_signals.c                                    :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 20:05:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:58:57 by onorridg         ###   ########.fr       */
+/*   Created: 2022/05/13 17:44:59 by onorridg          #+#    #+#             */
+/*   Updated: 2022/05/13 18:02:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	hdl_child_sigint(int sig)
-{
-	write(1, "^C\n", 3);
-	return ;
-}
+int	ft_pwd(t_command *command)
+{	
+	int		i;
+	char	*dir;
+	int		*pipes;
 
-void	hdl_child_sigquit(int sig)
-{
-	write(1, "^\\Quit: 3\n", 11);
-	return ;
+	pipes = is_redirection(command);
+	dir = my_getenv("PWD");
+	if (!dir)
+		error_handler(command);
+	i = 0;
+	while (dir[i])
+		write(pipes[1], &dir[i++], 1);
+	write(pipes[1], "\n", 1);
+	close(pipes[1]);
+	set_exit_code(0);
+	return (0);
 }

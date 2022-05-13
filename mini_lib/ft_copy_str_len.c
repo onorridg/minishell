@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 12:07:53 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/21 13:27:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:53:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_copy_str_len(char *string, int len)
 {
-	int 	i;
-	char 	*new_string;
+	int		i;
+	char	*new_string;
 
 	new_string = (char *)malloc(sizeof(char) * (len + 1));
 	if (!new_string)
@@ -28,5 +28,5 @@ char	*ft_copy_str_len(char *string, int len)
 		len--;
 	}
 	new_string[i] = '\0';
-	return (new_string);	
+	return (new_string);
 }

@@ -6,34 +6,22 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 13:37:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:56:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*static char	**split_value(char *value)
+char	*get_left_string_part(char *string, int stop)
 {
-	char	**values;
-	
-	values = ft_split(value, ' ');
-	if (!value)
-		exit(1);
-	if (value[1])
-		return (value);
-	return (0);
-}*/
-
-char *get_left_string_part(char *string, int stop)
-{
-	int 	i;
+	int		i;
 	char	*left_part;
 
 	i = 0;
 	left_part = (char *)malloc(sizeof(char) * (stop + 1));
 	if (!left_part)
 		exit(1);
-	while(string[i] && i < stop)
+	while (string[i] && i < stop)
 	{
 		left_part[i] = string[i];
 		i++;
@@ -42,16 +30,16 @@ char *get_left_string_part(char *string, int stop)
 	return (left_part);
 }
 
-char *get_right_string_part(char *string, char *full_string)
+char	*get_right_string_part(char *string, char *full_string)
 {
-	int 	i;
+	int		i;
 	int		j;
-	int 	string_len;
+	int		string_len;
 	char	*right_part;
-	
+
 	if (ft_strcmp(full_string, "$?"))
 		i = 1;
-	else 
+	else
 		i = ft_char_len(string, TRUE);
 	string_len = ft_strlen(&string[i]);
 	right_part = (char *)malloc(sizeof(char) * (string_len + 1));
@@ -68,9 +56,9 @@ char *get_right_string_part(char *string, char *full_string)
 	return (right_part);
 }
 
-char *parse_variable(char *string)
+char	*parse_variable(char *string)
 {
-	char *variable;
+	char	*variable;
 
 	variable = ft_copy_str_len(string, ft_char_len(string, TRUE));
 	return (variable);
@@ -78,8 +66,8 @@ char *parse_variable(char *string)
 
 char	*value_to_string(char *string)
 {
-	char 		*value;
-	t_envp		*var;
+	char	*value;
+	t_envp	*var;
 
 	if (!ft_strcmp(string, "?"))
 		string = parse_variable(string);
@@ -93,54 +81,31 @@ char	*value_to_string(char *string)
 	return (value);
 }
 
-char *inser_value_to_string(char *string)
+char	*inser_value_to_string(char *str, int i, char quote, char *val)
 {
-	int 	i;
-	char	quote;
-	char	*left_part;
-	char	*right_part;
-	char	*value;
-	char	*new_string;
+	char	*l_part;
+	char	*r_part;
+	char	*n_string;
 
-	i = 0;
-	quote = 0;
-	while (string[i])
+	while (str[i])
 	{
-		if (string[i] == '\'' || string[i] == '"')
-		{
-			if (quote == 0)
-				quote = string[i];
-			else if (quote == string[i])
-				quote = 0;
+		if (set_qoute_replace_variable(&quote, str, i))
 			i++;
-		}
-		else if (string[i] == '$' && (quote == 0 || quote == '"'))
+		else if (str[i] == '$' && (quote == 0 || quote == '"'))
 		{
 			i += 1;
-			value = value_to_string(&string[i]);
-			left_part = get_left_string_part(string, i - 1);
-			right_part = get_right_string_part(&string[i], string);
-			free(string);
-			if (value)
-			{
-				new_string = ft_strjoin(left_part, value);
-				string = ft_strjoin(new_string, right_part);
-				free(new_string);
-			}
-			else
-			{
-				new_string = ft_strjoin(left_part, " ");
-				string = ft_strjoin(new_string, right_part);
-				free(new_string);
-			}
-			free(left_part);
-			free(value);
-			free(right_part);
+			val = value_to_string(&str[i]);
+			l_part = get_left_string_part(str, i - 1);
+			r_part = get_right_string_part(&str[i], str);
+			free(str);
+			n_string = ft_strjoin(l_part, val);
+			str = ft_strjoin(n_string, r_part);
+			free_replace_variable(n_string, l_part, val, r_part);
 			quote = 0;
 			i = 0;
 		}
 		else
 			i++;
 	}
-	return (string);
+	return (str);
 }

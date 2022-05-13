@@ -6,12 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:42:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/04/26 16:27:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:50:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 static int	envp_array_len(char **envp_array)
 {
@@ -20,26 +19,26 @@ static int	envp_array_len(char **envp_array)
 	i = 0;
 	while (envp_array[i])
 		i++;
-	return(i);
+	return (i);
 }
 
-static int need_swap(char *str1, char *str2)
+static int	need_swap(char *str1, char *str2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str1[i] == str2[i])
-	 	i++;
+		i++;
 	return (str1[i] - str2[i]);
 }
 
-static void sort(char **envp)
+static void	sort(char **envp)
 {
-	int	i;
-	char *swap;
+	int		i;
+	char	*swap;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (envp[i + 1] && need_swap(envp[i], envp[i + 1]) > 0)
 		{
@@ -53,12 +52,8 @@ static void sort(char **envp)
 
 char	**alphabet_sort(void)
 {
-	t_envp	*envp_node;
 	char	**envp_array;
-	int		array_len;
 	int		i;
-	int		word_len;
-	int		j;
 
 	envp_array = env_generator();
 	i = 0;
@@ -66,7 +61,7 @@ char	**alphabet_sort(void)
 	while (envp_array[i])
 	{	
 		sort(envp_array);
-		i++;	
+		i++;
 	}
 	return (envp_array);
 }

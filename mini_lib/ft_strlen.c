@@ -6,20 +6,20 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:39:14 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 16:25:02 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 19:28:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (!str)
 		return (0);
-    while(str[i])
-        i++;
-    return i;
+	while (str[i])
+		i++;
+	return (i);
 }

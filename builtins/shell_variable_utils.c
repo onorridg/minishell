@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_signals.c                                    :+:      :+:    :+:   */
+/*   shell_variable_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 20:05:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:58:57 by onorridg         ###   ########.fr       */
+/*   Created: 2022/05/13 17:21:29 by onorridg          #+#    #+#             */
+/*   Updated: 2022/05/13 17:42:44 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include	"../minishell.h"
 
-void	hdl_child_sigint(int sig)
-{
-	write(1, "^C\n", 3);
-	return ;
-}
+int	set_my_env_variable(char **data)
+{	
+	char		*clear_data;
+	t_own_var	*own_envp;
 
-void	hdl_child_sigquit(int sig)
-{
-	write(1, "^\\Quit: 3\n", 11);
-	return ;
+	own_envp = g_data->first_var;
+	while (own_envp)
+	{
+		if (ft_strcmp(own_envp->variable, data[0]))
+		{
+			clear_data = own_envp->value;
+			own_envp->value = ft_set_mem_aloc(data[1]);
+			free(clear_data);
+			split_free(data, -1);
+			return (0);
+		}
+		own_envp = own_envp->next;
+	}
+	return (1);
 }

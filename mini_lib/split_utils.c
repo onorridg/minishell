@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_signals.c                                    :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 20:05:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:58:57 by onorridg         ###   ########.fr       */
+/*   Created: 2022/05/13 19:17:34 by onorridg          #+#    #+#             */
+/*   Updated: 2022/05/13 19:58:09 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	hdl_child_sigint(int sig)
-{
-	write(1, "^C\n", 3);
-	return ;
-}
-
-void	hdl_child_sigquit(int sig)
-{
-	write(1, "^\\Quit: 3\n", 11);
-	return ;
+void	is_quote(t_split *data, char *string)
+{	
+	if (string[data->k] == '"' || string[data->k] == '\'')
+	{
+		if (data->flag == 0)
+			data->flag = string[data->k];
+		else if (string[data->k] == data->flag)
+			data->flag = 0;
+	}
 }

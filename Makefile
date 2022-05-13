@@ -11,18 +11,21 @@ MAKEFILE=Makefile
 SRCS=main.c\
 	terminal_config/set_terminal_config.c\
 	terminal_config/child_signals.c\
-	builtins/builtins.c\
 	builtins/echo.c\
+	builtins/pwd.c\
+	builtins/cd.c\
 	builtins/shell_variable.c\
 	builtins/unset_variable.c\
 	builtins/export.c\
+	builtins/exit.c\
 	builtins/exit_code.c\
+	builtins/export_arg_utils.c\
+	builtins/shell_variable_utils.c\
 	parser/command_utils.c\
 	parser/string_parser.c\
 	parser/my_getenv.c\
 	parser/get_own_env.c\
 	parser/get_command_path.c\
-	parser/quote_deleter.c\
 	parser/quote_parse.c\
 	parser/redirections.c\
 	parser/redirection_utils.c\
@@ -32,6 +35,7 @@ SRCS=main.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	executor/exec_open_pipe_command.c\
+	executor/path_command_utils.c\
 	exit/ctrl_d_exit.c\
 	exit/free_pipe_array.c\
 	error/error_handler.c\
@@ -54,7 +58,9 @@ SRCS=main.c\
 	mini_lib/ft_memcmp.c\
 	mini_lib/ft_memcpy.c\
 	mini_lib/ft_strdup.c\
-	mini_lib/ft_itoa.c
+	mini_lib/ft_itoa.c\
+	mini_lib/split_utils.c\
+	mini_lib/replace_varibale_in_string_utils.c
 
 READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
 
