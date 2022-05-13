@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:12:54 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 08:42:05 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:16:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char    *get_command_path(t_command *command)
+char	*get_command_path(t_command *command)
 {
 	char	**arr_paths;
-	int 	i;
+	int		i;
 	char	*path;
-	
+
 	path = my_getenv("PATH");
 	if (!path)
 		return (0);
@@ -25,7 +25,7 @@ char    *get_command_path(t_command *command)
 	if (!arr_paths)
 		return (0);
 	i = 0;
-	while(arr_paths[i])
+	while (arr_paths[i])
 	{	
 		path = ft_strjoin_path(arr_paths[i], command->command_parts[0]);
 		if (!access(path, X_OK))

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:54:18 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:43:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,16 +152,23 @@ char		*spaces_deleter(char *string);
 char		*value_to_variable(char *string);
 char 		*my_getenv(char *variable);
 char		*get_own_env(char *string);
-//char		*inser_value_to_string(char *string);
 char		*inser_value_to_string(char *str, int i, char quote, char *val);
 void		parser_quote_and_variable(t_command *command);
 void		redirections(t_command *command);
-char    	*quote_parse(char *string);
+char		*quote_parse(char *string, int i, int j, char quote);
 int			*is_redirection(t_command *command);
 int			pipe_err_parser(char *command);
 void		additional_redirection_parser(t_command *command);
 void		free_replace_variable(char *new_string, char *left_part, char *value, char *right_part);
 int			set_qoute_replace_variable(char *quote, char *str, int i);
+int			check_redirection_sign(char *string);
+int			split_redirection_len(char *string, int i, int count);
+int			arr_len(char **command_parts);
+void		heredoc_read(char *stop, int pipe_write);
+
+
+
+
 
 
 

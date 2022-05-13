@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:25:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 14:46:18 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:16:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_own_env(char *string)
 {	
 	t_own_var	*variable;
 	char		*value;
-	
+
 	variable = g_data->first_var;
 	value = NULL;
 	while (variable)
@@ -24,7 +24,7 @@ char	*get_own_env(char *string)
 		if (ft_strcmp(string, variable->variable))
 		{
 			value = ft_set_mem_aloc(variable->value);
-			break;
+			break ;
 		}
 		variable = variable->next;
 	}

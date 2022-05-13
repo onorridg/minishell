@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 11:56:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 12:11:00 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:16:55 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	*is_redirection(t_command *command)
 {
 	int	*pipes;
-	
+
 	pipes = (int *)malloc(sizeof(int) * 2);
 	if (!pipes)
 		exit(1);

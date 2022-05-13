@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 20:03:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:40:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	hdl(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		l_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	return ;

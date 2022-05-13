@@ -6,17 +6,17 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 13:23:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:46:53 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void redirect_output_append_mode(t_command *command, int part)
+void	redirect_output_append_mode(t_command *command, int part, int *i)
 {
-	int 	fd;
+	int		fd;
 	char	*file_n;
-	
+
 	file_n = command->command_parts[part + 1];
 	if (access(file_n, F_OK) != -1 && access(file_n, W_OK) == -1)
 		error_redirection_handler(command, file_n);
@@ -31,56 +31,38 @@ void redirect_output_append_mode(t_command *command, int part)
 		command->file_pipe[1] = fd;
 		rewrite_command_part_arr(command, part);
 	}
+	*i = 0;
 }
 
-void	here_doc(t_command *command, int part)
+void	here_doc(t_command *command, int part, int *i)
 {	
-	char 	*str;
-	char 	*stop;
-	int 	i;
-	int 	pipe_write;
-	
+	char	*str;
+	char	*stop;
+	int		pipe_write;
+
 	command->here_doc = TRUE;
 	if (command->command_parts[part + 1])
 	{	
 		get_pipe(command);
 		pipe_write = command->file_pipe[1];
 		stop = command->command_parts[part + 1];
-		while (TRUE)
-		{
-			str = readline("> ");
-			if (!str || ft_strcmp(str, stop))
-			{
-				close(pipe_write);
-				break;
-			}
-			else
-			{
-				i = 0;
-				write(pipe_write, str, ft_strlen(str));
-				write(pipe_write, "\n",  1);
-			}
-		}
+		heredoc_read(stop, pipe_write);
 		rewrite_command_part_arr(command, part);
 	}
-	else 
-	{
-		printf("syntax error near unexpected token `newline'\n");
-		fflush(stdout);
-	}
-	//fprintf(stderr, "EXIT here_doc\n");
-	//fflush(stderr);
+	else
+		write(1, "syntax error near unexpected token `newline'\n", 46);
+	*i = 0;
 }
 
-static void redirection_output(t_command *command, int part)
+static void	redirection_output(t_command *command, int part, int *i)
 {	
-	int fd;
-	char *file_n;
-	
+	int		fd;
+	char	*file_n;
+
 	file_n = command->command_parts[part + 1];
 	if (access(file_n, F_OK) != -1 && access(file_n, W_OK) == -1)
 		error_redirection_handler(command, file_n);
-	else 
+	else
 	{
 		fd = open(file_n, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		if (fd < 0)
@@ -91,53 +73,46 @@ static void redirection_output(t_command *command, int part)
 		command->file_pipe[1] = fd;
 		rewrite_command_part_arr(command, part);
 	}
+	*i = 0;
 }
 
-static void redirect_input(t_command *command, int part)
+static void	redirect_input(t_command *command, int part, int *i)
 {
 	int		fd;
 	char	*file_n;
-	
+
 	file_n = command->command_parts[part + 1];
 	if (access(file_n, F_OK) != -1 && access(file_n, R_OK) == -1)
 		error_redirection_handler(command, file_n);
-	else 
+	else
 	{
 		fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
 		command->file_pipe[0] = fd;
 		rewrite_command_part_arr(command, part);
 	}
+	*i = 0;
 }
 
 void	redirections(t_command *command)
 {	
-	int part;
-	
+	int		part;
+	char	*command_part;
+
 	part = 0;
 	additional_redirection_parser(command);
-	while(command->command_parts && command->command_parts[part] && g_data->error_redirection != FAIL)
-	{
-		if (ft_strcmp(command->command_parts[part], "<") && command->command_parts[part + 1])
-		{
-			redirect_input(command, part);
-			part = 0;
-		}
-		else if (ft_strcmp(command->command_parts[part], ">") && command->command_parts[part + 1])
-		{
-			redirection_output(command, part);
-			part = 0;
-		}
-		else if (ft_strcmp(command->command_parts[part], "<<") && command->command_parts[part + 1])
-		{
-			here_doc(command, part);
-			part = 0;
-		}
-		else if (ft_strcmp(command->command_parts[part], ">>") && command->command_parts[part + 1])
-		{
-			redirect_output_append_mode(command, part);
-			part = 0;
-		}
-		else 
+	while (command->command_parts && command->command_parts[part]
+		&& g_data->error_redirection != FAIL)
+	{	
+		command_part = command->command_parts[part];
+		if (ft_strcmp(command_part, "<") && command->command_parts[part + 1])
+			redirect_input(command, part, &part);
+		else if (ft_strcmp(command_part, ">") && command->command_parts[part + 1])
+			redirection_output(command, part, &part);
+		else if (ft_strcmp(command_part, "<<") && command->command_parts[part + 1])
+			here_doc(command, part, &part);
+		else if (ft_strcmp(command_part, ">>") && command->command_parts[part + 1])
+			redirect_output_append_mode(command, part, &part);
+		else
 			part++;
 	}
 }

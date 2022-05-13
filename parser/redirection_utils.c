@@ -6,13 +6,33 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 13:24:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:48:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void error_redirection_handler(t_command *command, char *file_n)
+void	heredoc_read(char *stop, int pipe_write)
+{	
+	char	*str;
+
+	while (TRUE)
+	{
+		str = readline("> ");
+		if (!str || ft_strcmp(str, stop))
+		{
+			close(pipe_write);
+			break ;
+		}
+		else
+		{
+			write(pipe_write, str, ft_strlen(str));
+			write(pipe_write, "\n", 1);
+		}
+	}
+}
+
+void	error_redirection_handler(t_command *command, char *file_n)
 {
 	g_data->error_redirection = FAIL;
 	g_data->exit_code = 1;
@@ -24,11 +44,11 @@ void error_redirection_handler(t_command *command, char *file_n)
 	write(1, "\n", 1);
 }
 
-static char **alloc_mem_for_arr(char **array)
+static char	**alloc_mem_for_arr(char **array)
 {
-	int 	len;
+	int		len;
 	char	**new_arr;
-	
+
 	len = 0;
 	while (array[len])
 		len++;
@@ -38,15 +58,15 @@ static char **alloc_mem_for_arr(char **array)
 	return (new_arr);
 }
 
-void rewrite_command_part_arr(t_command *command, int part)
+void	rewrite_command_part_arr(t_command *command, int part)
 {
-	int i;
-	int k;
-	char **new_arr;
-	
+	int		i;
+	int		k;
+	char	**new_arr;
+
 	i = 0;
 	new_arr = alloc_mem_for_arr(command->command_parts);
-	while (command->command_parts[i] && i < part )
+	while (command->command_parts[i] && i < part)
 	{
 		new_arr[i] = command->command_parts[i];
 		i++;
@@ -54,22 +74,22 @@ void rewrite_command_part_arr(t_command *command, int part)
 	free(command->command_parts[i]);
 	free(command->command_parts[i + 1]);
 	k = i + 2;
-	while(command->command_parts[k])
+	while (command->command_parts[k])
 		new_arr[i++] = command->command_parts[k++];
 	free(command->command_parts);
 	if (i == 0)
 		command->command_parts = NULL;
 	else
-	{ 
+	{
 		new_arr[i] = NULL;
 		command->command_parts = new_arr;
 	}
 }
 
-void get_pipe(t_command *command)
+void	get_pipe(t_command *command)
 {	
-	int pipe_fds[2];
-	
+	int	pipe_fds[2];
+
 	if (pipe(pipe_fds) == -1)
 	{	
 		write(1, "new pipe fail\n", 15);

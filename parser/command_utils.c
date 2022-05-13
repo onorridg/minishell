@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/03 11:14:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 21:14:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int builtin_chek(char *builtin)
+int	builtin_chek(char *builtin)
 {	
 	if (!builtin)
-		return -1;
+		return (-1);
 	if (ft_strcmp(builtin, "echo"))
 		return (0);
 	else if (ft_strcmp(builtin, "cd"))
@@ -30,25 +30,25 @@ int builtin_chek(char *builtin)
 		return (5);
 	else if (ft_strcmp(builtin, "exit"))
 		return (6);
-	else 
+	else
 		return (7);
 }
 
 BUILTIN	**set_ptr_func_to_arr(void)
 {
-	BUILTIN **builtins_arr;
-	
-	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN*) * 9);
+	BUILTIN	**builtins_arr;
+
+	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN *) * 9);
 	if (!builtins_arr)
 		exit(1);
 	builtins_arr[0] = ft_echo;
 	builtins_arr[1] = ft_cd;
 	builtins_arr[2] = ft_pwd;
-	builtins_arr[3] = ft_export; 	// export
+	builtins_arr[3] = ft_export;
 	builtins_arr[4] = ft_unset;
 	builtins_arr[5] = ft_env;
 	builtins_arr[6] = ft_exit;
 	builtins_arr[7] = path_command;
 	builtins_arr[8] = 0;
-	return builtins_arr;
+	return (builtins_arr);
 }

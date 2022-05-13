@@ -32,6 +32,7 @@ SRCS=main.c\
 	parser/is_redirection.c\
 	parser/pipe_err_parser.c\
 	parser/additional_redirection_parser.c\
+	parser/additional_redirection_utils.c\
 	executor/command_distribution.c\
 	executor/path_command.c\
 	executor/exec_open_pipe_command.c\

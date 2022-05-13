@@ -6,13 +6,22 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:05:07 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 16:44:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/13 20:54:07 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	miss_flag(int *j, t_command *command, int *newline)
+static void	exit_echo(int newline, int *pipes)
+{
+	if (newline)
+		write(pipes[1], "\n", 1);
+	close(pipes[1]);
+	free(pipes);
+	set_exit_code(0);
+}
+
+static int	miss_flag(int *j, t_command *command, int *newline)
 {
 	if (ft_strcmp(command->command_parts[*j], "-n"))
 	{
@@ -38,18 +47,18 @@ int	ft_echo(t_command *command)
 	{
 		j = miss_flag(&j, command, &newline);
 		while (command->command_parts[j])
-		{
+		{	
+			if (ft_strlen(command->command_parts[j]) == 0)
+			{
+				j++;
+				continue ;
+			}
 			write(pipes[1], command->command_parts[j],
 				ft_strlen(command->command_parts[j]));
-			j++;
-			if (command->command_parts[j])
+			if (command->command_parts[++j])
 				write(pipes[1], " ", 1);
 		}
 	}
-	if (newline)
-		write(pipes[1], "\n", 1);
-	close(pipes[1]);
-	free(pipes);
-	set_exit_code(0);
+	exit_echo(newline, pipes);
 	return (0);
 }
