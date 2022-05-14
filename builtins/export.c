@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 17:20:13 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 15:52:11 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,12 @@ static int	export_arg(char *variable)
 	char		**data;
 
 	data = ft_split(variable, '=');
-	if (!data[0][0] || !data[1])
-	{
-		if (data[0])
-			get_own_envp(data, variable);
+	if (!data[0] || !data[0][0])
 		return (0);
-	}
 	if (!get_envp(data))
 		return (0);
+	if (!get_own_envp(data, variable))
+		return (0);	
 	if (data[0])
 		set_new_env_entry(data[0], data[1]);
 	free(data);

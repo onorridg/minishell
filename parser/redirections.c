@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 14:07:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 15:47:20 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	here_doc(t_command *command, int part, int *i)
 		stop = command->command_parts[part + 1];
 		heredoc_read(stop, pipe_write);
 		rewrite_command_part_arr(command, part);
+		printf("IN << \n");
 	}
 	else
 		write(1, "syntax error near unexpected token `newline'\n", 46);

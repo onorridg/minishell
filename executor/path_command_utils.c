@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:15:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:39:22 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 15:46:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,13 @@ void	get_status_code(int stt, char *path, t_command *command)
 }
 
 void	set_pipe_config(t_command *command, int *pipe_fds)
-{	
-	if ((command->file_pipe[1] < 0 || command->here_doc == TRUE)
-		&& command->last_command == FALSE)
+{
+	if (command->file_pipe[1] < 0 && command->next)
 	{
 		if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 			exit(1);
 	}
-	else if (command->file_pipe[1] > 0 && command->here_doc == FALSE)
+	else if (command->file_pipe[1] > 0)
 	{
 		if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1)
 			exit(1);

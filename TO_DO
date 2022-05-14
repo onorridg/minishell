@@ -127,6 +127,9 @@ echo $?
 WIFSIGNALED, WTERMSIG
 
 ----------------------------------------------------------------------------------
+<< EOF grep 42 > kek
+
+< q2 grep s1 > output  | wc -l
 
 << EOF grep 42 > output | wc -c
 
