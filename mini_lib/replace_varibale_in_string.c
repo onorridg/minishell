@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 20:49:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:57:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*parse_variable(char *string)
 	char	*variable;
 
 	variable = ft_copy_str_len(string, ft_char_len(string, TRUE));
+	free(string);
 	return (variable);
 }
 

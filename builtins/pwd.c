@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:44:59 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:02:46 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:48:00 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_pwd(t_command *command)
 		write(pipes[1], &dir[i++], 1);
 	write(pipes[1], "\n", 1);
 	close(pipes[1]);
+	free(pipes);
+	free(dir);
 	set_exit_code(0);
 	return (0);
 }

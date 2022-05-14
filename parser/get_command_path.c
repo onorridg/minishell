@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 19:12:54 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:16:03 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:20:52 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*get_command_path(t_command *command)
 	arr_paths = ft_split(path, ':');
 	if (!arr_paths)
 		return (0);
+	free(path);
 	i = 0;
 	while (arr_paths[i])
 	{	

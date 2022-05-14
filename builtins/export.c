@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 15:52:11 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 20:38:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	set_new_env_entry(char *variable, char *value)
 	node = (t_envp *)malloc(sizeof(t_envp));
 	if (!node)
 		exit(1);
-	node->variable = variable;
-	node->value = value;
+	node->variable = ft_set_mem_aloc(variable);
+	node->value = ft_set_mem_aloc(value);
 	node->next = NULL;
 	g_data->last_envp->next = node;
 	g_data->last_envp = node;
@@ -48,14 +48,17 @@ static int	export_arg(char *variable)
 
 	data = ft_split(variable, '=');
 	if (!data[0] || !data[0][0])
+	{	
+		split_free(data, -1);
 		return (0);
+	}
 	if (!get_envp(data))
 		return (0);
 	if (!get_own_envp(data, variable))
 		return (0);	
 	if (data[0])
 		set_new_env_entry(data[0], data[1]);
-	free(data);
+	split_free(data, -1);
 	set_exit_code(0);
 	return (0);
 }

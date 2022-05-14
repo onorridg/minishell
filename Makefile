@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g -O0 #-fsanitize=address #-fcommon  #-Wall -Wextra -Werror
+CFLAGS= -g3 -O0 #-fsanitize=address #-fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
@@ -40,6 +40,7 @@ SRCS=main/main.c\
 	executor/path_command_utils.c\
 	exit/ctrl_d_exit.c\
 	exit/free_pipe_array.c\
+	exit/free_envp.c\
 	error/error_handler.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin_path.c\

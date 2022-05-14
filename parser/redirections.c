@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 15:47:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 22:23:52 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,21 @@ void	here_doc(t_command *command, int part, int *i)
 	char	*str;
 	char	*stop;
 	int		pipe_write;
+	int 	pipes_f[2];
 
 	command->here_doc = TRUE;
 	if (command->command_parts[part + 1])
 	{	
+		command->here_doc = TRUE;
 		get_pipe(command);
 		pipe_write = command->file_pipe[1];
 		stop = command->command_parts[part + 1];
 		heredoc_read(stop, pipe_write);
+		pipe(pipes_f);
+		close(command->file_pipe[1]);
+		command->file_pipe[1] = -1;
+		g_data->pipe_array[command->command_number][1] = pipes_f[1];
 		rewrite_command_part_arr(command, part);
-		printf("IN << \n");
 	}
 	else
 		write(1, "syntax error near unexpected token `newline'\n", 46);

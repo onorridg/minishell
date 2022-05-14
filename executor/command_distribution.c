@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:05:38 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 16:45:23 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	command_distribution(t_command *command)
 	builtin_functions = set_ptr_func_to_arr();
 	builtin_number = builtin_chek(command->command_parts[0]);
 	if (builtin_number == -1)
+	{	
+		free(builtin_functions);
 		return (0);
+	}
 	if (command->command_parts[0]
 		&& ft_find_char_in_string(command->command_parts[0], '=') != -1)
 	{
@@ -30,5 +33,6 @@ int	command_distribution(t_command *command)
 	}
 	else if (command->command_parts[0])
 		builtin_functions[builtin_number](command);
+	free(builtin_functions);
 	return (0);
 }

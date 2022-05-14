@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 14:53:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 19:36:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,8 @@ void		clear_command_data(t_command *command);
 int			cpp_err_hdl(t_command *command, char *string);
 void		display_pipe_data(int command_number);
 int			config_and_pars(t_command *command, char *string, int command_number);
+void		free_all_envp(void);
 
-void rl_replace_line();
+void		rl_replace_line();
 
 #endif

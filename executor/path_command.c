@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:22:27 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 21:04:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	execut_comand(t_command *command, char *path)
 	int		*pipe_fds;
 	pid_t	pid;
 	int		stt;
+	char	**envp;
 
 	pipe_fds = g_data->pipe_array[command->command_number];
 	pid = fork();
@@ -43,7 +44,10 @@ static int	execut_comand(t_command *command, char *path)
 	{
 		set_fork_signal(0);
 		set_pipe_config(command, pipe_fds);
-		execve(path, command->command_parts, env_generator());
+		envp = env_generator();
+		execve(path, command->command_parts, envp);
+		split_free(envp, -1);
+		clear_command_data(command);
 		exit(127);
 	}
 	set_fork_signal(1);
@@ -75,7 +79,8 @@ int	path_command(t_command *command)
 			execut_comand(command, path);
 		else
 			execut_comand(command, command->command_parts[0]);
-		free(path);
+		if (path) 
+			free(path);
 	}
 	else
 	{

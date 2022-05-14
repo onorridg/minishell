@@ -1,0 +1,21 @@
+root@mac:# ls
+
+root@mac:# pwd
+
+root@mac:# cd ..
+
+root@mac:# export kek=24
+
+root@mac:# export
+
+root@mac:# unset kek
+
+root@mac:# env
+
+root@mac:# echo kek
+
+root@mac:# echo $USER
+
+root@mac:# ls -al | wc -l
+
+root@mac:# exit

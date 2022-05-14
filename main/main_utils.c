@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 14:08:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 14:49:27 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 20:41:17 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	display_pipe_data(int command_number)
 int	cpp_err_hdl(t_command *command, char *string)
 {
 	if (!command->command || !command->command_parts)
-	{	
+	{
+		
 		if (ft_find_char_in_string(string, '|') != -1)
 		{
 			write(1, "minishell: syntax error: unexpected end of file\n", 48);

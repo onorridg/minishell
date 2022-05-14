@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:16:21 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:17:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 16:49:05 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*my_getenv(char *variable)
 	while (var)
 	{
 		if (ft_strcmp(variable, var->variable))
-		{
+		{	
+			
 			value = ft_set_mem_aloc(var->value);
 			break ;
 		}

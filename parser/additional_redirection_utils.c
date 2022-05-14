@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:05:43 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:13:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 18:16:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	split_redirection_len(char *string, int i, int count)
 
 int	check_redirection_sign(char *string)
 {
-	char	chr1;
-	char	chr2;
+	int	chr1;
+	int	chr2;
 
 	chr1 = ft_find_char_in_string(string, '<');
 	chr2 = ft_find_char_in_string(string, '>');
