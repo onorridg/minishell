@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:46:53 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 14:07:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	redirect_output_append_mode(t_command *command, int part, int *i)
 		fd = open(file_n, O_CREAT | O_WRONLY | O_APPEND, 0666);
 		if (fd < 0)
 		{
-			printf("FCK\n");
-			exit(1);
+			error_handler(command);
+			g_data->error_redirection = FAIL;
+			return ;
 		}
 		command->file_pipe[1] = fd;
 		rewrite_command_part_arr(command, part);
@@ -67,8 +68,9 @@ static void	redirection_output(t_command *command, int part, int *i)
 		fd = open(file_n, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 		if (fd < 0)
 		{
-			printf("WTF\n");
-			exit(1);
+			error_handler(command);
+			g_data->error_redirection = FAIL;
+			return ;
 		}
 		command->file_pipe[1] = fd;
 		rewrite_command_part_arr(command, part);
@@ -87,6 +89,12 @@ static void	redirect_input(t_command *command, int part, int *i)
 	else
 	{
 		fd = open(command->command_parts[part + 1], O_RDONLY, 0777);
+		if (fd < 0)
+		{
+			error_handler(command);
+			g_data->error_redirection = FAIL;
+			return ;
+		}
 		command->file_pipe[0] = fd;
 		rewrite_command_part_arr(command, part);
 	}
@@ -104,13 +112,13 @@ void	redirections(t_command *command)
 		&& g_data->error_redirection != FAIL)
 	{	
 		command_part = command->command_parts[part];
-		if (ft_strcmp(command_part, "<") && command->command_parts[part + 1])
+		if (ft_strcmp(command_part, "<"))
 			redirect_input(command, part, &part);
-		else if (ft_strcmp(command_part, ">") && command->command_parts[part + 1])
+		else if (ft_strcmp(command_part, ">"))
 			redirection_output(command, part, &part);
-		else if (ft_strcmp(command_part, "<<") && command->command_parts[part + 1])
+		else if (ft_strcmp(command_part, "<<"))
 			here_doc(command, part, &part);
-		else if (ft_strcmp(command_part, ">>") && command->command_parts[part + 1])
+		else if (ft_strcmp(command_part, ">>"))
 			redirect_output_append_mode(command, part, &part);
 		else
 			part++;

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:43:20 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/14 14:53:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@
 # define D_ENV	5
 # define D_EXIT	6
 
-
-#define CLOSE "\001\033[0m\002"                 // Закрыть все свойства
-#define BLOD  "\001\033[1m\002"                 // Подчеркнуть, жирным шрифтом, выделить
-#define BEGIN(x,y) "\001\033["#x";"#y"m\002"    // x: background, y: foreground
+#define CLOSE "\001\033[0m\002"
+#define BLOD  "\001\033[1m\002"
+#define BEGIN(x,y) "\001\033["#x";"#y"m\002"
 
 #include <unistd.h>             		/* pipe, getcwd, chdir */
 #include <stdlib.h>             		/* malloc, free */
@@ -114,11 +113,11 @@ typedef struct s_split
 	char	flag;
 } t_split;
 
-// start configuration
+/* start configuration */
 t_data		*g_data;
 void		set_terminal_configuration(char **envp);
 
-// builtins
+/* builtins */
 typedef int BUILTIN(t_command *command);
 
 int			ft_echo(t_command *command);
@@ -134,18 +133,12 @@ int 		get_own_envp(char **data, char *variable);
 int			set_new_env_entry(char *variable, char *value);
 int			set_my_env_variable(char **data);
 
-
-
-
-
-
-
 int			path_command(t_command *command);
 
-// exit
+/* exit */
 void 		ctrl_d_exit(void);
 
-// parser
+/* parser */
 t_command	*string_parser(char *string, char **envp);
 char		**command_parts_parser(t_command *command);
 char		*spaces_deleter(char *string);
@@ -166,17 +159,6 @@ int			split_redirection_len(char *string, int i, int count);
 int			arr_len(char **command_parts);
 void		heredoc_read(char *stop, int pipe_write);
 
-
-
-
-
-
-
-
-
-
-
-
 /* executor */
 int			command_distribution(t_command *command);
 int			set_variable(char *string);
@@ -188,13 +170,7 @@ void		get_status_code_signal(int stt);
 void		set_fork_signal(int flag);
 void 		close_fork_pipe(t_command *command, int *pipe_fds);
 
-
-
-
-
-
-
-// utils
+/* utils */
 t_heredoc 	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
 char    	*get_command_path(t_command *command);
@@ -210,16 +186,7 @@ void		set_signal_configuration(void);
 void 		free_pipe_array(void);
 void		hdl_child_sigint(int sig);
 void		hdl_child_sigquit(int sig);
-
-
-
-
-
-
-
-
-
-
+int 		pqv_err_hdl(t_command *command, char *string);
 
 /* minilib */
 char		**ft_split(char *string, char ch);
@@ -240,21 +207,11 @@ char		*ft_strdup(const char *s);
 char		*ft_itoa(int n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		is_quote(t_split *data, char *string);
+void		clear_command_data(t_command *command);
+int			cpp_err_hdl(t_command *command, char *string);
+void		display_pipe_data(int command_number);
+int			config_and_pars(t_command *command, char *string, int command_number);
 
-
-
-
-
-
-
-
-
-// libreadline
 void rl_replace_line();
-//void rl_clear_history();
-
-
-// static
-
 
 #endif

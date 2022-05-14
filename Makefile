@@ -4,11 +4,12 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g -O0 #-fcommon  #-Wall -Wextra -Werror
+CFLAGS= -g -O0 #-fsanitize=address #-fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
-SRCS=main.c\
+SRCS=main/main.c\
+	main/main_utils.c\
 	terminal_config/set_terminal_config.c\
 	terminal_config/child_signals.c\
 	builtins/echo.c\
