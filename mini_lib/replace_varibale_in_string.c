@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 19:57:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 11:03:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*parse_variable(char *string)
 	char	*variable;
 
 	variable = ft_copy_str_len(string, ft_char_len(string, TRUE));
-	free(string);
+	//free(string);
 	return (variable);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 19:36:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 10:48:22 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int			set_my_env_variable(char **data);
 int			path_command(t_command *command);
 
 /* exit */
-void 		ctrl_d_exit(void);
+void 		ctrl_d_exit(char *str);
 
 /* parser */
 t_command	*string_parser(char *string, char **envp);

@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -g3 -O0 #-fsanitize=address #-fcommon  #-Wall -Wextra -Werror
+CFLAGS= -g3 -O0 -fcommon #-fsanitize=address #-fcommon  #-Wall -Wextra -Werror
 
 MAKEFILE=Makefile
 
