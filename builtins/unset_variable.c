@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/11 15:14:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:54:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,50 @@ static int	uset_own_variable(char *string, t_own_var *node, t_own_var *save)
 }
 
 static int	unset_envp(char *string, t_envp *node, t_envp *save)
-{
+{	
+	t_envp	*privius;
+
+	if (ft_strcmp(node->variable, string))
+	{	
+		save = node;
+		if (node->next)
+			g_data->first_envp = node->next;
+		else
+		{
+			g_data->first_envp = NULL;
+			g_data->last_envp = NULL;
+		}
+		free(save->variable);
+		if (save->value)
+			free(save->value);
+		free(save);
+		return (0);
+	}
+	privius = node;
+	node = node->next;
 	while (node)
 	{	
 		save = node;
-		if (ft_strcmp(node->variable, string))
-		{	
-			g_data->first_envp = node->next;
-		}
-		else if (node->next && ft_strcmp(node->next->variable, string))
+		if (!node->next && ft_strcmp(node->variable, string))
 		{
-			save = node->next;
-			node->next = node->next->next;
-		}
-		if (node != save)
-		{
+			privius->next = NULL;
+			g_data->last_envp = privius;
+			free(save->variable);
+			if (save->value)
+				free(save->value);
 			free(save);
-			return (1);
+			return (0);
 		}
+		else if (node->next && ft_strcmp(node->variable, string))
+		{
+			privius->next = node->next;
+			free(save->variable);
+			if (save->value)
+				free(save->value);
+			free(save);
+			return (0);
+		}
+		privius = node;
 		node = node->next;
 	}
 	return (0);
@@ -60,7 +86,7 @@ static int	unset_envp(char *string, t_envp *node, t_envp *save)
 
 int	ft_unset(t_command *command)
 {	
-	if (command->command_parts[1])
+	if (command->command_parts[0] && command->command_parts[1])
 	{
 		if (!unset_envp(command->command_parts[1],
 				g_data->first_envp, NULL))

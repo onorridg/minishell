@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 10:48:22 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 19:56:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ char		**env_generator(void);
 char		**alphabet_sort(void);
 void 		error_redirection_handler(t_command *command, char *file_n);
 void 		rewrite_command_part_arr(t_command *command, int part);
-void		get_pipe(t_command *command);
+void		get_pipe(t_command *command, int flag);
 void		set_signal_configuration(void);
 void 		free_pipe_array(void);
 void		hdl_child_sigint(int sig);

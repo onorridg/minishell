@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 11:03:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 19:34:54 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*parse_variable(char *string)
 	char	*variable;
 
 	variable = ft_copy_str_len(string, ft_char_len(string, TRUE));
-	//free(string);
 	return (variable);
 }
 
@@ -69,16 +68,19 @@ char	*value_to_string(char *string)
 {
 	char	*value;
 	t_envp	*var;
+	char	*str;
 
-	if (!ft_strcmp(string, "?"))
-		string = parse_variable(string);
+	if (string[0] == '?')
+		return (get_own_env("?"));
+	str = parse_variable(string);
 	value = NULL;
 	var = g_data->first_envp;
-	value = my_getenv(string);
+	value = my_getenv(str);
 	if (!value)
-		value = get_own_env(string);
+		value = get_own_env(str);
 	if (!value)
 		value = ft_set_mem_aloc("");
+	free(str);
 	return (value);
 }
 

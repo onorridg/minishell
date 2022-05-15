@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 19:07:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:43:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ static int	redirection_string_len(char *string)
 
 	i = 0;
 	if (string[i] == '<')
-	{
-		while (string[i] && string[i] == '<')
+	{	
+		i++;
+		if (string[i] && string[i] == '<')
 			i++;
 	}
 	else if (string[i] == '>')
-	{
-		while (string[i] && string[i] == '>')
+	{	
+		i++;
+		if (string[i] && string[i] == '>')
 			i++;
 	}
 	else
@@ -81,11 +83,8 @@ static void	rewrite_command_parts(t_command *command, int part,
 	while (command->command_parts[k])
 		new_command_parts[i++] = command->command_parts[k++];
 	new_command_parts[i] = 0;
+	split_free(command->command_parts, -1);
 	command->command_parts = new_command_parts;
-	i = 0;
-	//while (command->command_parts[i])
-	//	printf("(%s) ", command->command_parts[i++]);
-	//printf("\nar len %i\n", arr_len(command->command_parts));
 }
 
 static void	split_redirection(t_command *command, int part)
@@ -96,7 +95,6 @@ static void	split_redirection(t_command *command, int part)
 	int		start;
 
 	len = split_redirection_len(command->command_parts[part], 0, 0);
-	//printf("len: %i\n", len);
 	new_command_parts = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!new_command_parts)
 		exit(1);
@@ -132,5 +130,4 @@ void	additional_redirection_parser(t_command *command)
 		else
 			i++;
 	}
-	//printf("OUT\n");
 }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:37:28 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:57:58 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:58:06 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ int	set_qoute_replace_variable(char *quote, char *str, int i)
 
 void	free_replace_variable(char *new_string, char *left_part,
 	char *value, char *right_part)
-{
-	free(new_string);
-	free(left_part);
-	free(value);
-	free(right_part);
+{	
+	if (new_string)
+		free(new_string);
+	if (left_part)
+		free(left_part);
+	if (value)
+		free(value);
+	if (right_part)
+		free(right_part);
 }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 22:23:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 20:25:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,19 @@ void	here_doc(t_command *command, int part, int *i)
 	if (command->command_parts[part + 1])
 	{	
 		command->here_doc = TRUE;
-		get_pipe(command);
+		get_pipe(command, TRUE);
 		pipe_write = command->file_pipe[1];
 		stop = command->command_parts[part + 1];
 		heredoc_read(stop, pipe_write);
-		pipe(pipes_f);
 		close(command->file_pipe[1]);
-		command->file_pipe[1] = -1;
-		g_data->pipe_array[command->command_number][1] = pipes_f[1];
 		rewrite_command_part_arr(command, part);
 	}
 	else
+	{
 		write(1, "syntax error near unexpected token `newline'\n", 46);
+		set_exit_code(258);
+		g_data->error_redirection = FAIL;
+	}
 	*i = 0;
 }
 
@@ -114,7 +115,7 @@ void	redirections(t_command *command)
 
 	part = 0;
 	additional_redirection_parser(command);
-	while (command->command_parts && command->command_parts[part]
+	while (command && command->command_parts && command->command_parts[part]
 		&& g_data->error_redirection != FAIL)
 	{	
 		command_part = command->command_parts[part];

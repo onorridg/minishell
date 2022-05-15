@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:09:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:46:40 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	exit_err_hdl(t_command *command, char ch, int number, int sign)
 			return (1);
 		}
 		else
+		{	
+			write(1, "exit\n", 6);
 			exit(number * sign);
+		}
 	}
 	return (0);
 }
@@ -39,7 +42,7 @@ int	get_sign(char ch)
 {
 	if (ch == '-')
 		return (-1);
-	return (0);
+	return (1);
 }
 
 int	ft_exit(t_command *command)
@@ -64,7 +67,10 @@ int	ft_exit(t_command *command)
 		}
 		exit_err_hdl(command, chr_number[i], number, sign);
 	}
-	write(1, "exit\n", 5);
-	exit(0);
+	else
+	{ 
+		write(1, "exit\n", 5);
+		exit(0);
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 10:47:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:23:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char	**command_parts_parser(t_command *command)
 		command_parts[i] = spaces_deleter(command_parts[i]);
 		i++;
 	}
-	free(command_parts);
 	return (command_parts);
 }
 

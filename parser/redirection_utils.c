@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 22:16:07 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 20:39:36 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	heredoc_read(char *stop, int pipe_write)
 		{
 			write(pipe_write, str, ft_strlen(str));
 			write(pipe_write, "\n", 1);
+			free(str);
 		}
 	}
 }
@@ -86,7 +87,7 @@ void	rewrite_command_part_arr(t_command *command, int part)
 	}
 }
 
-void	get_pipe(t_command *command)
+void	get_pipe(t_command *command, int flag)
 {	
 	int	pipe_fds[2];
 

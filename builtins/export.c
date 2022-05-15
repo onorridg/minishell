@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 20:38:34 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:06:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	set_new_env_entry(char *variable, char *value)
 {	
 	t_envp	*node;
 
+	printf("SET NEW ENV\n");
 	if (variable[ft_char_len(variable, TRUE)])
 		return (export_error_hdl(variable, value));
 	node = (t_envp *)malloc(sizeof(t_envp));
@@ -55,8 +56,8 @@ static int	export_arg(char *variable)
 	if (!get_envp(data))
 		return (0);
 	if (!get_own_envp(data, variable))
-		return (0);	
-	if (data[0])
+		return (0);
+	if (data[0] && ft_find_char_in_string(variable, '=') != -1)
 		set_new_env_entry(data[0], data[1]);
 	split_free(data, -1);
 	set_exit_code(0);
@@ -71,6 +72,8 @@ static void	display_export(int command_number)
 
 	pipe = g_data->pipe_array[command_number][1];
 	sorted_envp = alphabet_sort();
+	fprintf(stderr, "ALPHABET SORT EXIT\n");
+	fflush(stderr);
 	i = 0;
 	while (sorted_envp[i])
 	{	
@@ -89,7 +92,7 @@ int	ft_export(t_command *command)
 	int	i;
 
 	i = 1;
-	if (command->command_parts[i])
+	if (command && command->command_parts[0] && command->command_parts[i])
 	{
 		while (command->command_parts[i])
 			export_arg(command->command_parts[i++]);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 19:23:30 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:07:16 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,20 @@ int	split_free(char **words, int count)
 	if (count != -1)
 	{
 		while (i < count)
-			free(words[i++]);
+		{	
+			if (words && words[i])
+				free(words[i]);
+			i++;
+		}
 	}
 	else
 	{
-		while (words[i])
-			free(words[i++]);
+		while (words && words[i])
+		{	
+			free(words[i]);
+			i++;
+		}
+		
 	}
 	free(words);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 21:04:24 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 20:28:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parser_quote_and_variable(t_command *command)
 	int	replace;
 
 	i = 0;
-	while (command->command_parts[i])
+	while (command && command->command_parts[i])
 	{
 		command->command_parts[i] = inser_value_to_string(
 				command->command_parts[i], 0, 0, 0);
@@ -83,9 +83,12 @@ int	path_command(t_command *command)
 			free(path);
 	}
 	else
-	{
-		printf("open pipe\n[!] Now blocked\n");
-		fflush(stdout);
+	{	
+		write(1, "minishell: ", 12);
+		if (command && command->command_parts[0])
+			write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));
+		write(1, ": command not found\n", 21);
+		set_exit_code(127);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:40:57 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:54:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:03:49 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ char	*ft_set_mem_aloc(char *string)
 {
 	int		i;
 	char	*aloc_mem;
-
-	aloc_mem = (char *)malloc(sizeof(char) * (ft_strlen(string) + 1));
+	int		len;
+	
+	len = ft_strlen(string);
+	aloc_mem = (char *)malloc(sizeof(char) * (len + 1));
 	if (!aloc_mem)
 		exit(1);
 	i = 0;
-	while (string[i])
+	while (string && string[i])
 	{
 		aloc_mem[i] = string[i];
 		i++;

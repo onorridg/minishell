@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:15:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 22:17:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 20:32:33 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,11 @@ void	set_pipe_config(t_command *command, int *pipe_fds)
 	{	
 		if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
 			exit(1);
-		fprintf(stderr, "pipe write\n");
-		fflush(stderr);
 	}
 	else if (command->file_pipe[1] > 0)
 	{
-		if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1)
+		if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1 && command->here_doc != TRUE)
 			exit(1);
-		close(pipe_fds[1]);
-		fprintf(stderr, "file pipe write\n");
-		fflush(stderr);
 	}
 	if (command->command_number > 0)
 		pipe_fds[0] = g_data->pipe_array[command->command_number - 1][0];
@@ -88,14 +83,10 @@ void	set_pipe_config(t_command *command, int *pipe_fds)
 	{
 		if (dup2(pipe_fds[0], STDIN_FILENO) == -1)
 			exit(1);
-		fprintf(stderr, "pipe read\n");
-		fflush(stderr);
 	}
 	else if (command->file_pipe[0] > 0)
 	{
 		if (dup2(command->file_pipe[0], STDIN_FILENO) == -1)
 			exit(1);
-		fprintf(stderr, "file pipe read\n");
-		fflush(stderr);
 	}
 }
