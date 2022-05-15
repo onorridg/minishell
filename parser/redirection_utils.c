@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 20:39:36 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 21:01:40 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	error_redirection_handler(t_command *command, char *file_n)
 {
 	g_data->error_redirection = FAIL;
 	g_data->exit_code = 1;
-	set_exit_code(g_data->exit_code);
+	set_exit_code(1);
 	write(1, "minishell: ", 11);
 	write(1, file_n, ft_strlen(file_n));
 	write(1, ": ", 2);

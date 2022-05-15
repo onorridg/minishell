@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 17:46:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 21:16:42 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	exit_err_hdl(t_command *command, char ch, int number, int sign)
 	else
 	{
 		if (command->command_parts[2])
-		{
+		{	
+			write(1, "exit\n", 6);
 			write(1, "minishell: exit: too many arguments\n", 36);
 			set_exit_code(1);
 			return (1);

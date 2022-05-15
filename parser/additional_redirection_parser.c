@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 18:43:15 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 21:51:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,13 @@ static void	rewrite_command_parts(t_command *command, int part,
 	j = 0;
 	while (new_parts[j])
 		new_command_parts[i++] = new_parts[j++];
+	free(command->command_parts[k]);
 	k += 1;
 	while (command->command_parts[k])
 		new_command_parts[i++] = command->command_parts[k++];
 	new_command_parts[i] = 0;
-	split_free(command->command_parts, -1);
+	free(command->command_parts);
+	split_free(new_parts, -1);
 	command->command_parts = new_command_parts;
 }
 
@@ -120,7 +122,7 @@ void	additional_redirection_parser(t_command *command)
 	i = 0;
 	chr1 = -1;
 	chr2 = -1;
-	while (command->command_parts[i])
+	while (command && command->command_parts[i])
 	{
 		if (check_redirection_sign(command->command_parts[i]))
 		{
