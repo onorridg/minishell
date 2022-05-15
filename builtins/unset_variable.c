@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 16:54:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/15 20:54:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,19 @@ static int	unset_envp(char *string, t_envp *node, t_envp *save)
 
 int	ft_unset(t_command *command)
 {	
-	if (command->command_parts[0] && command->command_parts[1])
-	{
-		if (!unset_envp(command->command_parts[1],
-				g_data->first_envp, NULL))
-			uset_own_variable(command->command_parts[1],
-				g_data->first_var, NULL);
+	int i;
+	
+	i = 1;
+	if (command->command_parts[0])
+	{	
+		while (command->command_parts[i])
+		{
+			if (!unset_envp(command->command_parts[i],
+					g_data->first_envp, NULL))
+				uset_own_variable(command->command_parts[i],
+					g_data->first_var, NULL);
+			i++;
+		}
 	}
 	set_exit_code(0);
 	return (0);
