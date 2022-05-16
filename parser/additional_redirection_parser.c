@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:48:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:50:29 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ static void	split_redirection(t_command *command, int part)
 void	additional_redirection_parser(t_command *command)
 {
 	int		i;
-	char	sign;
 
 	i = 0;
 	while (command && command->command_parts[i])

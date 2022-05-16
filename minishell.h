@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 16:10:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:26:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_command
 	int					last_command;
 	int					file_pipe[2];
 	int					here_doc;
+	int					quote;
 	struct s_command	*next;
 }	t_command;
 
@@ -141,7 +142,7 @@ char		*get_own_env(char *string);
 char		*inser_value_to_string(char *str, int i, char quote, char *val);
 void		parser_quote_and_variable(t_command *command);
 void		redirections(t_command *command);
-char		*quote_parse(char *string, int i, int j, char quote);
+char		*quote_parse(t_command *command, int i, int j, char quote);
 int			*is_redirection(t_command *command);
 int			pipe_err_parser(char *command);
 void		additional_redirection_parser(t_command *command);

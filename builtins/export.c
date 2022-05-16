@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:33:35 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:48:11 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	set_new_env_entry(char *variable, char *value)
 }
 
 static int	export_arg(char *variable)
-{	
-	t_envp		*envp;	
-	t_own_var	*var;
+{
 	char		**data;
 
 	data = ft_split(variable, '=');

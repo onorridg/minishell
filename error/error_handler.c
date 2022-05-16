@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:57:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 17:21:04 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:51:42 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	display_error(int error_number, t_command *command)
 {	
 	int	pipe;
 
+	(void)error_number;
 	pipe = g_data->pipe_array[command->command_number][1];
 	write(1, "minishell: ", 11);
 	write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));

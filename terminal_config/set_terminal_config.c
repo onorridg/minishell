@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:51:32 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:46:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	set_status_code(void)
 static int	create_envp_list(char **envp, int i, char **data)
 {
 	t_envp	*swap;
-	t_envp	*first;
 
 	while (envp[i])
 	{

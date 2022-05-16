@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 14:23:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:48:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	**command_parts_parser(t_command *command)
 {
 	char	**command_parts;
 	int		i;
-	char	*delete;
 
 	command_parts = ft_split(command->command, ' ');
 	if (!command_parts)
@@ -70,6 +69,7 @@ static t_command	*insert_command_into_node(char *command, char **envp,
 {	
 	t_command	*node;
 
+	(void)envp;
 	node = (t_command *)malloc(sizeof(t_command));
 	if (!node)
 		exit(1);

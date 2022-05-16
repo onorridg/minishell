@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 16:07:28 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:55:43 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*str;
 
+	(void)ac;
+	(void)(av);
 	str = NULL;
 	set_terminal_configuration(envp);
 	while (TRUE)

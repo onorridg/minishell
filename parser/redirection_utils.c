@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:55:00 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 21:01:40 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:50:12 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	heredoc_read(char *stop, int pipe_write)
 }
 
 void	error_redirection_handler(t_command *command, char *file_n)
-{
+{	
+	(void)command;
 	g_data->error_redirection = FAIL;
 	g_data->exit_code = 1;
 	set_exit_code(1);
@@ -91,6 +92,7 @@ void	get_pipe(t_command *command, int flag)
 {	
 	int	pipe_fds[2];
 
+	(void)flag;
 	if (pipe(pipe_fds) == -1)
 	{	
 		write(1, "new pipe fail\n", 15);

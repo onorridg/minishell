@@ -6,21 +6,11 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:42:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 18:50:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:52:13 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	envp_array_len(char **envp_array)
-{
-	int	i;
-
-	i = 0;
-	while (envp_array[i])
-		i++;
-	return (i);
-}
 
 static int	need_swap(char *str1, char *str2)
 {

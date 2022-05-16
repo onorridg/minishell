@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:49:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:49:15 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	redirect_output_append_mode(t_command *command, int part, int *i)
 }
 
 void	here_doc(t_command *command, int part, int *i)
-{	
-	char	*str;
+{
 	char	*stop;
 	int		pipe_write;
-	int		pipes_f[2];
 
 	command->here_doc = TRUE;
 	if (command->command_parts[part + 1])
@@ -114,18 +112,19 @@ void	redirections(t_command *command)
 	char	*command_part;
 
 	part = 0;
-	additional_redirection_parser(command);
+	if (command->quote == FALSE)
+		additional_redirection_parser(command);
 	while (command && command->command_parts && command->command_parts[part]
 		&& g_data->error_redirection != FAIL)
 	{	
 		command_part = command->command_parts[part];
-		if (ft_strcmp(command_part, "<"))
+		if (ft_strcmp(command_part, "<") && command->quote == FALSE)
 			redirect_input(command, part, &part);
-		else if (ft_strcmp(command_part, ">"))
+		else if (ft_strcmp(command_part, ">") && command->quote == FALSE)
 			redirection_output(command, part, &part);
-		else if (ft_strcmp(command_part, "<<"))
+		else if (ft_strcmp(command_part, "<<") && command->quote == FALSE)
 			here_doc(command, part, &part);
-		else if (ft_strcmp(command_part, ">>"))
+		else if (ft_strcmp(command_part, ">>") && command->quote == FALSE)
 			redirect_output_append_mode(command, part, &part);
 		else
 			part++;

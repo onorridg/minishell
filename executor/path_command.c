@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:45:23 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:50:56 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 void	parser_quote_and_variable(t_command *command)
 {
 	int	i;
-	int	replace;
 
 	i = 0;
 	while (command && command->command_parts[i])
 	{
 		command->command_parts[i] = inser_value_to_string(
 				command->command_parts[i], 0, 0, 0);
-		command->command_parts[i] = quote_parse(command->command_parts[i],
-				0, 0, 0);
+		command->quote = FALSE;
+		command->command_parts[i] = quote_parse(command, i, 0, 0);
 		i++;
 	}
 	redirections(command);
