@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 14:27:51 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:48:40 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	rewrite_command_parts(t_command *command, int part,
 	int		i;
 	int		j;
 	int		k;
-	
+
 	arr_l = arr_len(command->command_parts) + new_parts_len;
 	new_command_parts = (char **)malloc(sizeof(char *) * arr_l);
 	if (!new_command_parts)

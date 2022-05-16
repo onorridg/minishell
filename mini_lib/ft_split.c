@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:11:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 14:07:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:47:58 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	split_free(char **words, int count)
 			free(words[i]);
 			i++;
 		}
-		
 	}
 	free(words);
 	return (0);

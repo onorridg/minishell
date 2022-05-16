@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:05:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 20:54:08 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:30:46 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static int	uset_own_variable(char *string, t_own_var *node, t_own_var *save)
 	return (0);
 }
 
-static int	unset_envp(char *string, t_envp *node, t_envp *save)
-{	
-	t_envp	*privius;
-
+static int	unset_first_envp(char *string, t_envp *node, t_envp *save)
+{
 	if (ft_strcmp(node->variable, string))
 	{	
 		save = node;
@@ -54,6 +52,24 @@ static int	unset_envp(char *string, t_envp *node, t_envp *save)
 		free(save);
 		return (0);
 	}
+	return (1);
+}
+
+static int	unset_free(t_envp *save)
+{	
+	free(save->variable);
+	if (save->value)
+		free(save->value);
+	free(save);
+	return (0);
+}
+
+static int	unset_envp(char *string, t_envp *node, t_envp *save)
+{	
+	t_envp	*privius;
+
+	if (!unset_first_envp(string, node, save))
+		return (0);
 	privius = node;
 	node = node->next;
 	while (node)
@@ -63,20 +79,12 @@ static int	unset_envp(char *string, t_envp *node, t_envp *save)
 		{
 			privius->next = NULL;
 			g_data->last_envp = privius;
-			free(save->variable);
-			if (save->value)
-				free(save->value);
-			free(save);
-			return (0);
+			return (unset_free(save));
 		}
 		else if (node->next && ft_strcmp(node->variable, string))
 		{
 			privius->next = node->next;
-			free(save->variable);
-			if (save->value)
-				free(save->value);
-			free(save);
-			return (0);
+			return (unset_free(save));
 		}
 		privius = node;
 		node = node->next;
@@ -86,8 +94,8 @@ static int	unset_envp(char *string, t_envp *node, t_envp *save)
 
 int	ft_unset(t_command *command)
 {	
-	int i;
-	
+	int	i;
+
 	i = 1;
 	if (command->command_parts[0])
 	{	

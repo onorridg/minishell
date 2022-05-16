@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:15:29 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 20:32:33 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:45:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	set_pipe_config(t_command *command, int *pipe_fds)
 	}
 	else if (command->file_pipe[1] > 0)
 	{
-		if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1 && command->here_doc != TRUE)
+		if (dup2(command->file_pipe[1], STDOUT_FILENO) == -1
+			&& command->here_doc != TRUE)
 			exit(1);
 	}
 	if (command->command_number > 0)

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:02:45 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:10:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,19 @@
 # define D_ENV	5
 # define D_EXIT	6
 
-#define CLOSE "\001\033[0m\002"
-#define BLOD  "\001\033[1m\002"
-#define BEGIN(x,y) "\001\033["#x";"#y"m\002"
+# include <unistd.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+# include <signal.h>
+# include <termios.h>
+# include <limits.h>
+# include <errno.h>
+# include <string.h>
+# include <fcntl.h>
 
-#include <unistd.h>             		/* pipe, getcwd, chdir */
-#include <stdlib.h>             		/* malloc, free */
-#include <readline/readline.h>  		/* readline */
-#include <readline/history.h>
-#include <sys/wait.h>           		/*  */
-#include <signal.h>						/*  sigemptyset, sigaddset, sigaction, signal*/
-#include <termios.h>					/* tcgetattr, tcsetattr */
-#include <limits.h>
-#include <errno.h>						/* errno */
-#include <string.h> 					/* strerror */
-#include <fcntl.h>						/* open */
-
-//////////////////////
-#include <string.h> // 					DELETE !!!
-//////////////////////
-
-typedef	struct s_command
+typedef struct s_command
 {	
 	int					command_number;
 	char				*command;
@@ -66,7 +58,7 @@ typedef	struct s_command
 	int					last_command;
 	int					file_pipe[2];
 	int					here_doc;
-	struct s_command 	*next;
+	struct s_command	*next;
 }	t_command;
 
 typedef struct s_heredoc
@@ -79,7 +71,7 @@ typedef struct s_own_var
 {
 	char				*variable;
 	char				*value;
-	struct 	s_own_var	*next;
+	struct s_own_var	*next;
 }	t_own_var;
 
 typedef struct s_envp
@@ -89,7 +81,7 @@ typedef struct s_envp
 	struct s_envp	*next;
 }	t_envp;
 
-typedef int BUILTIN(t_command *command);
+typedef int	t_BUILTIN(t_command *command);
 
 typedef struct s_data
 {
@@ -102,9 +94,8 @@ typedef struct s_data
 	char		**envp;
 	t_envp		*first_envp;
 	t_envp		*last_envp;
-	t_own_var 	*first_var;
-	t_own_var 	*last_var;
-	BUILTIN		**builtin_functions;
+	t_own_var	*first_var;
+	t_own_var	*last_var;
 }	t_data;
 
 typedef struct s_split
@@ -114,10 +105,10 @@ typedef struct s_split
 	int		j;
 	int		k;
 	char	flag;
-} t_split;
+}	t_split;
 
-/* start configuration */
 t_data		*g_data;
+/* start configuration */
 void		set_terminal_configuration(char **envp);
 
 /* builtins */
@@ -127,25 +118,25 @@ int			ft_cd(t_command *command);
 int			ft_export(t_command *command);
 int			ft_pwd(t_command *command);
 int			ft_unset(t_command *command);
-int 		ft_env(t_command *command);
-int 		ft_exit(t_command *command);
-void    	set_exit_code(int exit_code);
+int			ft_env(t_command *command);
+int			ft_exit(t_command *command);
+void		set_exit_code(int exit_code);
 int			get_envp(char **data);
-int 		get_own_envp(char **data, char *variable);
+int			get_own_envp(char **data, char *variable);
 int			set_new_env_entry(char *variable, char *value);
 int			set_my_env_variable(char **data);
 
 int			path_command(t_command *command);
 
 /* exit */
-void 		ctrl_d_exit(char *str);
+void		ctrl_d_exit(char *str);
 
 /* parser */
 t_command	*string_parser(char *string, char **envp);
 char		**command_parts_parser(t_command *command);
 char		*spaces_deleter(char *string);
 char		*value_to_variable(char *string);
-char 		*my_getenv(char *variable);
+char		*my_getenv(char *variable);
 char		*get_own_env(char *string);
 char		*inser_value_to_string(char *str, int i, char quote, char *val);
 void		parser_quote_and_variable(t_command *command);
@@ -154,7 +145,8 @@ char		*quote_parse(char *string, int i, int j, char quote);
 int			*is_redirection(t_command *command);
 int			pipe_err_parser(char *command);
 void		additional_redirection_parser(t_command *command);
-void		free_replace_variable(char *new_string, char *left_part, char *value, char *right_part);
+void		free_replace_variable(char *new_string, char *left_part,
+				char *value, char *right_part);
 int			set_qoute_replace_variable(char *quote, char *str, int i);
 int			check_redirection_sign(char *string);
 int			split_redirection_len(char *string, int i, int count);
@@ -170,31 +162,29 @@ void		set_pipe_config(t_command *command, int *pipe_fds);
 void		get_status_code(int stt, char *path, t_command *command);
 void		get_status_code_signal(int stt);
 void		set_fork_signal(int flag);
-void 		close_fork_pipe(t_command *command, int *pipe_fds);
+void		close_fork_pipe(t_command *command, int *pipe_fds);
 
 /* utils */
-t_heredoc 	*free_heredoc(t_heredoc *node);
+t_heredoc	*free_heredoc(t_heredoc *node);
 int			builtin_chek(char *builtin);
-char    	*get_command_path(t_command *command);
-BUILTIN		**set_ptr_func_to_arr(void);
-void 		error_handler(t_command *command);
-void 		pipe_array(void);
+char		*get_command_path(t_command *command);
+t_BUILTIN	**set_ptr_func_to_arr(void);
+void		error_handler(t_command *command);
+void		pipe_array(void);
 char		**env_generator(void);
 char		**alphabet_sort(void);
-void 		error_redirection_handler(t_command *command, char *file_n);
-void 		rewrite_command_part_arr(t_command *command, int part);
+void		error_redirection_handler(t_command *command, char *file_n);
+void		rewrite_command_part_arr(t_command *command, int part);
 void		get_pipe(t_command *command, int flag);
 void		set_signal_configuration(void);
-void 		free_pipe_array(void);
+void		free_pipe_array(void);
 void		hdl_child_sigint(int sig);
 void		hdl_child_sigquit(int sig);
-int 		pqv_err_hdl(t_command *command, char *string);
-void		clear_fork_mem(t_command *command, char *path);
-
+int			pqv_err_hdl(t_command *command, char *string);
 
 /* minilib */
 char		**ft_split(char *string, char ch);
-int			split_free(char **words, int count); 
+int			split_free(char **words, int count);
 int			ft_strcmp(char *str1, char *str2);
 int			ft_strlen(char *str);
 void		*ft_memset(void *b, int c, size_t len);
@@ -214,9 +204,10 @@ void		is_quote(t_split *data, char *string);
 void		clear_command_data(t_command *command);
 int			cpp_err_hdl(t_command *command, char *string);
 void		display_pipe_data(int command_number);
-int			config_and_pars(t_command *command, char *string, int command_number);
+int			config_and_pars(t_command *command, char *string,
+				int command_number);
 void		free_all_envp(void);
 
-void		rl_replace_line();
+void		rl_replace_line(const char *text, int clear_undo);
 
 #endif

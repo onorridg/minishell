@@ -41,7 +41,6 @@ SRCS=main/main.c\
 	exit/ctrl_d_exit.c\
 	exit/free_pipe_array.c\
 	exit/free_envp.c\
-	exit/fork_clear.c\
 	error/error_handler.c\
 	mini_lib/ft_split.c\
 	mini_lib/ft_strjoin_path.c\

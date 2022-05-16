@@ -6,15 +6,15 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 19:29:19 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 20:34:37 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:46:23 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void free_own_envp(void)
+static void	free_own_envp(void)
 {
-	t_own_var 	*node;
+	t_own_var	*node;
 	t_own_var	*clear_data;
 
 	node = g_data->first_var;
@@ -30,7 +30,7 @@ static void free_own_envp(void)
 	}
 }
 
-static void free_envp(void)
+static void	free_envp(void)
 {
 	t_envp	*node;
 	t_envp	*clear_data;
@@ -48,7 +48,7 @@ static void free_envp(void)
 	}
 }
 
-void free_all_envp(void)
+void	free_all_envp(void)
 {
 	free_envp();
 	free_own_envp();

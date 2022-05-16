@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 21:16:42 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:23:08 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ int	get_sign(char ch)
 	return (1);
 }
 
+static void	exit_zero(void)
+{
+	write(1, "exit\n", 5);
+	exit(0);
+}
+
 int	ft_exit(t_command *command)
 {	
 	char	*chr_number;
@@ -62,16 +68,10 @@ int	ft_exit(t_command *command)
 		i = 0;
 		sign = get_sign(chr_number[i]);
 		while (chr_number[i] >= '0' && chr_number[i] <= '9')
-		{
-			number = number * 10 + (chr_number[i] - '0');
-			i++;
-		}
+			number = number * 10 + (chr_number[i++] - '0');
 		exit_err_hdl(command, chr_number[i], number, sign);
 	}
 	else
-	{ 
-		write(1, "exit\n", 5);
-		exit(0);
-	}
+		exit_zero();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:19:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 14:50:55 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:07:28 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **envp)
 	set_terminal_configuration(envp);
 	while (TRUE)
 	{
-		str = readline(BEGIN(49, 33)"root@mac:# "CLOSE);
+		str = readline("root@mac:# ");
 		add_history(str);
 		if (str)
 			minishell(str, envp);

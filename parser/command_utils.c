@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 12:24:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 21:14:43 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:58:24 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	builtin_chek(char *builtin)
 		return (7);
 }
 
-BUILTIN	**set_ptr_func_to_arr(void)
+t_BUILTIN	**set_ptr_func_to_arr(void)
 {
-	BUILTIN	**builtins_arr;
+	t_BUILTIN	**builtins_arr;
 
-	builtins_arr = (BUILTIN **)malloc(sizeof(BUILTIN *) * 9);
+	builtins_arr = (t_BUILTIN **)malloc(sizeof(t_BUILTIN *) * 9);
 	if (!builtins_arr)
 		exit(1);
 	builtins_arr[0] = ft_echo;

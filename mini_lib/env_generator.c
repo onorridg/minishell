@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:18:13 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 19:39:11 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:47:30 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*variable_value_join(char *variable, char *value)
 {
 	char	*env_string;
 	char	*var;
-	
+
 	var = ft_strjoin(variable, "=");
 	env_string = ft_strjoin(var, value);
 	free(var);

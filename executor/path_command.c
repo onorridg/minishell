@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:09:50 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:45:23 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	execut_comand(t_command *command, char *path)
 	int		*pipe_fds;
 	pid_t	pid;
 	int		stt;
-	char	**envp;
 
 	pipe_fds = g_data->pipe_array[command->command_number];
 	pid = fork();
@@ -44,11 +43,7 @@ static int	execut_comand(t_command *command, char *path)
 	{
 		set_fork_signal(0);
 		set_pipe_config(command, pipe_fds);
-		envp = env_generator();
-		execve(path, command->command_parts, envp);
-		//split_free(envp, -1);
-		//clear_command_data(command);
-		clear_fork_mem(command, path);
+		execve(path, command->command_parts, env_generator());
 		exit(127);
 	}
 	set_fork_signal(1);
@@ -60,6 +55,16 @@ static int	execut_comand(t_command *command, char *path)
 		get_status_code_signal(stt);
 	close_fork_pipe(command, pipe_fds);
 	return (0);
+}
+
+static void	pc_err_hdl(t_command *command)
+{
+	write(1, "minishell: ", 12);
+	if (command && command->command_parts[0])
+		write(1, command->command_parts[0],
+			ft_strlen(command->command_parts[0]));
+	write(1, ": command not found\n", 21);
+	set_exit_code(127);
 }
 
 int	path_command(t_command *command)
@@ -80,16 +85,10 @@ int	path_command(t_command *command)
 			execut_comand(command, path);
 		else
 			execut_comand(command, command->command_parts[0]);
-		if (path) 
+		if (path)
 			free(path);
 	}
 	else
-	{	
-		write(1, "minishell: ", 12);
-		if (command && command->command_parts[0])
-			write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));
-		write(1, ": command not found\n", 21);
-		set_exit_code(127);
-	}
+		pc_err_hdl(command);
 	return (0);
 }

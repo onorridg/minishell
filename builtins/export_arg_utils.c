@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:48:08 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 14:35:21 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:42:03 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	get_envp(char **data)
 				free(envp->value);
 				envp->value = ft_set_mem_aloc(data[1]);
 			}
-			else
-				envp->value = "";
 			split_free(data, -1);
 			return (0);
 		}

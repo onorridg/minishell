@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:58:11 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 15:06:43 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:33:35 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	set_new_env_entry(char *variable, char *value)
 {	
 	t_envp	*node;
 
-	printf("SET NEW ENV\n");
 	if (variable[ft_char_len(variable, TRUE)])
 		return (export_error_hdl(variable, value));
 	node = (t_envp *)malloc(sizeof(t_envp));

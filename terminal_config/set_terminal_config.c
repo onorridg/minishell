@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:05:38 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 20:48:52 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:51:32 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,11 @@ static void	set_status_code(void)
 	g_data->last_var = g_data->first_var;
 }
 
-static int	create_envp_list(char **envp)
+static int	create_envp_list(char **envp, int i, char **data)
 {
-	int		i;
 	t_envp	*swap;
-	char	**data;
 	t_envp	*first;
 
-	i = 0;
-	data = NULL;
 	while (envp[i])
 	{
 		swap = g_data->last_envp;
@@ -97,7 +93,7 @@ void	set_terminal_configuration(char **envp)
 	g_data->command_counter = 0;
 	g_data->exit_code = 0;
 	g_data->envp = envp;
-	create_envp_list(envp);
+	create_envp_list(envp, 0, 0);
 	set_status_code();
 	g_data->error_redirection = FALSE;
 	g_data->error_command = FALSE;

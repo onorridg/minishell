@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 13:47:14 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:49:52 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	here_doc(t_command *command, int part, int *i)
 	char	*str;
 	char	*stop;
 	int		pipe_write;
-	int 	pipes_f[2];
+	int		pipes_f[2];
 
 	command->here_doc = TRUE;
 	if (command->command_parts[part + 1])
@@ -130,9 +130,4 @@ void	redirections(t_command *command)
 		else
 			part++;
 	}
-	int i = 0;
-	/*while (command->command_parts[i])
-	{
-		printf("%s\n", command->command_parts[i++]);
-	}*/
 }

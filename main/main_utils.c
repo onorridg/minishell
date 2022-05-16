@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 14:08:48 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 14:24:16 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:46:48 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	cpp_err_hdl(t_command *command, char *string)
 {
 	if (!command->command || !command->command_parts)
 	{
-		
 		if (ft_find_char_in_string(string, '|') != -1)
 		{
 			write(1, "minishell: syntax error: unexpected end of file\n", 48);
