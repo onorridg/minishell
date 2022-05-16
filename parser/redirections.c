@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:35:32 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 20:25:24 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:47:14 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,9 @@ void	redirections(t_command *command)
 		else
 			part++;
 	}
+	int i = 0;
+	/*while (command->command_parts[i])
+	{
+		printf("%s\n", command->command_parts[i++]);
+	}*/
 }

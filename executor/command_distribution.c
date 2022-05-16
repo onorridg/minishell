@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 19:14:25 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 16:45:23 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:04:21 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	command_distribution(t_command *command)
 	int		builtin_number;
 
 	builtin_functions = set_ptr_func_to_arr();
+	g_data->builtin_functions = builtin_functions;
 	builtin_number = builtin_chek(command->command_parts[0]);
 	if (builtin_number == -1)
 	{	

@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:35:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 21:51:56 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:27:51 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,14 @@ static void	rewrite_command_parts(t_command *command, int part,
 	int		i;
 	int		j;
 	int		k;
-
+	
 	arr_l = arr_len(command->command_parts) + new_parts_len;
 	new_command_parts = (char **)malloc(sizeof(char *) * arr_l);
 	if (!new_command_parts)
 		exit(1);
 	k = 0;
-	while (i < part)
+	i = 0;
+	while (i < part && command->command_parts[k])
 		new_command_parts[i++] = command->command_parts[k++];
 	j = 0;
 	while (new_parts[j])
@@ -85,7 +86,7 @@ static void	rewrite_command_parts(t_command *command, int part,
 		new_command_parts[i++] = command->command_parts[k++];
 	new_command_parts[i] = 0;
 	free(command->command_parts);
-	split_free(new_parts, -1);
+	free(new_parts);
 	command->command_parts = new_command_parts;
 }
 
@@ -115,13 +116,9 @@ static void	split_redirection(t_command *command, int part)
 void	additional_redirection_parser(t_command *command)
 {
 	int		i;
-	int		chr1;
-	int		chr2;
 	char	sign;
 
 	i = 0;
-	chr1 = -1;
-	chr2 = -1;
 	while (command && command->command_parts[i])
 	{
 		if (check_redirection_sign(command->command_parts[i]))

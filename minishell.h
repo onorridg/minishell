@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:29:10 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 19:56:13 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:02:45 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_envp
 	struct s_envp	*next;
 }	t_envp;
 
+typedef int BUILTIN(t_command *command);
+
 typedef struct s_data
 {
 	int			error_redirection;
@@ -102,6 +104,7 @@ typedef struct s_data
 	t_envp		*last_envp;
 	t_own_var 	*first_var;
 	t_own_var 	*last_var;
+	BUILTIN		**builtin_functions;
 }	t_data;
 
 typedef struct s_split
@@ -118,7 +121,6 @@ t_data		*g_data;
 void		set_terminal_configuration(char **envp);
 
 /* builtins */
-typedef int BUILTIN(t_command *command);
 
 int			ft_echo(t_command *command);
 int			ft_cd(t_command *command);
@@ -187,6 +189,8 @@ void 		free_pipe_array(void);
 void		hdl_child_sigint(int sig);
 void		hdl_child_sigquit(int sig);
 int 		pqv_err_hdl(t_command *command, char *string);
+void		clear_fork_mem(t_command *command, char *path);
+
 
 /* minilib */
 char		**ft_split(char *string, char ch);

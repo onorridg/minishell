@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:05:43 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/14 18:16:22 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:22:25 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	split_redirection_len(char *string, int i, int count)
 			|| (string[i] == '>' && string[i + 1] == '>'))
 		{
 			count += 1;
-			i++;
+			i += 2;
 		}
 		else if ((string[i] == '<') || (string[i] == '>'))
 		{
@@ -43,6 +43,7 @@ int	split_redirection_len(char *string, int i, int count)
 				i++;
 			count += 1;
 		}
+		
 	}
 	return (count);
 }

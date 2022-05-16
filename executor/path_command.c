@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:42:26 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 20:51:12 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:09:50 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ static int	execut_comand(t_command *command, char *path)
 		set_pipe_config(command, pipe_fds);
 		envp = env_generator();
 		execve(path, command->command_parts, envp);
-		split_free(envp, -1);
-		clear_command_data(command);
+		//split_free(envp, -1);
+		//clear_command_data(command);
+		clear_fork_mem(command, path);
 		exit(127);
 	}
 	set_fork_signal(1);
