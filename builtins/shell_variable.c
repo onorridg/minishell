@@ -6,7 +6,7 @@
 /*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/13 17:41:10 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:38:27 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	ft_env(t_command *command)
 {
 	t_envp	*variable_node;
-	int		w_pipe;
+	int		*pipes;
 
-	w_pipe = g_data->pipe_array[command->command_number][1];
+	pipes = is_redirection(command);
 	variable_node = g_data->first_envp;
 	while (variable_node)
 	{
-		write(w_pipe, variable_node->variable,
+		write(pipes[1], variable_node->variable,
 			ft_strlen(variable_node->variable));
-		write(w_pipe, "=", 1);
+		write(pipes[1], "=", 1);
 		if (variable_node->value)
-			write(w_pipe, variable_node->value,
+			write(pipes[1], variable_node->value,
 				ft_strlen(variable_node->value));
-		write(w_pipe, "\n", 1);
+		write(pipes[1], "\n", 1);
 		variable_node = variable_node->next;
 	}
-	close(w_pipe);
+	close(pipes[1]);
 	return (0);
 }
 
