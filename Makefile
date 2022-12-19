@@ -65,7 +65,7 @@ SRCS=main/main.c\
 	mini_lib/split_utils.c\
 	mini_lib/replace_varibale_in_string_utils.c
 
-READLINE_FLAGS= -lreadline -L/Users/onorridg/.brew/opt/readline/lib
+READLINE_FLAGS= -lreadline
 
 OBJS=$(SRCS:.c=.o)
 
