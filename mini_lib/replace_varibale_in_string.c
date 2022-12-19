@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_varibale_in_string.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:07:22 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/15 19:34:54 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:45:06 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ char	*parse_variable(char *string)
 char	*value_to_string(char *string)
 {
 	char	*value;
-	t_envp	*var;
 	char	*str;
 
 	if (string[0] == '?')
 		return (get_own_env("?"));
 	str = parse_variable(string);
 	value = NULL;
-	var = g_data->first_envp;
 	value = my_getenv(str);
 	if (!value)
 		value = get_own_env(str);

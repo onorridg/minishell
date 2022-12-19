@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:12:06 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 15:23:08 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:42:34 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ int	ft_exit(t_command *command)
 	int		i;
 	int		number;
 	int		sign;
-	int		pipe;
 
 	number = 0;
-	pipe = g_data->pipe_array[command->command_number][1];
 	if (command->command_parts[1])
 	{
 		chr_number = command->command_parts[1];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:10:04 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 17:48:48 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:43:09 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 char	*value_to_variable(char *string)
 {
 	char	*value;
-	t_envp	*var;
 
 	value = NULL;
-	var = g_data->first_envp;
 	value = my_getenv(string);
 	if (!value)
 		value = get_own_env(string);

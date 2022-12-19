@@ -4,7 +4,7 @@ CC=cc
 
 HEADER=minishell.h
 
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -fcommon
 
 MAKEFILE=Makefile
 
@@ -65,7 +65,7 @@ SRCS=main/main.c\
 	mini_lib/split_utils.c\
 	mini_lib/replace_varibale_in_string_utils.c
 
-READLINE_FLAGS= -lreadline
+READLINE_FLAGS= 
 
 OBJS=$(SRCS:.c=.o)
 

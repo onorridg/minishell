@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:57:51 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/16 17:51:42 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:44:26 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 static void	display_error(int error_number, t_command *command)
-{	
-	int	pipe;
-
+{
 	(void)error_number;
-	pipe = g_data->pipe_array[command->command_number][1];
 	write(1, "minishell: ", 11);
 	write(1, command->command_parts[0], ft_strlen(command->command_parts[0]));
 	if (command->command_parts[1])

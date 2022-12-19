@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: onorridg <onorridg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: onorridg <onorridg@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 16:33:05 by onorridg          #+#    #+#             */
-/*   Updated: 2022/05/17 15:38:27 by onorridg         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:41:41 by onorridg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	set_data_to_variable(char **data)
 int	set_env_variable(char **data)
 {
 	t_envp		*envp;
-	t_own_var	*own_envp;
 	char		*clear_data;
 
 	envp = g_data->first_envp;
@@ -70,7 +69,6 @@ int	set_env_variable(char **data)
 		}
 		envp = envp->next;
 	}
-	own_envp = g_data->first_var;
 	if (set_my_env_variable(data))
 		return (1);
 	return (0);
