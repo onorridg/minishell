@@ -36,8 +36,20 @@
 ## Зависимости:
 * [readline](https://man7.org/linux/man-pages/man3/readline.3.html)
 
-## Компиляция:
 В `Makefile` следует указать путь до `readline` в поле `READLINE_FLAGS`.
+
+### Путь для `Linux`
+```Makefile
+READLINE_FLAGS= -lreadline
+```
+### Путь для `macOS`
+Замените `<username>` на свой
+```Makefile
+
+READLINE_FLAGS= -lreadline -L/Users/<username>/.brew/opt/readline/lib
+```
+
+## Компиляция:
 ```bash
 make
 ```
